@@ -1,0 +1,81 @@
+﻿@page "/todo"
+@using Microsoft.AspNetCore.Components
+@using ToDos.Data
+@inject IToDoList ToDoList
+
+<h3>ToDo</h3>
+
+<input class="form-control" @bind-value="@title" @bind-value:event="oninput" @onkeypress="OnKeyDown" placeholder="Add a new todo" />
+
+<br />
+
+<select class="form-control" @onchange="OnChangeSelect">
+    <option selected>Choose...</option>
+    <option value="true">Not show done tasks</option>
+    <option value="false">Show all tasks</option>
+</select>
+
+<br />
+
+@if (toDoItems == null)
+{
+    <h6>>ToDo list is empty!</h6>
+}
+else
+{
+    <span> You have @(toDoItems.Count(FilterExpression()))</span>
+    <table>
+        @foreach (var toDoItem in toDoItems.Where(FilterExpression()))
+        {
+            <tr class="form-control">
+                <td>
+                    <input type="checkbox" @bind="@toDoItem.IsDone" />
+                </td>
+                <td>@toDoItem.Title</td>
+            </tr>
+        }
+    </table>
+}
+
+
+@code {
+
+    List<ToDoItem> toDoItems;
+    string title;
+    bool? showDone;
+
+    protected override async Task OnInitializedAsync()
+    {
+        toDoItems = await ToDoList.GetToDoItems();
+    }
+
+    public void OnKeyDown(KeyboardEventArgs aegArgs)
+    {
+        if (aegArgs.Key == "Enter")
+        {
+            ToDoList.AddNewToDo(new ToDoItem { Title = title });
+            title = string.Empty;
+        }
+    }
+
+    public void OnChangeSelect(ChangeEventArgs args)
+    {
+        var isNull = Boolean.TryParse(args.Value.ToString(), out var value);
+        if (!isNull)
+        {
+            showDone = null;
+            return;
+        }
+        showDone = value;
+    }
+
+    public Func<ToDoItem, bool> FilterExpression()
+    {
+        if (showDone == null || showDone.Value)
+        {
+            return x => !x.IsDone;
+        }
+
+        return x => !x.IsDone || x.IsDone;
+    }
+}
