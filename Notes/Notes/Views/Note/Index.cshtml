@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Note>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mw-100">
+    <div class="row">
+        <div class="col-4 clr-main">
+            <header class="border-bottom">
+                <div class="list-head-padding">
+                    <h4>Notes</h4>
+                </div>
+            </header>
+            <div class="vh-91">
+                @foreach (var note in Model)
+                {
+                    @(await Html.RenderComponentAsync<NoteComponent>(RenderMode.ServerPrerendered, note))
+                }
+            </div>
+        </div>
+        <div class="col-8">
+
+        </div>
+    </div>
+</div>
