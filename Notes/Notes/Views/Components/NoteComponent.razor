@@ -1,11 +1,39 @@
 ﻿@using Notes.Models
+@using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 
-<div>
-
+<div class="@Class border-bottom" @onmouseover="OnMouseOver" @onmouseout="OnMouseOut" @onclick="@(()=>OnMouseClick(Model.Id))">
+    <div class="card-title">
+        @Model.Title
+    </div>
+    <div class="card-body">
+        @Model.Description
+    </div>
 </div>
 
 @code {
+
+    protected override void OnInitialized()
+    {
+        Model = new Note
+        {
+            Id = 1,
+            Description = "Hello, World!",
+            Title = "Hello"
+        };
+    }
+
+    public void OnMouseOver() => Class = "clr-selected";
+
+    public void OnMouseOut() => Class = "";
+
+    public Task OnMouseClick(int noteId) => OnMouseClicked.InvokeAsync(noteId);
+
     [Parameter]
     public Note Model { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnMouseClicked { get; set; }
+
+    public string Class { get; set; }
 }

@@ -15,7 +15,7 @@
             <div class="vh-91">
                 @foreach (var note in Model)
                 {
-                    @(await Html.RenderComponentAsync<NoteComponent>(RenderMode.ServerPrerendered, note))
+                    @(await Html.RenderComponentAsync<NoteComponent>(RenderMode.ServerPrerendered, new { Model = note }))
                 }
             </div>
         </div>

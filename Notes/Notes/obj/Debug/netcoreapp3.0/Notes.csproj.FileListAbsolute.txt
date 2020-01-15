@@ -104,3 +104,6 @@ C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\Notes.RazorComponent.input.cache
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\RazorDeclaration\Views\Components\NoteComponent.razor.g.cs
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\Notes.MvcApplicationPartsAssemblyInfo.cache
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\RazorDeclaration\Notes.dll
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.0\Razor\Views\Components\NoteComponent.razor.g.cs
