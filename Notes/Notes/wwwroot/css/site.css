@@ -13,3 +13,16 @@
 .vh-91{
     height:91vh;
 }
+
+.note-title{
+    padding:4px 14px;
+}
+
+.note-body{
+    padding:0px 14px;
+    font-weight:lighter;
+    font-size:14px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+}
