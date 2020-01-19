@@ -1,9 +1,12 @@
 ﻿@using Notes.Models
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
-@inject NavigationManager NavifationManager
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject NavigationManager NavigationManager
 
-<div class="@Class border-bottom" @onmouseover="OnMouseOver" @onmouseout="OnMouseOut" @onclick="@(()=>OnMouseClick(Model.Id))">
+
+<div class="@Class border-bottom" @onmouseover="OnMouseOver" @onmouseout="OnMouseOut" @onclick="@(()=>OnMouseClick(Model.Id))"
+     pag-action="Edit" page-model="@Model.Id">
     <div class="note-title">
         @Model.Title
     </div>
@@ -18,7 +21,7 @@
 
     public void OnMouseOut() => Class = "";
 
-    public void OnMouseClick(int noteId) =>  NavifationManager.NavigateTo($"/note/edit?noteId={noteId}");
+    public void OnMouseClick(int noteId) => NavigationManager.NavigateTo($"/Note/Edit?noteId={noteId}", true);
 
     [Parameter]
     public Note Model { get; set; }

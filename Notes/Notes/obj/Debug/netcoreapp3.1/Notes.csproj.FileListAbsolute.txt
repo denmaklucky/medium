@@ -87,12 +87,10 @@ C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\staticwebassets\Notes.Stat
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\staticwebassets\Notes.StaticWebAssets.xml
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.MvcApplicationPartsAssemblyInfo.cache
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.RazorComponent.input.cache
-C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\RazorDeclaration\Views\Components\NoteComponent.razor.g.cs
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\RazorDeclaration\Notes.dll
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.TagHelpers.input.cache
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.TagHelpers.output.cache
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.RazorCoreGenerate.cache
-C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Views\Components\NoteComponent.razor.g.cs
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Views\Note\Index.cshtml.g.cs
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -108,3 +106,7 @@ C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.csproj.CopyComplete
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.dll
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Notes.pdb
 C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Views\Note\Edit.cshtml.g.cs
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\NoteComponent.razor.g.cs
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Components\NoteComponent.razor.g.cs
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\NotePage.razor.g.cs
+C:\repos\Examples\Notes\Notes\obj\Debug\netcoreapp3.1\Razor\Components\NotePage.razor.g.cs

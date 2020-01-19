@@ -36,6 +36,6 @@ namespace Notes.Controllers
         }
 
         public IActionResult Edit(int noteId)
-            => View();
+            => PartialView(new Note { Title= "Hello", Description="Desc"});
     }
 }
