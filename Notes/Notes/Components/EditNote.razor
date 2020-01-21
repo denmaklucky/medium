@@ -1,0 +1,44 @@
+﻿@using Notes.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+
+@if (Model == null)
+{
+    <div class="text-center">
+        <span>Select notes for the left!</span>
+    </div>
+}
+else
+{
+    <EditForm Model="Model" OnValidSubmit="OnSumbmit">
+        <DataAnnotationsValidator/>
+        <div class="form-group">
+            <label class="form-check-label">Title</label>
+            <input @bind="Model.Title" class="form-control" />
+            <ValidationMessage For="Model.Title" />
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <label class="form-check-label">Description</label>
+            <InputTextArea @bind-Value="Model.Description" class="form-control" />
+            <ValidationMessage For="Model.Description" />
+        </div>
+
+        <br />
+
+        <button type="submit">Save</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public Note Model { get; set; }
+
+    public void OnSumbmit()
+    {
+
+    }
+
+}

@@ -1,8 +1,6 @@
 ﻿@using Notes.Models
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@inject NavigationManager NavigationManager
 
 
 <div class="@Class border-bottom" @onmouseover="OnMouseOver" @onmouseout="OnMouseOut" @onclick="@(()=>OnMouseClick(Model.Id))"
@@ -21,10 +19,13 @@
 
     public void OnMouseOut() => Class = "";
 
-    public void OnMouseClick(int noteId) => NavigationManager.NavigateTo($"/Note/Edit?noteId={noteId}", true);
+    public Task OnMouseClick(int noteId) => OnClickNoteCallBack.InvokeAsync(Model);
 
     [Parameter]
     public Note Model { get; set; }
+
+    [Parameter]
+    public EventCallback<Note> OnClickNoteCallBack { get; set; }
 
     public string Class { get; set; }
 }

@@ -11,12 +11,12 @@
             <div class="vh-91">
                 @foreach (var note in Notes)
                 {
-                    <NoteComponent Model="note"/>
+                    <NoteComponent Model="note" OnClickNoteCallBack="OnClickNoteCallBack"/>
                 }
             </div>
         </div>
         <div id="noteCard" class="col-8">
-
+            <EditNote Model="SelectedNote"/>
         </div>
     </div>
 </div>
@@ -24,4 +24,11 @@
 @code {
     [Parameter]
     public IEnumerable<Note> Notes { get; set; }
+
+    public Note SelectedNote { get; set; }
+
+    public void OnClickNoteCallBack(Note selectedNote)
+    {
+        SelectedNote = selectedNote;
+    }
 }
