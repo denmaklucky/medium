@@ -26,3 +26,7 @@
     white-space:nowrap;
     overflow:hidden;
 }
+
+.validation-message{
+    color:red;
+}

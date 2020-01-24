@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Notes.Models
 {
@@ -6,10 +7,10 @@ namespace Notes.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Title can't be null or empty")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Description can't be null or empty")]
         public string Description { get; set; }
     }
 }
