@@ -1,0 +1,9 @@
+﻿.movie-body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height:150px;
+}
+
+.movie-selected {
+    background-color: #f2f2f2;
+}

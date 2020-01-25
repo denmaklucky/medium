@@ -13,6 +13,7 @@ namespace OnlineCinema
         {
             services.AddControllersWithViews();
             services.AddTransient<ICinemaRepository, CinemaRepository>();
+            services.AddServerSideBlazor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,6 +32,7 @@ namespace OnlineCinema
                     name: "default",
                     pattern: "{Controller=Home}/{Action=Index}"
                 );
+                endpoints.MapBlazorHub();
             });
         }
     }

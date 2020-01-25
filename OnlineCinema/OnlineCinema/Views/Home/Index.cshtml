@@ -4,5 +4,10 @@
     ViewData["Title"] = "Online Cinema";
 }
 
-<h1>Index</h1>
+<div class="row p-2">
+    @foreach (var movie in Model)
+    {
+        <component type="typeof(MovieComponent)" render-mode="ServerPrerendered" param-Model="movie" />
+    }
+</div>
 
