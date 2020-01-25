@@ -15,6 +15,7 @@ namespace OnlineCinema.Models
             {
                 new Movie
                 {
+                    Id = 1,
                     Name = "Bad Boys for Life",
                     Description = "Detectives Mike Lowry and Marcus Burnett are back on the case! True,"
                     +"they are suspended from all operations, but have desperate friends ever been stopped "
@@ -24,6 +25,7 @@ namespace OnlineCinema.Models
                 },
                 new Movie
                 {
+                    Id =2 ,
                     Name = "Aladdin",
                     Description = "Aladdin retells its classic source material's story with sufficient spectacle and skill,"
                     +" even if it never approaches the dazzling splendor of the animated original.",
@@ -31,11 +33,15 @@ namespace OnlineCinema.Models
                 },
                 new Movie
                 {
+                    Id = 3,
                     Name = "The Wild, Wild Westers",
                     Type =MovieType.Western
                 }
             };
         }
+
+        public Movie GetMovie(int id)
+            => _repository.FirstOrDefault(m => m.Id == id);
 
         public List<Movie> GetMovies()
             => _repository;

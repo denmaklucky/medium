@@ -15,5 +15,12 @@ namespace OnlineCinema.Contollers
             ViewBag.Title = type;
             return View(_repository.GetMovies(type));
         }
+
+        public IActionResult Card(int movieId)
+        {
+            var movie = _repository.GetMovie(movieId);
+            ViewBag.Title = movie.Name;
+            return View(movie);
+        }
     }
 }

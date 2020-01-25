@@ -9,5 +9,7 @@ namespace OnlineCinema.Interfaces
         List<Movie> GetMovies();
 
         List<Movie> GetMovies(MovieType type);
+
+        Movie GetMovie(int id);
     }
 }
