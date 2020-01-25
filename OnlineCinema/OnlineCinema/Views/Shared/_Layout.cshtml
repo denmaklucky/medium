@@ -3,11 +3,45 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div>
-        @RenderBody()
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Online Cinema</a>
+                    <div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Movie" asp-action="List" asp-route-type="@MovieType.Action">
+                                    @nameof(MovieType.Action)
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Movie" asp-action="List" asp-route-type="@MovieType.Western">
+                                    @nameof(MovieType.Western)
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Movie" asp-action="List" asp-route-type="@MovieType.Comedy">
+                                    @nameof(MovieType.Comedy)
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Movie" asp-action="List" asp-route-type="@MovieType.Horror">
+                                    @nameof(MovieType.Horror)
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

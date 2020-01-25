@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineCinema.Interfaces;
 
 namespace OnlineCinema.Contollers
 {
     public class HomeController : Controller
     {
+        private readonly ICinemaRepository _repository;
+        public HomeController(ICinemaRepository repository)
+            => _repository = repository;
+
         public IActionResult Index()
-        {
-            return View();
-        }
+            => View(_repository.GetMovies());
     }
 }
