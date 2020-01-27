@@ -4,7 +4,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <link href="~/css/site.css" type="text/css" rel="stylesheet"/>
+    <link href="~/css/site.css" type="text/css" rel="stylesheet" />
+    @*Need for Blazor*@
+    <base href="~/" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -45,6 +47,6 @@
         </div>
     </div>
     @*Need for Blazor*@
-    <script src="~/_framework/blazor.server.js"></script>
+    <script src="_framework/blazor.server.js"></script>
 </body>
 </html>
