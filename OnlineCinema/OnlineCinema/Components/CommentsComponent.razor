@@ -1,0 +1,15 @@
+﻿@using OnlineCinema.Models
+
+@foreach (var comment in Comments)
+{
+    <div>
+        <span >@comment.Author</span>
+        <span>@comment.Value</span>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public IEnumerable<Comment> Comments { get; set; }
+
+}

@@ -21,7 +21,8 @@ namespace OnlineCinema.Models
                     +"they are suspended from all operations, but have desperate friends ever been stopped "
                     +"by anything? After all, this time Mike is being hunted by someone from his past life."
                     +" So the guys will have to burn out to the full!",
-                    Type = MovieType.Action
+                    Type = MovieType.Action,
+                    Comments = GetComments()
                 },
                 new Movie
                 {
@@ -48,5 +49,13 @@ namespace OnlineCinema.Models
 
         public List<Movie> GetMovies(MovieType type)
             => _repository.Where(m => m.Type == type).ToList();
+
+        public IEnumerable<Comment> GetComments()
+            => new[] { new Comment 
+            {
+                Id = 1,
+                Author = "Denis",
+                Value = "It's good film!"
+            } };
     }
 }
