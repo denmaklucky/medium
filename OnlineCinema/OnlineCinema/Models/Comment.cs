@@ -1,4 +1,6 @@
-﻿namespace OnlineCinema.Models
+﻿using System;
+
+namespace OnlineCinema.Models
 {
     public class Comment
     {
@@ -7,5 +9,7 @@
         public string Author { get; set; }
 
         public string Value { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

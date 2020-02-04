@@ -7,3 +7,13 @@
 .movie-selected {
     background-color: #f2f2f2;
 }
+
+.comment-author{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.comment-createdate {
+    font-size: 12px;
+    color:darkgray;
+}

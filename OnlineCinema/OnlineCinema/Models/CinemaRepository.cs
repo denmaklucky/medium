@@ -1,5 +1,6 @@
 ﻿using OnlineCinema.Enums;
 using OnlineCinema.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,7 +56,8 @@ namespace OnlineCinema.Models
             {
                 Id = 1,
                 Author = "Denis",
-                Value = "It's good film!"
+                Value = "It's good film!",
+                CreatedOn = DateTime.Now
             } };
     }
 }

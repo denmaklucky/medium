@@ -1,15 +1,51 @@
 ﻿@using OnlineCinema.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@*@inject HttpClient Http*@
+
+<EditForm Model="@NewComment" OnSubmit="OnCreateNewComment">
+
+    <div class="form-group">
+        <label>Author</label>
+        <InputText class="form-control" @bind-Value="NewComment.Author" />
+    </div>
+
+    <div class="form-group">
+        <label>Comment</label>
+        <InputTextArea class="form-control" @bind-Value="@NewComment.Value" />
+    </div>
+
+    <div class="float-right">
+        <button class="btn btn-success" type="submit">Add</button>
+    </div>
+
+</EditForm>
 
 @foreach (var comment in Comments)
 {
     <div>
-        <span >@comment.Author</span>
-        <span>@comment.Value</span>
+        <div>
+            <span class="comment-author">@comment.Author</span>
+            <span class="comment-createdate">@comment.CreatedOn.ToShortDateString()</span>
+        </div>
+        <div>@comment.Value</div>
     </div>
+
+    <br />
 }
 
 @code {
     [Parameter]
-    public IEnumerable<Comment> Comments { get; set; }
+    public List<Comment> Comments { get; set; }
+
+    public Comment NewComment { get; set; } = new Comment();
+
+    public void OnCreateNewComment()
+    {
+        NewComment.CreatedOn = DateTime.Now;
+        Comments.Add(NewComment);
+
+        NewComment = new Comment();
+    }
 
 }
