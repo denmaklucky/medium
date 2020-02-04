@@ -14,6 +14,7 @@ namespace OnlineCinema
             services.AddControllersWithViews();
             services.AddTransient<ICinemaRepository, CinemaRepository>();
             services.AddServerSideBlazor();
+            services.AddHttpClient();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

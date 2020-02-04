@@ -8,11 +8,12 @@ namespace OnlineCinema.Models
 {
     public class CinemaRepository : ICinemaRepository
     {
-        private List<Movie> _repository;
+        private List<Movie> _movieRepository;
+        private List<Comment> _commentRepository;
 
         public CinemaRepository()
         {
-            _repository = new List<Movie>
+            _movieRepository = new List<Movie>
             {
                 new Movie
                 {
@@ -22,8 +23,7 @@ namespace OnlineCinema.Models
                     +"they are suspended from all operations, but have desperate friends ever been stopped "
                     +"by anything? After all, this time Mike is being hunted by someone from his past life."
                     +" So the guys will have to burn out to the full!",
-                    Type = MovieType.Action,
-                    Comments = GetComments()
+                    Type = MovieType.Action
                 },
                 new Movie
                 {
@@ -40,24 +40,33 @@ namespace OnlineCinema.Models
                     Type =MovieType.Western
                 }
             };
+
+            _commentRepository = new List<Comment>
+            {
+                new Comment
+                {
+                    Id = 1,
+                    MovieId = 1,
+                    Author = "Denis",
+                    Value = "Good film!",
+                    CreatedOn = DateTime.Now
+                }
+            };
         }
 
         public Movie GetMovie(int id)
-            => _repository.FirstOrDefault(m => m.Id == id);
+            => _movieRepository.FirstOrDefault(m => m.Id == id);
 
         public List<Movie> GetMovies()
-            => _repository;
+            => _movieRepository;
 
         public List<Movie> GetMovies(MovieType type)
-            => _repository.Where(m => m.Type == type).ToList();
+            => _movieRepository.Where(m => m.Type == type).ToList();
 
-        public IEnumerable<Comment> GetComments()
-            => new[] { new Comment 
-            {
-                Id = 1,
-                Author = "Denis",
-                Value = "It's good film!",
-                CreatedOn = DateTime.Now
-            } };
+        public IEnumerable<Comment> GetComments(int movieId)
+            => _commentRepository.Where(c => c.MovieId == movieId);
+
+        public void AddComment(Comment comment)
+            => _commentRepository.Add(comment);
     }
 }

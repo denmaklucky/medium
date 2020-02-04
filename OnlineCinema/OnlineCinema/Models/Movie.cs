@@ -1,5 +1,4 @@
 ﻿using OnlineCinema.Enums;
-using System.Collections.Generic;
 
 namespace OnlineCinema.Models
 {
@@ -12,7 +11,5 @@ namespace OnlineCinema.Models
         public string Description { get; set; }
 
         public MovieType Type { get; set; }
-
-        public IEnumerable<Comment> Comments { get; set; }
     }
 }

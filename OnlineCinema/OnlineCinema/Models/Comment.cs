@@ -6,6 +6,8 @@ namespace OnlineCinema.Models
     {
         public int Id { get; set; }
 
+        public int MovieId { get; set; }
+
         public string Author { get; set; }
 
         public string Value { get; set; }

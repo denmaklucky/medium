@@ -1,7 +1,8 @@
 ﻿@using OnlineCinema.Models
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
-@*@inject HttpClient Http*@
+@using System.Net.Http
+@inject System.Net.Http.IHttpClientFactory HttpClientFactory
 
 <EditForm Model="@NewComment" OnSubmit="OnCreateNewComment">
 
@@ -35,17 +36,28 @@
 }
 
 @code {
-    [Parameter]
+    private HttpClient _client;
+
     public List<Comment> Comments { get; set; }
+
+    [Parameter]
+    public int MovieId { get; set; }
 
     public Comment NewComment { get; set; } = new Comment();
 
-    public void OnCreateNewComment()
+    public async Task OnCreateNewComment()
     {
         NewComment.CreatedOn = DateTime.Now;
         Comments.Add(NewComment);
 
+        var result = await _client.PostJsonAsync<Comment>("/commet/addComment", NewComment);
+
         NewComment = new Comment();
     }
 
+    protected override Task OnInitializedAsync()
+    {
+        _client = HttpClientFactory.CreateClient();
+        return base.OnInitializedAsync();
+    }
 }
