@@ -14,7 +14,8 @@ namespace OnlineCinema.Contollers
         public IEnumerable<Comment> GetComments(int movieId)
             => _repository.GetComments(movieId);
 
-        public IActionResult AddComment(Comment comment)
+        [HttpPost]
+        public IActionResult AddComment([FromBody]Comment comment)
         {
             _repository.AddComment(comment);
             return Ok();

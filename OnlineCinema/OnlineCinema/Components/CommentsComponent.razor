@@ -22,17 +22,24 @@
 
 </EditForm>
 
-@foreach (var comment in Comments)
+@if (Comments == null)
 {
-    <div>
+    <span>Loading...</span>
+}
+else
+{
+    @foreach (var comment in Comments)
+    {
         <div>
-            <span class="comment-author">@comment.Author</span>
-            <span class="comment-createdate">@comment.CreatedOn.ToShortDateString()</span>
+            <div>
+                <span class="comment-author">@comment.Author</span>
+                <span class="comment-createdate">@comment.CreatedOn.ToShortDateString()</span>
+            </div>
+            <div>@comment.Value</div>
         </div>
-        <div>@comment.Value</div>
-    </div>
 
-    <br />
+        <br />
+    }
 }
 
 @code {
@@ -48,16 +55,22 @@
     public async Task OnCreateNewComment()
     {
         NewComment.CreatedOn = DateTime.Now;
+        NewComment.MovieId = MovieId;
         Comments.Add(NewComment);
 
-        var result = await _client.PostJsonAsync<Comment>("/commet/addComment", NewComment);
+        var result = await _client.PostAsync("https://localhost:5001/Comment/AddComment", 
+            new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(NewComment), System.Text.Encoding.UTF8, "application/json"));
 
         NewComment = new Comment();
     }
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         _client = HttpClientFactory.CreateClient();
-        return base.OnInitializedAsync();
+
+        var response = await _client.GetAsync($"https://localhost:5001/Comment/GetComments?movieId={MovieId}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        Comments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comment>>(content);
     }
 }
