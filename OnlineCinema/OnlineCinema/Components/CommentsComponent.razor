@@ -58,7 +58,7 @@ else
         NewComment.MovieId = MovieId;
         Comments.Add(NewComment);
 
-        var result = await _client.PostAsync("https://localhost:5001/Comment/AddComment", 
+        var result = await _client.PostAsync("/Comment/AddComment", 
             new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(NewComment), System.Text.Encoding.UTF8, "application/json"));
 
         NewComment = new Comment();
@@ -66,9 +66,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _client = HttpClientFactory.CreateClient();
+        _client = HttpClientFactory.CreateClient("Cinema Api");
 
-        var response = await _client.GetAsync($"https://localhost:5001/Comment/GetComments?movieId={MovieId}");
+        var response = await _client.GetAsync($"/Comment/GetComments?movieId={MovieId}");
         var content = await response.Content.ReadAsStringAsync();
 
         Comments = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Comment>>(content);

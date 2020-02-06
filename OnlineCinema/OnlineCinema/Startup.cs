@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineCinema.Interfaces;
 using OnlineCinema.Models;
+using System;
 
 namespace OnlineCinema
 {
@@ -12,9 +13,12 @@ namespace OnlineCinema
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddTransient<ICinemaRepository, CinemaRepository>();
+            services.AddSingleton<ICinemaRepository,CinemaRepository>();
             services.AddServerSideBlazor();
-            services.AddHttpClient();
+            services.AddHttpClient("Cinema Api", cnf => 
+            {
+                cnf.BaseAddress = new Uri("https://localhost:5001");
+            }) ;
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
