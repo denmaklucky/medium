@@ -9,7 +9,7 @@ namespace Notes
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddServerSideBlazor();
         }
 
@@ -25,10 +25,7 @@ namespace Notes
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Note}/{action=Index}");
-
+                endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapBlazorHub();
             });
         }

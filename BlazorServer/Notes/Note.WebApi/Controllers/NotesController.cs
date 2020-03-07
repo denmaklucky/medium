@@ -28,5 +28,12 @@ namespace Note.WebApi.Controllers
             await _repository.AddOrUpdateNote(note, token);
             return Ok();
         }
+        
+        [HttpDelete, Route("delete/{noteId}")]
+        public async Task<IActionResult> DeleteNote(int noteId, CancellationToken token)
+        {
+            await _repository.DeleteNote(noteId, token);
+            return Ok();
+        }
     }
 }

@@ -9,7 +9,6 @@ namespace Note.WebApi
 {
     public class Startup
     {
-        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<INoteRepository, NoteRepsitory>();
@@ -24,7 +23,7 @@ namespace Note.WebApi
             }
 
             app.UseRouting();
-            app.UseMiddleware(typeof(HttpExceptionMiddleware));
+            app.UseMiddleware<HttpExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

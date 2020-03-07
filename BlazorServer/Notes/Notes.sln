@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notes", "Notes\Notes.csproj", "{138C8D6F-EC7F-4DA2-BBB0-8DF824616650}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Note.WebApi", "Note.WebApi\Note.WebApi.csproj", "{26D21F00-1DF7-4095-A5BF-F0638CB22687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Note.WebApi", "Note.WebApi\Note.WebApi.csproj", "{26D21F00-1DF7-4095-A5BF-F0638CB22687}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
