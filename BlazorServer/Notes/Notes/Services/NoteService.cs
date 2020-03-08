@@ -1,14 +1,15 @@
-﻿using Notes.Models;
+﻿using Newtonsoft.Json;
+using Notes.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Notes.Services
 {
-    public class NoteService : INoteService
+    public class NoteService : INoteService, IDisposable
     {
+        private const string Server = "https://localhost:44350/api/";
         private readonly HttpClient _httpClient;
 
         public NoteService(IHttpClientFactory httpFactory)
@@ -20,9 +21,15 @@ namespace Notes.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Note>> GetNotes()
+        public async Task<List<Note>> GetNotes()
         {
-            throw new NotImplementedException();
+            const string getNoteUrl = "notes/list";
+            var response = await _httpClient.GetAsync($"{Server}{getNoteUrl}");
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Note>>(content);
         }
+
+        public void Dispose()
+            => _httpClient?.Dispose();
     }
 }

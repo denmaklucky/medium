@@ -1,7 +1,0 @@
-﻿@model IEnumerable<Note>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-@(await Html.RenderComponentAsync<NotePage>(RenderMode.ServerPrerendered, new { Notes = Model }))
