@@ -1,8 +1,4 @@
-﻿@using Notes.Models
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Web
-
-
+﻿
 <div class="@Class border-bottom" @onmouseover="OnMouseOver" @onmouseout="OnMouseOut" @onclick="@(()=>OnMouseClick(Model.Id))"
      pag-action="Edit" page-model="@Model.Id">
     <div class="note-title">

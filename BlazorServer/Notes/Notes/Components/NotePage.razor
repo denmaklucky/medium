@@ -24,7 +24,7 @@
             </div>
         </div>
         <div id="noteCard" class="col-8">
-            <EditNote Model="SelectedNote"/>
+            <EditNote Model="SelectedNote" GoBack="OnGoBack"/>
         </div>
     </div>
 </div>
@@ -48,5 +48,10 @@
     public void OnClickNoteCallBack(Note selectedNote)
     {
         SelectedNote = selectedNote;
+    }
+
+    public void OnGoBack()
+    {
+        SelectedNote = null;
     }
 }

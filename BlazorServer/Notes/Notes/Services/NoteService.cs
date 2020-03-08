@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using Notes.Extensions;
 using Notes.Models;
 using System;
 using System.Collections.Generic;
@@ -16,17 +16,16 @@ namespace Notes.Services
             => _httpClient = httpFactory.CreateClient();
 
 
-        public Task CreateOrUpdate(Note note)
+        public async Task CreateOrUpdate(Note note)
         {
-            throw new NotImplementedException();
+            const string method = "notes/createOrUpdate";
+            await _httpClient.PostJsonAsync<Note>($"{Server}{method}", note);
         }
 
-        public async Task<List<Note>> GetNotes()
+        public Task<List<Note>> GetNotes()
         {
-            const string getNoteUrl = "notes/list";
-            var response = await _httpClient.GetAsync($"{Server}{getNoteUrl}");
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<Note>>(content);
+            const string method = "notes/list";
+            return _httpClient.GetJsonAsync<List<Note>>($"{Server}{method}");
         }
 
         public void Dispose()

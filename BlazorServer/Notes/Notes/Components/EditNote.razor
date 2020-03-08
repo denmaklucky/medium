@@ -1,6 +1,5 @@
-﻿@using Notes.Models
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Components.Web
+﻿@inject INoteService NoteService
+
 
 @if (Model == null)
 {
@@ -38,9 +37,12 @@ else
     [Parameter]
     public Note Model { get; set; }
 
-    public void OnSumbmit()
+    [Parameter]
+    public EventCallback GoBack { get; set; }
+
+    public async Task OnSumbmit()
     {
-
+        await NoteService.CreateOrUpdate(Model);
+        await GoBack.InvokeAsync(this);
     }
-
 }
