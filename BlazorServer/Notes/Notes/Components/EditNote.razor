@@ -1,6 +1,5 @@
 ﻿@inject INoteService NoteService
 
-
 @if (Model == null)
 {
     <div class="text-center">
@@ -14,7 +13,7 @@ else
         <div class="form-group">
             <label class="form-check-label">Title</label>
             <input @bind="Model.Title" class="form-control" />
-            <ValidationMessage For="@(() => Model.Title)"/>
+            <ValidationMessage For="@(() => Model.Title)" />
         </div>
 
         <br />
@@ -22,13 +21,15 @@ else
         <div class="form-group">
             <label class="form-check-label">Description</label>
             <InputTextArea @bind-Value="Model.Description" class="form-control" />
-            <ValidationMessage For="@(() => Model.Title)" />
+            <ValidationMessage For="@(() => Model.Description)" />
         </div>
 
         <br />
 
         <div class="text-right">
+            <img src="images/ajax-loader.gif" class="@LoadingClass" />
             <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-danger" type="submit">Delete</button>
         </div>
     </EditForm>
 }
@@ -40,9 +41,13 @@ else
     [Parameter]
     public EventCallback GoBack { get; set; }
 
+    public string LoadingClass { get; set; } = "d-none";
+
     public async Task OnSumbmit()
     {
+        LoadingClass = "";
         await NoteService.CreateOrUpdate(Model);
         await GoBack.InvokeAsync(this);
+        LoadingClass = "d-none";
     }
 }
