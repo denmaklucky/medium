@@ -29,7 +29,7 @@ else
         <div class="text-right">
             <img src="images/ajax-loader.gif" class="@LoadingClass" />
             <button class="btn btn-success" type="submit">Save</button>
-            <button class="btn btn-danger" type="submit">Delete</button>
+            <button class="btn btn-danger" @onclick="OnDelete">Delete</button>
         </div>
     </EditForm>
 }
@@ -41,6 +41,9 @@ else
     [Parameter]
     public EventCallback GoBack { get; set; }
 
+    [Parameter]
+    public EventCallback<int> DeletedEvent { get; set; }
+
     public string LoadingClass { get; set; } = "d-none";
 
     public async Task OnSumbmit()
@@ -48,6 +51,14 @@ else
         LoadingClass = "";
         await NoteService.CreateOrUpdate(Model);
         await GoBack.InvokeAsync(this);
+        LoadingClass = "d-none";
+    }
+
+    public async Task OnDelete()
+    {
+        LoadingClass = "";
+        await NoteService.Delete(Model.Id);
+        await DeletedEvent.InvokeAsync(Model.Id);
         LoadingClass = "d-none";
     }
 }

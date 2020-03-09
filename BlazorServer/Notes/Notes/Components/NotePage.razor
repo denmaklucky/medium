@@ -31,7 +31,7 @@
             </div>
         </div>
         <div id="noteCard" class="col-8">
-            <EditNote Model="SelectedNote" GoBack="OnGoBack" />
+            <EditNote Model="SelectedNote" GoBack="OnGoBack" DeletedEvent="OnDeletedNote"/>
         </div>
     </div>
 </div>
@@ -64,4 +64,7 @@
         SelectedNote = newNote;
         Notes.Add(newNote);
     }
+
+    public void OnDeletedNote(int noteId)
+        => Notes.Remove(Notes.First(n => n.Id == noteId));
 }

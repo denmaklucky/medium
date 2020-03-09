@@ -28,6 +28,12 @@ namespace Notes.Services
             return _httpClient.GetJsonAsync<List<Note>>($"{Server}{method}");
         }
 
+        public async Task Delete(int noteId)
+        {
+            const string method = "notes/delete/";
+            await _httpClient.DeleteAsync($"{Server}{method}{noteId}");
+        }
+
         public void Dispose()
             => _httpClient?.Dispose();
     }

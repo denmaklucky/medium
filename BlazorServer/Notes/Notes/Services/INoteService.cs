@@ -9,5 +9,7 @@ namespace Notes.Services
         Task CreateOrUpdate(Note note);
 
         Task<List<Note>> GetNotes();
+
+        Task Delete(int noteId);
     }
 }
