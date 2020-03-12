@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Note.WebApi.Controllers
 {
-    [Route("api/notes")]
-    [ApiController]
+    [ApiController, Route("api/notes")]
     public class NotesController : ControllerBase
     {
         private readonly INoteRepository _repository;
@@ -28,7 +27,7 @@ namespace Note.WebApi.Controllers
             await _repository.AddOrUpdateNote(note, token);
             return Ok();
         }
-        
+
         [HttpDelete, Route("delete/{noteId}")]
         public async Task<IActionResult> DeleteNote(int noteId, CancellationToken token)
         {

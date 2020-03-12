@@ -12,12 +12,11 @@ namespace Notes.Extensions
             var response = await httpClient.GetAsync(requestedUrl);
 
             if (!response.IsSuccessStatusCode)
-                throw new HttpRequestException($"Can't call {requestedUrl}; Status cod {response.StatusCode}");
+                throw new HttpRequestException($"Can't call {requestedUrl}; Status code {response.StatusCode}");
 
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(content);
         }
-
 
         public static async Task<bool> PostJsonAsync<T>(this HttpClient httpClient, string requestedUrl, T obj)
         {
