@@ -1,4 +1,5 @@
 ﻿using MongoDB.WebApi.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MongoDB.WebApi.Interfaces
@@ -7,14 +8,12 @@ namespace MongoDB.WebApi.Interfaces
     {
         Task AddUser(User user);
 
-        Task<User> GetUser(string guid);
+        Task<User> GetUser(string userId);
 
         Task AddPost(Post post);
 
-        Task<Post[]> GetPost(string userId);
+        Task<List<Post>> GetPosts(string userId);
 
         Task AddComment(Comment comment);
-
-        Task<Comment[]> GetComments(string postId);
     }
 }

@@ -2,50 +2,53 @@
 using MongoDB.Driver;
 using MongoDB.WebApi.Entities;
 using MongoDB.WebApi.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MongoDB.WebApi.Models
 {
     public class BlogRepository : IBlogRepository
     {
-        private readonly IMongoDatabase _database;
-        public BlogRepository(IMongoDatabase database)
-            => _database = database;
+        private readonly BlogContext _context;
+        public BlogRepository(BlogContext context)
+            => _context = context;
 
         public async Task<User> GetUser(string guid)
         {
             var objectId = new ObjectId(guid);
-            var users = _database.GetCollection<User>("Users");
             var filter = new BsonDocument { { "_id", objectId } };
-            var cursor = await users.FindAsync(filter);
+            var cursor = await _context.Users.FindAsync(filter);
             return cursor.First();
         }
 
         public Task AddUser(User user)
-        {
-            var users = _database.GetCollection<User>("Users");
-            return users.InsertOneAsync(user);
-        
-        }
+            => _context.Users.InsertOneAsync(user);
 
-        public Task AddComment(Comment comment)
+        public async Task AddComment(Comment comment)
         {
-            throw new System.NotImplementedException();
-        }
+            var filter = new BsonDocument { { "_id", comment.PostId } };
+            var cursor = await _context.Posts.FindAsync(filter);
+            var post = cursor.FirstOrDefault();
+            if (post != null)
+            {
+                post.Comments ??= new List<Comment>();
+                post.Comments.Add(comment);
+                var filterForUpdate = Builders<Post>.Filter.Eq("_id", comment.PostId);
+                var update = Builders<Post>.Update.Set("Comments", post.Comments);
 
-        public Task<Comment[]> GetComments(string postId)
-        {
-            throw new System.NotImplementedException();
+                await _context.Posts.UpdateOneAsync(filterForUpdate, update);
+            }
         }
 
         public Task AddPost(Post post)
-        {
-            throw new System.NotImplementedException();
-        }
+            => _context.Posts.InsertOneAsync(post);
 
-        public Task<Post[]> GetPost(string userId)
+        public async Task<List<Post>> GetPosts(string userId)
         {
-            throw new System.NotImplementedException();
+            var objectId = new ObjectId(userId);
+            var filter = new BsonDocument { { "CreatedBy", objectId } };
+            var cursor = await _context.Posts.FindAsync(filter);
+            return await cursor.ToListAsync();
         }
     }
 }

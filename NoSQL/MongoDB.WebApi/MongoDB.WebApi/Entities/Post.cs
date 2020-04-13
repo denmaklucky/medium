@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace MongoDB.WebApi.Entities
 {
@@ -7,5 +8,7 @@ namespace MongoDB.WebApi.Entities
         public string Text { get; set; }
 
         public ObjectId CreatedBy { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }
