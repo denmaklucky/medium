@@ -12,5 +12,7 @@ namespace MongoDB.WebApi.Entities
         public ObjectId PostId { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public bool IsBad { get; set; }
     }
 }
