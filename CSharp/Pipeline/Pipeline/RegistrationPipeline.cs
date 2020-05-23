@@ -23,11 +23,11 @@ namespace Pipeline
 
                 pipelineResult.StepResults.Add(stepResult);
 
-                PipelineResult.CanChangeStep = PipelineResult.CanChangeStep
+                pipelineResult.CanChangeStep = pipelineResult.CanChangeStep
                                              ? stepResult
                                              : false;
 
-                if (PipelineResult.CanChangeStep)
+                if (pipelineResult.CanChangeStep)
                     pipelineResult.CurrentStep = stepResult.Step;
             }
 

@@ -4,7 +4,7 @@ namespace Pipeline
 {
     public class PipelineResult
     {
-        public static bool CanChangeStep = true;
+        public bool CanChangeStep { get; set; } = true;
 
         public RegistrationStep CurrentStep { get; set; }
 
