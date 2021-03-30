@@ -5,7 +5,10 @@
 
 <button class="btn btn-primary" @onclick="OnCreateTable">Create a table</button>
 
+<p>@_count</p>
+
 @code {
+    private int _count;
 
     private void OnCreateTable()
     {
@@ -15,5 +18,6 @@
         };
 
         Service.CreateTable(newTable);
+        _count = Service.GetTableCount();
     }
 }
