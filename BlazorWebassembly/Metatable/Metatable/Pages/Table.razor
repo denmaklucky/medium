@@ -1,0 +1,19 @@
+﻿@page "/Table"
+@using Metatable.Models
+@inject Services.IMetaService Service
+<h3>Metatable</h3>
+
+<button class="btn btn-primary" @onclick="OnCreateTable">Create a table</button>
+
+@code {
+
+    private void OnCreateTable()
+    {
+        var newTable = new TableModel
+        {
+            Name = "New table"
+        };
+
+        Service.CreateTable(newTable);
+    }
+}
