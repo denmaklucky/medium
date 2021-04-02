@@ -7,28 +7,28 @@ namespace Metatable.Services
 {
     public interface IMetaService
     {
-        void CreateTable(TableModel table);
-        Task UpdateTable(TableModel table);
-        Task<TableModel> GetTable();
+        void CreateTable(View table);
+        Task UpdateTable(View table);
+        Task<View> GetTable();
         int GetTableCount();
     }
 
     public class MetaService : IMetaService
     {
-        private static List<TableModel> _repository;
+        private static List<View> _repository;
 
         public MetaService()
-            => _repository = new List<TableModel>();
+            => _repository = new List<View>();
 
-        public void CreateTable(TableModel table)
+        public void CreateTable(View table)
         {
             _repository.Add(table);
         }
 
-        public Task UpdateTable(TableModel table)
+        public Task UpdateTable(View table)
             => throw new NotImplementedException(); //_repository.UpdateTable(table.Id, table);
 
-        public Task<TableModel> GetTable()
+        public Task<View> GetTable()
             => throw new NotImplementedException(); // _repository.GetFirstTable();
 
         public int GetTableCount()

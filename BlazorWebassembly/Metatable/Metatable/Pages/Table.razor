@@ -9,24 +9,24 @@
 
 @if (_table != null)
 {
-    <TableComponent Model="_table"></TableComponent>
+    <Metatable.Compenets.TableComponent Model="_table"></TableComponent>
 }
 
 @code {
     private int _count;
-    private TableModel _table;
+    private View _table;
 
     private void OnCreateTable()
     {
-        _table = new TableModel
+        _table = new View
         {
             Name = "New table",
             Objects = new List<MetaObject>
-    {
+{
                 new MetaObject
                 {
                     Properties = new List<MetaProperty>
-            {
+        {
                         new MetaProperty("Name", "Text1",PropertyType.Text),
                         new MetaProperty("Name1", "Text2", PropertyType.Text),
                         new MetaProperty("Name2", "Text3", PropertyType.Text),
