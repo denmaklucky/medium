@@ -7,18 +7,18 @@
 <button class="btn btn-primary" @onclick="OnCreateTable">Create a table</button>
 
 
-@if (_table != null)
+@if (_model != null)
 {
-    <Metatable.Compenets.TableComponent Model="_table"></TableComponent>
+    <ViewComponent Model="_model"></ViewComponent>
 }
 
 @code {
     private int _count;
-    private View _table;
+    private View _model;
 
     private void OnCreateTable()
     {
-        _table = new View
+        _model = new View
         {
             Name = "New table",
             Objects = new List<MetaObject>
@@ -26,7 +26,7 @@
                 new MetaObject
                 {
                     Properties = new List<MetaProperty>
-        {
+                    {
                         new MetaProperty("Name", "Text1",PropertyType.Text),
                         new MetaProperty("Name1", "Text2", PropertyType.Text),
                         new MetaProperty("Name2", "Text3", PropertyType.Text),

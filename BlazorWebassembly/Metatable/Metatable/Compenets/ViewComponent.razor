@@ -41,12 +41,15 @@ else
     [Parameter]
     public View Model { get; set; }
 
+    [CascadingParameter] public IModalService Modal { get; set; }
+
     public void AddNewProperty()
     {
-        var newProperty = new MetaProperty("CreatedOn", DateTime.Now, Enums.PropertyType.Text);
-        foreach (var metaObject in Model.Objects)
-        {
-            metaObject.Properties.Add(newProperty);
-        }
+        Modal.Show<AddPropertyPage>();
+        //var newProperty = new MetaProperty("CreatedOn", DateTime.Now, Enums.PropertyType.Text);
+        //foreach (var metaObject in Model.Objects)
+        //{
+        //    metaObject.Properties.Add(newProperty);
+        //}
     }
 }
