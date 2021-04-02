@@ -1,6 +1,6 @@
 ﻿namespace Metatable.Enums
 {
-    public enum DataType
+    public enum PropertyType
     {
         Text,
         Number,

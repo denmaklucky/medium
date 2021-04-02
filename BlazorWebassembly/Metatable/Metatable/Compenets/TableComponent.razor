@@ -1,0 +1,52 @@
+﻿@using Metatable.Models
+<h3>@Model.Name</h3>
+
+@if (Model == null)
+{
+    <div>
+        <span>table is null</span>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach (var column in Model.Objects.FirstOrDefault().Properties.Where(c => !c.IsHidden).GroupBy(c => c.Name).Select(g => g.Key))
+                {
+                    <th>@column</th>
+                }
+                <th><button type="button" class="btn btn-outline-success" @onclick="AddNewProperty">Add column</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var metaObject in Model.Objects)
+            {
+                <tr>
+                    @foreach (var data in metaObject.Properties.Where(p => !p.IsHidden))
+                    {
+                        <td>@data.Value</td>
+                    }
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+
+    [Parameter]
+    public TableModel Model { get; set; }
+
+    public void AddNewProperty()
+    {
+        var newProperty = new MetaProperty("CreatedOn", DateTime.Now, Enums.PropertyType.Text);
+        foreach (var metaObject in Model.Objects)
+        {
+            metaObject.Properties.Add(newProperty);
+        }
+    }
+}

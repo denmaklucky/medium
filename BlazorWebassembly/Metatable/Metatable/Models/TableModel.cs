@@ -6,6 +6,6 @@ namespace Metatable.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public List<Metadata> Data { get; set; }
+        public List<MetaObject> Objects { get; set; }
     }
 }

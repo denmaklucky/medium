@@ -1,23 +1,40 @@
 ﻿@page "/Table"
 @using Metatable.Models
+@using Metatable.Enums
 @inject Services.IMetaService Service
 <h3>Metatable</h3>
 
 <button class="btn btn-primary" @onclick="OnCreateTable">Create a table</button>
 
-<p>@_count</p>
+
+@if (_table != null)
+{
+    <TableComponent Model="_table"></TableComponent>
+}
 
 @code {
     private int _count;
+    private TableModel _table;
 
     private void OnCreateTable()
     {
-        var newTable = new TableModel
+        _table = new TableModel
         {
-            Name = "New table"
-        };
+            Name = "New table",
+            Objects = new List<MetaObject>
+    {
+                new MetaObject
+                {
+                    Properties = new List<MetaProperty>
+            {
+                        new MetaProperty("Name", "Text1",PropertyType.Text),
+                        new MetaProperty("Name1", "Text2", PropertyType.Text),
+                        new MetaProperty("Name2", "Text3", PropertyType.Text),
+                        new MetaProperty("Name3", "Text4", PropertyType.Text)
+                    }
+                }
 
-        Service.CreateTable(newTable);
-        _count = Service.GetTableCount();
+            }
+        };
     }
 }
