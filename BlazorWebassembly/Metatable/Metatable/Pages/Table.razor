@@ -27,10 +27,34 @@
                 {
                     Properties = new List<MetaProperty>
                     {
-                        new MetaProperty("Name", "Text1",PropertyType.Text),
-                        new MetaProperty("Name1", "Text2", PropertyType.Text),
-                        new MetaProperty("Name2", "Text3", PropertyType.Text),
-                        new MetaProperty("Name3", "Text4", PropertyType.Text)
+                        new MetaProperty
+                        {
+                            Name = "Name",
+                            IsHidden = false,
+                            Type = PropertyType.Text,
+                            Value = "Text1"
+                        },
+                        new MetaProperty
+                        {
+                            Name = "Name2",
+                            IsHidden = false,
+                            Type = PropertyType.Text,
+                            Value = "Text2"
+                        },
+                        new MetaProperty
+                        {
+                            Name = "Name3",
+                            IsHidden = false,
+                            Type = PropertyType.Text,
+                            Value = "Text3"
+                        },
+                        new MetaProperty
+                        {
+                            Name = "Name4",
+                            IsHidden = false,
+                            Type = PropertyType.Text,
+                            Value = "Text4"
+                        }
                     }
                 }
 

@@ -1,17 +1,55 @@
-﻿
-<div class="modal-body">
-    <form>
-        <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Property name</label>
-            <input type="text" class="form-control" id="recipient-name">
-        </div>
-        <div class="mb-3">
-            <label for="message-text" class="col-form-label">Value:</label>
-            <input type="text" class="form-control" id="recipient-name">
-        </div>
-    </form>
+﻿@using Metatable.Enums
+@using Metatable.Models
+
+<div>
+    <div>
+        <label class="col-form-label">Name:</label>
+        <input type="text" class="form-control" value="@Property.Name">
+    </div>
+
+    <div>
+        <label class="col-form-label">Type:</label>
+        <select class="custom-select form-select-sm">
+            @foreach (PropertyType type in Enum.GetValues(typeof(PropertyType)))
+            {
+                <option value="@type">@type</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label class="col-form-label">Value:</label>
+        <input type="text" class="form-control" value="@Property.Value">
+    </div>
+
+    <div class="modal-footer">
+        <button @onclick="OnOkClick" class="btn btn-primary">Save</button>
+        <button @onclick="OnCancelClick" class="btn btn-secondary">Cancel</button>
+    </div>
+
 </div>
+
 
 @code {
 
+    [CascadingParameter] 
+    BlazoredModalInstance ModalInstance { get; set; }
+    
+    MetaProperty Property { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        Property = new MetaProperty();
+        return base.OnInitializedAsync();
+    }
+
+    void OnOkClick()
+    {
+        ModalInstance.CloseAsync(ModalResult.Ok(Property));
+    }
+
+    void OnCancelClick()
+    {
+        ModalInstance.CancelAsync();
+    }
 }

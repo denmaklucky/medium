@@ -11,45 +11,57 @@ else
 {
     <table class="table">
         <thead>
-            <tr>
-                @foreach (var column in Model.Objects.FirstOrDefault().Properties.Where(c => !c.IsHidden).GroupBy(c => c.Name).Select(g => g.Key))
-                {
-                    <th>@column</th>
-                }
-                <th><button type="button" class="btn btn-outline-success" @onclick="AddNewProperty">Add column</button></th>
-            </tr>
+        <tr>
+            @foreach (var column in Model.Objects.FirstOrDefault().Properties.Where(c => !c.IsHidden).GroupBy(c => c.Name).Select(g => g.Key))
+            {
+                <th>@column</th>
+            }
+            <th>
+                <button type="button" class="btn btn-outline-success" @onclick="AddNewProperty">Add column</button>
+            </th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var metaObject in Model.Objects)
-            {
-                <tr>
-                    @foreach (var data in metaObject.Properties.Where(p => !p.IsHidden))
-                    {
-                        <td>@data.Value</td>
-                    }
-                    <td></td>
-                </tr>
-            }
+        @foreach (var metaObject in Model.Objects)
+        {
+            <tr>
+                @foreach (var data in metaObject.Properties.Where(p => !p.IsHidden))
+                {
+                    <td>@data.Value</td>
+                }
+                <td></td>
+            </tr>
+        }
         </tbody>
     </table>
 }
 
+<p>@_i</p>
 
 
 @code {
 
+    private int _i;
+
     [Parameter]
     public View Model { get; set; }
 
-    [CascadingParameter] public IModalService Modal { get; set; }
+    [CascadingParameter]
+    public IModalService Modal { get; set; }
 
-    public void AddNewProperty()
+    async void AddNewProperty()
     {
-        Modal.Show<AddPropertyPage>();
-        //var newProperty = new MetaProperty("CreatedOn", DateTime.Now, Enums.PropertyType.Text);
-        //foreach (var metaObject in Model.Objects)
-        //{
-        //    metaObject.Properties.Add(newProperty);
-        //}
+        var modal = Modal.Show<AddPropertyPage>("Add property", new ModalOptions
+        {
+            HideCloseButton = true
+        });
+        var result = await modal.Result;
+        
+        var newProperty = (MetaProperty) result.Data;
+        foreach (var metaObject in Model.Objects)
+        {
+            metaObject.Properties.Add(newProperty);
+        }
     }
+
 }
