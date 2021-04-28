@@ -14,7 +14,9 @@ else
         <tr>
             @foreach (var column in Model.Objects.FirstOrDefault().Properties.Where(c => !c.IsHidden).GroupBy(c => c.Name).Select(g => g.Key))
             {
-                <th>@column</th>
+                <th>
+                    @column <button type="button" class="btn btn-link" @onclick="@(() => EditProperty(@column))">Edit</button>
+                </th>
             }
             <th>
                 <button type="button" class="btn btn-outline-success" @onclick="AddNewProperty">Add column</button>
@@ -36,12 +38,9 @@ else
     </table>
 }
 
-<p>@_i</p>
-
 
 @code {
-
-    private int _i;
+    int _count;
 
     [Parameter]
     public View Model { get; set; }
@@ -51,17 +50,58 @@ else
 
     async void AddNewProperty()
     {
-        var modal = Modal.Show<AddPropertyPage>("Add property", new ModalOptions
+        var parameters = new ModalParameters();
+        parameters.Add("NotAvailableNames", Model.Objects.FirstOrDefault()?.Properties.Select(p => p.Name).ToList());
+        var modal = Modal.Show<AddPropertyPage>("Add property", parameters, new ModalOptions
         {
             HideCloseButton = true
         });
         var result = await modal.Result;
-        
-        var newProperty = (MetaProperty) result.Data;
-        foreach (var metaObject in Model.Objects)
+
+        if (result != null)
         {
-            metaObject.Properties.Add(newProperty);
+            var newProperty = (MetaProperty) result.Data;
+            foreach (var metaObject in Model.Objects)
+            {
+                metaObject.Properties.Add(newProperty);
+            }
         }
+        
+        StateHasChanged();
+    }
+
+    async void EditProperty(string propertyName)
+    {
+        if (string.IsNullOrEmpty(propertyName))
+            return;
+
+        var property = Model.Objects.FirstOrDefault()?.Properties.FirstOrDefault(p => p.Name == propertyName);
+        if (property != null)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add("Property", property);
+            parameters.Add("NotAvailableNames", Model.Objects.FirstOrDefault()?.Properties.Where( p => p.Name != propertyName)
+                .Select(p => p.Name).ToList());
+            var modal = Modal.Show<AddPropertyPage>("Add property", parameters, new ModalOptions
+            {
+                HideCloseButton = true
+            });
+            var result = await modal.Result;
+
+            if (result != null)
+            {
+                var newProperty = (MetaProperty) result.Data;
+                var obj = Model.Objects.FirstOrDefault();
+                if (obj != null)
+                {
+                    var index = obj.Properties.IndexOf(property);
+                    obj.Properties.Remove(property);
+                    obj.Properties.Insert(index, newProperty);
+                }
+            }
+        }
+        
+        StateHasChanged();
     }
 
 }
