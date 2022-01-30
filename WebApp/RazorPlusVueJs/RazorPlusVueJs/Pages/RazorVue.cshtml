@@ -4,4 +4,23 @@
 @{
 }
 
-<p>Razor + Vue.Js</p>
+<div id="razor-vue">
+    <p>Count : {{ count }}</p>
+    <button v-on:click="incrementCount">increment</button>
+</div>
+
+
+<script type="text/javascript">
+var app = new Vue({
+el: '#razor-vue',
+data:{
+    count: 1
+ },
+ methods:
+ {
+     incrementCount: function (){
+         this.count +=1;
+     }
+ }
+});
+</script>
