@@ -15,13 +15,19 @@
 </ul>
 
 <div class="align-content-center">
-    
-    <form class="form-check" method="post" asp-page-handler="Post" asp-route-showall="@Model.ShowAll">
-        <input class="" type="text" asp-for="NewTask" placeholder="Add a new task"/>
-        <button type="submit" class="btn btn-primary">Add</button>
+
+    <form class="row" method="post" asp-page-handler="Post" asp-route-showall="@Model.ShowAll">
+        <div class="col-auto ">
+            <input class=" form-control" type="text" asp-for="NewTask" placeholder="Add a new task"/>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
     </form>
-    
-    
+
+
+    <br/>
+
     @if (Model.ShowAll)
     {
         <ul class="list-group">
