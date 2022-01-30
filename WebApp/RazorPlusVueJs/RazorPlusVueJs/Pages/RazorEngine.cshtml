@@ -1,0 +1,51 @@
+﻿@page
+@model RazorPlusVueJs.Pages.RazorEngine
+
+@{
+    ViewData["Title"] = "To-Do List based on Razor";
+}
+
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" asp-page="RazorEngine" asp-route-showall="true">All</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-page="RazorEngine" asp-route-showall="false">Uncompleted</a>
+    </li>
+</ul>
+
+<div class="align-content-center">
+    
+    <form class="form-check" method="post" asp-page-handler="Post" asp-route-showall="@Model.ShowAll">
+        <input class="" type="text" asp-for="NewTask" placeholder="Add a new task"/>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+    
+    
+    @if (Model.ShowAll)
+    {
+        <ul class="list-group">
+            @foreach (var item in Model.List.Items)
+            {
+                <li class="list-group-item">
+                    <input type="checkbox" class="form-check-input" checked="@item.IsDone"/>
+                    <span class="text-black">@item.Title</span>
+                    <span class="float-end">@item.CreatedAt.ToShortDateString()</span>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var item in Model.List.Items.Where(i => !i.IsDone))
+            {
+                <li class="list-group-item">
+                    <input type="checkbox" class="form-check-input" checked="@item.IsDone"/>
+                    <span class="text-black">@item.Title</span>
+                    <span class="float-end">@item.CreatedAt.ToShortDateString()</span>
+                </li>
+            }
+        </ul>
+    }
+</div>

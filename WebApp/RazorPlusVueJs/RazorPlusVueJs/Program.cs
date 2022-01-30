@@ -1,7 +1,11 @@
+using RazorPlusVueJs.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IToDoList, ToDoList>();
 
 var app = builder.Build();
 
