@@ -1,10 +1,17 @@
 ﻿using MongoDB.Driver;
 using WebApi.Entities;
+using WebApi.Requests;
 using WebApi.Services.Results;
 
 namespace WebApi.Services;
 
-public class UserService
+public interface IUserService
+{
+    Task<AddUserResult> AddUser(CreateUserRequest request, CancellationToken token);
+    Task<GetUserResult> GetUser(LogInRequest request, CancellationToken token);
+}
+
+public class UserService : IUserService
 {
     private const string CollectionName = "Users";
 
@@ -15,29 +22,31 @@ public class UserService
         _users = database.GetCollection<User>(CollectionName);
     }
 
-    public async Task<AddUserResult> AddUser(User newUser, CancellationToken token)
+    public async Task<AddUserResult> AddUser(CreateUserRequest request, CancellationToken token)
     {
-        if (newUser.Password.Length < 6)
+        if (request.Password.Length < 6)
             return AddUserResult.Failed(AddUserResultError.PasswordNotStrong);
 
-        var userCursor = await _users.FindAsync(u => u.Login == newUser.Login, cancellationToken: token);
+        var userCursor = await _users.FindAsync(u => u.Login == request.Login, cancellationToken: token);
         var user = await userCursor.FirstOrDefaultAsync(token);
 
         if (user != null)
             return AddUserResult.Failed(AddUserResultError.AlreadyExists);
 
+        var newUser = new User
+        {
+            Login = request.Login,
+            Password = request.Password
+        };
         await _users.InsertOneAsync(newUser, cancellationToken: token);
         return AddUserResult.Success();
     }
 
-    public async Task<GetUserResult> GetUser(string login, CancellationToken token)
+    public async Task<GetUserResult> GetUser(LogInRequest request, CancellationToken token)
     {
-        var userCursor = await _users.FindAsync(u => u.Login == login, cancellationToken: token);
+        var userCursor = await _users.FindAsync(u => u.Login == request.Login && u.Password == request.Password, cancellationToken: token);
         var user = await userCursor.FirstOrDefaultAsync(token);
 
-        if (user == null)
-            return GetUserResult.Failed();
-
-        return GetUserResult.Success(user);
+        return user == null ? GetUserResult.Failed() : GetUserResult.Success(user);
     }
 }
