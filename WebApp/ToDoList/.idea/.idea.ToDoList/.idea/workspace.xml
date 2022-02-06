@@ -5,8 +5,12 @@
     <projectFile profileName="IIS Express">WebApi/WebApi.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="Add `UserService`">
+    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="Updated LoginConteroller">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Controllers/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Controllers/LoginController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Requests/LogInRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Requests/GetUserRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Services/UserService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +19,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d5f92893b4e362502fc4e02cf758f9ed02fdab36fa5d36b75d31416bdb3596/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c2c72555df485eaeb73d76e6b4e7c39bfdc9fe8148df42d482ecce9aa755bd2/ApiBehaviorApplicationModelProvider.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -75,7 +83,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1644152260006</updated>
-      <workItem from="1644152266989" duration="5051000" />
+      <workItem from="1644152266989" duration="6350000" />
     </task>
     <task id="LOCAL-00001" summary="Add a new project for DT-13 task">
       <created>1644152292857</created>
@@ -91,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644157529002</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated LoginConteroller">
+      <created>1644158513950</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1644158513950</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +130,39 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add a new project for DT-13 task" />
     <MESSAGE value="Add `UserService`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add `UserService`" />
+    <MESSAGE value="Updated LoginConteroller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated LoginConteroller" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebApi/Controllers/LoginController.cs</url>
+          <line>18</line>
+          <properties documentPath="D:\Repos\Examples\WebApp\ToDoList\WebApi\Controllers\LoginController.cs" initialLine="18" containingFunctionPresentation="method 'LogIn'">
+            <startOffsets>
+              <option value="476" />
+            </startOffsets>
+            <endOffsets>
+              <option value="477" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebApi/Controllers/LoginController.cs</url>
+          <line>25</line>
+          <properties documentPath="D:\Repos\Examples\WebApp\ToDoList\WebApi\Controllers\LoginController.cs" initialLine="25" containingFunctionPresentation="method 'SignUp'">
+            <startOffsets>
+              <option value="767" />
+            </startOffsets>
+            <endOffsets>
+              <option value="768" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -8,7 +8,7 @@ namespace WebApi.Services;
 public interface IUserService
 {
     Task<AddUserResult> AddUser(CreateUserRequest request, CancellationToken token);
-    Task<GetUserResult> GetUser(LogInRequest request, CancellationToken token);
+    Task<GetUserResult> GetUser(GetUserRequest request, CancellationToken token);
 }
 
 public class UserService : IUserService
@@ -42,7 +42,7 @@ public class UserService : IUserService
         return AddUserResult.Success();
     }
 
-    public async Task<GetUserResult> GetUser(LogInRequest request, CancellationToken token)
+    public async Task<GetUserResult> GetUser(GetUserRequest request, CancellationToken token)
     {
         var userCursor = await _users.FindAsync(u => u.Login == request.Login && u.Password == request.Password, cancellationToken: token);
         var user = await userCursor.FirstOrDefaultAsync(token);
