@@ -5,7 +5,14 @@ using Task = WebApi.Entities.Task;
 
 namespace WebApi.Services;
 
-public class TaskService
+public interface ITaskService
+{
+    Task<List<Task>> GetAll(string userId, CancellationToken token);
+    Task<Task> CreateTask(string userId, CreateTaskRequest request, CancellationToken token);
+    Task<CompleteTaskResult> CompleteTask(string taskId, CancellationToken token);
+}
+
+public class TaskService : ITaskService
 {
     private const string CollectionName = "Tasks";
 

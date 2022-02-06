@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped(_ => new MongoClient("mongodb://localhost:27017").GetDatabase("ToDoList"));
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.Configure<SecurityOptions>(builder.Configuration.GetSection(SecurityOptions.SectionName));
 
 var app = builder.Build();
