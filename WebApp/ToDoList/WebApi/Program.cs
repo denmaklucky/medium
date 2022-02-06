@@ -1,10 +1,14 @@
 using MongoDB.Driver;
+using WebApi.Options;
 using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
-builder.Services.AddScoped(s => new MongoClient("mongodb://localhost:27017").GetDatabase("ToDoList"));
+builder.Services.AddScoped(_ => new MongoClient("mongodb://localhost:27017").GetDatabase("ToDoList"));
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.Configure<SecurityOptions>(builder.Configuration.GetSection(SecurityOptions.SectionName));
+
 var app = builder.Build();
 
 app.MapDefaultControllerRoute();
