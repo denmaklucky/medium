@@ -5,7 +5,9 @@
     <projectFile profileName="IIS Express">WebApi/WebApi.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="Updated `TasksController`" />
+    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +81,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1644152260006</updated>
-      <workItem from="1644152266989" duration="9527000" />
+      <workItem from="1644152266989" duration="10999000" />
     </task>
     <task id="LOCAL-00001" summary="Add a new project for DT-13 task">
       <created>1644152292857</created>
