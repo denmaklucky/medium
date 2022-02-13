@@ -9,9 +9,11 @@ builder.Services.AddScoped(_ => new MongoClient("mongodb://localhost:27017").Get
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.Configure<SecurityOptions>(builder.Configuration.GetSection(SecurityOptions.SectionName));
+builder.Services.AddCors(cors => cors.AddPolicy("local", policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyHeader()));
 
 var app = builder.Build();
 
 app.MapDefaultControllerRoute();
+app.UseCors("local");
 
 app.Run();

@@ -7,23 +7,16 @@
     <projectFile profileName="IIS Express">WebApp/WebApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/List.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/List.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Shared/_Layout.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Signup.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Signup.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/Pages/_ViewStart.cshtml" afterDir="false" />
+    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="Add a new project">
+      <change afterPath="$PROJECT_DIR$/WebApp/Options/AppOptions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Index.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/Pages/Index.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/Pages/_ViewImports.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList.sln" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/todolist/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/todolist/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/todolist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/todolist/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/todolist/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/todolist/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/todolist/src/assets/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/todolist/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/todolist/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/todolist/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +51,12 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.WebApp">
+  <component name="RunManager" selected="Compound.todolist">
+    <configuration name="todolist" type="CompoundRunConfigurationType">
+      <toRun name="WebApi" type="LaunchSettings" />
+      <toRun name="WebApp" type="LaunchSettings" />
+      <method v="2" />
+    </configuration>
     <configuration name="WebApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/WebApi/WebApi.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -119,6 +117,13 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.WebApi" />
+      <item itemvalue=".NET Launch Settings Profile.WebApi: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.WebApp" />
+      <item itemvalue=".NET Launch Settings Profile.WebApp: IIS Express" />
+      <item itemvalue="Compound.todolist" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -129,7 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1644152260006</updated>
       <workItem from="1644152266989" duration="10999000" />
-      <workItem from="1644677623129" duration="3295000" />
+      <workItem from="1644677623129" duration="12910000" />
     </task>
     <task id="LOCAL-00001" summary="Add a new project for DT-13 task">
       <created>1644152292857</created>
@@ -173,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644161808890</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add a new project">
+      <created>1644762535259</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1644762535259</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,6 +213,7 @@
     <MESSAGE value="Changed `UsersController` after testing" />
     <MESSAGE value="Add `TaskService`" />
     <MESSAGE value="Updated `TasksController`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated `TasksController`" />
+    <MESSAGE value="Add a new project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a new project" />
   </component>
 </project>
