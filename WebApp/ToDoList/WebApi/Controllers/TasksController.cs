@@ -52,12 +52,12 @@ public class TasksController : ControllerBase
     {
         userId = null;
         
-        var apiKeyHeader = Request.Headers.FirstOrDefault(h => h.Key == "Api-Key");
+        var apiKeyHeader = Request.Headers.FirstOrDefault(h => h.Key.ToLowerInvariant() == "api-key");
 
         if (apiKeyHeader.Value != _options.ApiKey)
             return false;
 
-        var userIdHeader = Request.Headers.FirstOrDefault(h => h.Key == "User-Id");
+        var userIdHeader = Request.Headers.FirstOrDefault(h => h.Key.ToLowerInvariant() == "user-id");
 
         if (string.IsNullOrWhiteSpace(userIdHeader.Value))
             return false;

@@ -13,13 +13,12 @@ public class List : PageModel
         _options = options.Value;
     }
 
-    public void OnGet(string userId, string userName)
+    public void OnGet(string userId)
     {
         UserId = userId;
-        UserName = userName;
     }
 
     public string UserId { get; set; }
-    public string UserName { get; set; }
     public string ApiKey => _options.ApiKey;
+    public string BaseUrl => _options.BaseUrl;
 }

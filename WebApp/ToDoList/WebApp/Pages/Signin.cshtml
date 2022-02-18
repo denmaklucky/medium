@@ -72,8 +72,8 @@
                 login: this.username,
                 password: this.password
             }).then(response => {                
-                var url = '@Url.PageLink("/List")';
-                window.location.href = url + '?userId=' + response.id + '&userName='+response.login;
+                var url = '@Url.PageLink("/List", values: new { UserId = "id"})';
+                window.location.href = url.replace('id', response.id);
             }).catch(error => {
                 this.apiError = true;
             });

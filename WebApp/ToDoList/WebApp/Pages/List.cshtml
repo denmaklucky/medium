@@ -5,45 +5,64 @@
     ViewData["Title"] = "ToDo List";
 }
 
-<header id="navigation" class="p-navigation">
-    <div class="p-navigation__row">
-        <div class="p-navigation__banner">
-            <div class="p-navigation__logo">
-                <a class="p-navigation__item" href="#">
-                    <img class="p-navigation__image" src="assets/logo.webp" width="40">
-                </a>
+<div id="list" class="row">
+    
+    <label for="newtask">Create a new task</label>
+    <input type="text" id="newtask" name="exampleInputEmail1" placeholder="Press Enter to create a new task" v-on:keyup.enter="createNewTask" v-model="newTask">
+    
+    <ul class="p-list">
+        <li class="p-list__item" v-for="task in items">
+            <div class="p-card">
+                <label class="p-checkbox">
+                    <input type="checkbox" aria-labelledby="checkboxLabel1" class="p-checkbox__input" v-model="task.isDone"/>
+                </label>
+                <div class="p-checkbox__label " id="checkboxLabel1">
+                    <h4>{{task.title}}</h4>
+                    <p class="p-card__content">task was created by {{task.createdBy}} | {{task.createdAt}}</p>
+                </div>
             </div>
-        </div>
-
-        <nav class="p-navigation__nav" aria-label="Example main navigation">
-            <ul class="p-navigation__items">
-                <li class="p-navigation__item is-selected">
-                    <a class="p-navigation__link" href="#">Tasks</a>
-                </li>
-                <li class="p-navigation__item">
-                    <a class="p-navigation__link" href="#">About</a>
-                </li>
-            </ul>
-            <ul class="p-navigation__items">
-                <li class="p-navigation__item--dropdown-toggle" id="link-4">
-                    <a class="p-navigation__link" aria-controls="account-menu">
-                        @Model.UserName
-                    </a>
-                    <ul class="p-navigation__dropdown--right" id="account-menu" aria-hidden="true">
-                        <li>
-                            <a href="#" class="p-navigation__dropdown-item">Sign out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
+        </li>
+    </ul>
+</div>
 
 <script>
 Vue.createApp({
- 
-    
-});
+ data(){
+     return {
+         items: [],
+         newTask: ''
+     }
+ },
+ mounted(){
+         axios.get('@Model.BaseUrl/api/tasks', {
+             headers:{
+                 'Api-Key' : '@Model.ApiKey',
+                 'User-Id' : '@Model.UserId'
+             }
+         }).then(response => {
+             this.items = response;
+         }).catch(error => {
+            console.log(error); 
+         });
+ },
+ methods:{
+     createNewTask:function (){
+         axios.post('@Model.BaseUrl/api/tasks/create', 
+         {
+             'title': this.newTask
+         },
+         {
+             headers:{
+                 'Api-Key' : '@Model.ApiKey',
+                 'User-Id' : '@Model.UserId'
+             }
+         }).then(response => {       
+             this.newTask = '';
+             this.items.push(response);
+         }).catch(error => {
+             console.log(error);
+         });
+     }
+ },
+}).mount('#list');
 </script>
