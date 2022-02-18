@@ -71,8 +71,9 @@
             axios.post('@Model.BaseUrl/api/users/signin',{
                 login: this.username,
                 password: this.password
-            }).then(response => {
-                
+            }).then(response => {                
+                var url = '@Url.PageLink("/List")';
+                window.location.href = url + '?userId=' + response.id + '&userName='+response.login;
             }).catch(error => {
                 this.apiError = true;
             });

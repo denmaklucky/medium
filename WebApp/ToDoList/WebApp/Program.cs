@@ -6,6 +6,7 @@ builder.Services.Configure<AppOptions>(builder.Configuration.GetSection(AppOptio
 
 var app = builder.Build();
 
-app.MapRazorPages(); 
+app.MapRazorPages();
+app.UseStaticFiles();
 
 app.Run();
