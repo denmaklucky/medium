@@ -52,14 +52,14 @@ Vue.createApp({
                  'User-Id' : '@Model.UserId'
              }
          }).then(response => {
-             this.items = response.sort(t => t.isDone);
+             this.items = response;
          }).catch(error => {
             console.log(error); 
          });
  },
  computed:{
      filteredTasks: function (){
-         return this.showAll ? this.items : this.items.filter(t => !t.isDone);
+         return this.showAll ? this.items.sort(t => t.isDone) : this.items.filter(t => !t.isDone);
      }
  },
  methods:{
@@ -89,7 +89,7 @@ Vue.createApp({
                 'User-Id' : '@Model.UserId'
                 }
          }).then(response => {       
-            this.items = this.items.sort(t => t.isDone);
+
          }).catch(error => {
             console.log(error);
          });
