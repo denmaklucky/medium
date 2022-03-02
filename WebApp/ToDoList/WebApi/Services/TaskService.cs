@@ -1,5 +1,7 @@
 ﻿using MongoDB.Driver;
+using WebApi.Entities;
 using WebApi.Requests;
+using WebApi.Response;
 using WebApi.Services.Results;
 using Task = WebApi.Entities.Task;
 
@@ -8,7 +10,7 @@ namespace WebApi.Services;
 public interface ITaskService
 {
     Task<List<Task>> GetAll(string userId, CancellationToken token);
-    Task<Task> CreateTask(string userId, CreateTaskRequest request, CancellationToken token);
+    Task<Task> CreateTask(User user, CreateTaskRequest request, CancellationToken token);
     Task<CompleteTaskResult> CompleteTask(string taskId, CancellationToken token);
 }
 
@@ -29,16 +31,17 @@ public class TaskService : ITaskService
         return await taskCursor.ToListAsync(token);
     }
 
-    public async Task<Task> CreateTask(string userId, CreateTaskRequest request, CancellationToken token)
+    public async Task<Task> CreateTask(User user, CreateTaskRequest request, CancellationToken token)
     {
         var newTask = new Task
         {
             Title = request.Title,
-            CreatedAt = DateTime.UtcNow,
-            CreatedBy = userId
+            CreatedAt = DateTime.UtcNow.Date,
+            CreatedBy = user.Id,
+            UserName = user.Login
         };
-       await _tasks.InsertOneAsync(newTask, cancellationToken: token);
-       return newTask;
+        await _tasks.InsertOneAsync(newTask, cancellationToken: token);
+        return newTask;
     }
 
     public async Task<CompleteTaskResult> CompleteTask(string taskId, CancellationToken token)

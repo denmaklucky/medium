@@ -10,11 +10,13 @@ namespace WebApi.Controllers;
 public class TasksController : ControllerBase
 {
     private readonly ITaskService _service;
+    private readonly IUserService _userService;
     private readonly SecurityOptions _options;
 
-    public TasksController(IOptions<SecurityOptions> options, ITaskService service)
+    public TasksController(IOptions<SecurityOptions> options, ITaskService service, IUserService userService)
     {
         _service = service;
+        _userService = userService;
         _options = options.Value;
     }
 
@@ -23,7 +25,7 @@ public class TasksController : ControllerBase
     {
         if (!TryAuthorize(out var userId))
             return Unauthorized();
-        
+
         var tasks = await _service.GetAll(userId, token);
         return Ok(tasks);
     }
@@ -34,10 +36,11 @@ public class TasksController : ControllerBase
         if (!TryAuthorize(out var userId))
             return Unauthorized();
 
-        var newTask = await _service.CreateTask(userId, request, token);
+        var userResult = await _userService.GetUser(userId, token);
+        var newTask = await _service.CreateTask(userResult.User, request, token);
         return Ok(newTask);
     }
-    
+
     [HttpPatch, Route("{taskId}/complete")]
     public async Task<IActionResult> Complete(string taskId, CancellationToken token)
     {
@@ -51,7 +54,7 @@ public class TasksController : ControllerBase
     private bool TryAuthorize(out string userId)
     {
         userId = null;
-        
+
         var apiKeyHeader = Request.Headers.FirstOrDefault(h => h.Key.ToLowerInvariant() == "api-key");
 
         if (apiKeyHeader.Value != _options.ApiKey)

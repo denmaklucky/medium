@@ -6,20 +6,20 @@
 }
 
 <div id="list" class="row">
-    
+
     <label for="newtask">Create a new task</label>
     <input type="text" id="newtask" name="exampleInputEmail1" placeholder="Press Enter to create a new task" v-on:keyup.enter="createNewTask" v-model="newTask">
-    
-    <ul class="p-list">
-        <li class="p-list__item" v-for="task in items">
+
+    <ul class="p-list" v-for="task in items">
+        <li class="p-list__item">
             <div class="p-card">
-                <label class="p-checkbox">
-                    <input type="checkbox" aria-labelledby="checkboxLabel1" class="p-checkbox__input" v-model="task.isDone"/>
-                </label>
-                <div class="p-checkbox__label " id="checkboxLabel1">
-                    <h4>{{task.title}}</h4>
-                    <p class="p-card__content">task was created by {{task.createdBy}} | {{task.createdAt}}</p>
-                </div>
+                <h4>
+                    <label class="p-checkbox--heading">
+                        <input type="checkbox" class="p-checkbox__input" aria-labelledby="headingCheckbox1label" v-model="task.isDone" v-on:click="onComplete(task.id)">
+                        <span class="p-checkbox__label" id="headingCheckbox1label">{{task.title}}</span>
+                    </label>
+                </h4>
+                <p class="p-card__content">task was created by {{task.userName}} | {{new Date(task.createdAt).toLocaleDateString()}}</p>
             </div>
         </li>
     </ul>
@@ -40,7 +40,7 @@ Vue.createApp({
                  'User-Id' : '@Model.UserId'
              }
          }).then(response => {
-             this.items = response;
+             this.items = response.sort(t => t.isDone);
          }).catch(error => {
             console.log(error); 
          });
@@ -61,6 +61,20 @@ Vue.createApp({
              this.items.push(response);
          }).catch(error => {
              console.log(error);
+         });
+     },
+     onComplete: function (taskId){
+         axios.patch('@Model.BaseUrl/api/tasks/'+taskId+'/complete',
+         {},
+         {
+             headers:{
+                'Api-Key' : '@Model.ApiKey',
+                'User-Id' : '@Model.UserId'
+                }
+         }).then(response => {       
+            this.items = this.items.sort(t => t.isDone);
+         }).catch(error => {
+            console.log(error);
          });
      }
  },

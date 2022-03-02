@@ -9,6 +9,7 @@ public interface IUserService
 {
     Task<AddUserResult> AddUser(CreateUserRequest request, CancellationToken token);
     Task<GetUserResult> GetUser(GetUserRequest request, CancellationToken token);
+    Task<GetUserResult> GetUser(string userId, CancellationToken token);
 }
 
 public class UserService : IUserService
@@ -45,6 +46,14 @@ public class UserService : IUserService
     public async Task<GetUserResult> GetUser(GetUserRequest request, CancellationToken token)
     {
         var userCursor = await _users.FindAsync(u => u.Login == request.Login && u.Password == request.Password, cancellationToken: token);
+        var user = await userCursor.FirstOrDefaultAsync(token);
+
+        return user == null ? GetUserResult.Failed() : GetUserResult.Success(user);
+    }
+    
+    public async Task<GetUserResult> GetUser(string userId, CancellationToken token)
+    {
+        var userCursor = await _users.FindAsync(u => u.Id == userId, cancellationToken: token);
         var user = await userCursor.FirstOrDefaultAsync(token);
 
         return user == null ? GetUserResult.Failed() : GetUserResult.Success(user);

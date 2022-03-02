@@ -7,12 +7,14 @@
     <projectFile profileName="IIS Express">WebApp/WebApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="Add Some logic to `List` page">
+    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/WebApi/Response/TaskResponse.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApi/Controllers/TasksController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Controllers/TasksController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Entities/Task.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Entities/Task.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Services/TaskService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Services/TaskService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApi/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Services/UserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/Pages/List.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/List.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/List.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/List.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/Signin.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +136,8 @@
       <updated>1644152260006</updated>
       <workItem from="1644152266989" duration="10999000" />
       <workItem from="1644677623129" duration="14125000" />
-      <workItem from="1645205963130" duration="8903000" />
+      <workItem from="1645205963130" duration="10146000" />
+      <workItem from="1646243164458" duration="3329000" />
     </task>
     <task id="LOCAL-00001" summary="Add a new project for DT-13 task">
       <created>1644152292857</created>
@@ -199,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645210101730</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added a showing of task list">
+      <created>1645215461856</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1645215461856</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,25 +240,7 @@
     <MESSAGE value="Add a new project" />
     <MESSAGE value="Add a `Sign in` page with vue.js logical" />
     <MESSAGE value="Add Some logic to `List` page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Some logic to `List` page" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WebApi/Controllers/TasksController.cs</url>
-          <line>23</line>
-          <properties documentPath="D:\Repos\Examples\WebApp\ToDoList\WebApi\Controllers\TasksController.cs" initialLine="23" containingFunctionPresentation="method 'GetAll'">
-            <startOffsets>
-              <option value="607" />
-            </startOffsets>
-            <endOffsets>
-              <option value="641" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Added a showing of task list" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a showing of task list" />
   </component>
 </project>
