@@ -10,19 +10,30 @@
     <label for="newtask">Create a new task</label>
     <input type="text" id="newtask" name="exampleInputEmail1" placeholder="Press Enter to create a new task" v-on:keyup.enter="createNewTask" v-model="newTask">
 
-    <ul class="p-list" v-for="task in items">
-        <li class="p-list__item">
-            <div class="p-card">
-                <h4>
-                    <label class="p-checkbox--heading">
-                        <input type="checkbox" class="p-checkbox__input" aria-labelledby="headingCheckbox1label" v-model="task.isDone" v-on:click="onComplete(task.id)">
-                        <span class="p-checkbox__label" id="headingCheckbox1label">{{task.title}}</span>
-                    </label>
-                </h4>
-                <p class="p-card__content">task was created by {{task.userName}} | {{new Date(task.createdAt).toLocaleDateString()}}</p>
+    <div class="p-tabs">
+        <div class="p-tabs__list" role="tablist" aria-label="Juju technology">
+            <div class="p-tabs__item">
+                <button class="p-tabs__link" role="tab" :aria-selected="!showAll" aria-controls="olm-tab" id="olm" v-on:click="onShowUncompleted">Uncompleted tasks</button>
             </div>
-        </li>
-    </ul>
+            <div class="p-tabs__item">
+                <button class="p-tabs__link" role="tab" :aria-selected="showAll" aria-controls="operator-tab" id="operator" tabindex="-1" v-on:click="onShowAll">All</button>
+            </div>
+        </div>
+        <ul class="p-list" v-for="task in filteredTasks">
+            <li class="p-list__item">
+                <div class="p-card">
+                    <h4>
+                        <label class="p-checkbox--heading">
+                            <input type="checkbox" class="p-checkbox__input" aria-labelledby="headingCheckbox1label" v-model="task.isDone" v-on:click="onComplete(task.id)">
+                            <span class="p-checkbox__label" id="headingCheckbox1label">{{task.title}}</span>
+                        </label>
+                    </h4>
+                    <p class="p-card__content">task was created by {{task.userName}} | {{new Date(task.createdAt).toLocaleDateString()}}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
 </div>
 
 <script>
@@ -30,7 +41,8 @@ Vue.createApp({
  data(){
      return {
          items: [],
-         newTask: ''
+         newTask: '',
+         showAll: false
      }
  },
  mounted(){
@@ -44,6 +56,11 @@ Vue.createApp({
          }).catch(error => {
             console.log(error); 
          });
+ },
+ computed:{
+     filteredTasks: function (){
+         return this.showAll ? this.items : this.items.filter(t => !t.isDone);
+     }
  },
  methods:{
      createNewTask:function (){
@@ -76,6 +93,12 @@ Vue.createApp({
          }).catch(error => {
             console.log(error);
          });
+     },
+     onShowAll: function (){
+         this.showAll = true;
+     },
+     onShowUncompleted: function (){
+         this.showAll = false;
      }
  },
 }).mount('#list');
