@@ -25,6 +25,6 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> SignUp([FromBody] CreateUserRequest request, CancellationToken token)
     {
         var result = await _service.AddUser(request, token);
-        return result.IsSuccess ? Ok() : BadRequest(result.Error.ToString());
+        return result.IsSuccess ? Ok(result.User) : BadRequest(result.Error.ToString());
     }
 }

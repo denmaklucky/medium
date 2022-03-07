@@ -5,7 +5,7 @@
     ViewData["Title"] = "Sign up";
 }
 
-<div id="singin" class="row p-card">
+<div id="singun" class="row p-card">
     <h3>Sign up to To-Do List</h3>
     <div class="col-4 col-medium-3 p-card__content">
         <div v-if="apiError" class="p-notification--negative">
@@ -38,7 +38,7 @@
             </div>
         </form>
         <div>
-            <button v-on:click="signIn">Sign up</button>
+            <button v-on:click="signUn">Sign up</button>
             <a asp-page="/Signin">Or sing in?</a>
         </div>
     </div>
@@ -77,13 +77,13 @@
         }
     },
     methods: {
-        signIn : function (){
+        signUn : function (){
             this.submitted = true;
             
             if (this.usernameIsEmpty || this.passwordIsEmpty || this.confirmPasswordIsEmpty)
                 return;
             
-            if (this.passord !== this.confirmPassword)
+            if (this.password !== this.confirmPassword)
                 return;
             
             axios.post('@Model.BaseUrl/api/users/signup',{
@@ -98,5 +98,5 @@
             });
         }
     }
-  }).mount('#singin')
+  }).mount('#singun')
 </script>

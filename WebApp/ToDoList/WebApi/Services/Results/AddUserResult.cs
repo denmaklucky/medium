@@ -1,20 +1,25 @@
-﻿namespace WebApi.Services.Results;
+﻿using WebApi.Entities;
+
+namespace WebApi.Services.Results;
 
 public class AddUserResult : ResultBase
 {
-    public AddUserResult(bool isSuccess, AddUserResultError error = AddUserResultError.None)
+    public AddUserResult(bool isSuccess,User user = null, AddUserResultError error = AddUserResultError.None)
     {
         IsSuccess = isSuccess;
         Error = error;
+        User = user;
     }
 
-    public static AddUserResult Success()
-        => new AddUserResult(true, AddUserResultError.None);
+    public static AddUserResult Success(User user)
+        => new AddUserResult(true, user, AddUserResultError.None);
 
     public static AddUserResult Failed(AddUserResultError error)
-        => new AddUserResult(false, error);
+        => new AddUserResult(false, error: error);
 
     public AddUserResultError Error { get; set; }
+    
+    public User User { get; set; }
 }
 
 public enum AddUserResultError

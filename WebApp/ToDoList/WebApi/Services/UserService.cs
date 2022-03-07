@@ -40,7 +40,7 @@ public class UserService : IUserService
             Password = request.Password
         };
         await _users.InsertOneAsync(newUser, cancellationToken: token);
-        return AddUserResult.Success();
+        return AddUserResult.Success(newUser);
     }
 
     public async Task<GetUserResult> GetUser(GetUserRequest request, CancellationToken token)
