@@ -7,13 +7,7 @@
     <projectFile profileName="IIS Express">WebApp/WebApp.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/Services/Results/AddUserResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Services/Results/AddUserResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApi/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebApi/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/Pages/Signup.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/Pages/Signup.cshtml" afterDir="false" />
-    </list>
+    <list default="true" id="8c7cbbb4-e474-433f-aa69-0ce9557c4dc9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +21,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d5f92893b4e362502fc4e02cf758f9ed02fdab36fa5d36b75d31416bdb3596/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/37565caec58e43d79f8d7b166d8a3628130400/0c/15123d88/IMongoCollection`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/abdac0d0ef9f47031abca2b4b9ca789474f428a324f9959b340ae20d64b9d73/RouteValueDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Repos/Examples/WebApp/ToDoList/WebApi/Services/Results/AddUserResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5e2bd0914ab527b3e9796d2314dc186883fed605fe36b6413f761da5937d/UrlHelperExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ed42d854e1d5fc11b5c645bac7efbb51170f4b4abb2fcf1a9bdaf01053b768/IUrlHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c2c72555df485eaeb73d76e6b4e7c39bfdc9fe8148df42d482ecce9aa755bd2/ApiBehaviorApplicationModelProvider.cs" root0="SKIP_HIGHLIGHTING" />
@@ -136,7 +131,7 @@
       <workItem from="1644677623129" duration="14125000" />
       <workItem from="1645205963130" duration="10146000" />
       <workItem from="1646243164458" duration="7412000" />
-      <workItem from="1646677193801" duration="1226000" />
+      <workItem from="1646677193801" duration="1571000" />
     </task>
     <task id="LOCAL-00001" summary="Add a new project for DT-13 task">
       <created>1644152292857</created>
@@ -236,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646250364404</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="DT-13 Some fix">
+      <created>1646678578806</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1646678578806</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +274,7 @@
     <MESSAGE value="Add computed properties" />
     <MESSAGE value="Some changes" />
     <MESSAGE value="Add logic to `sign-up`" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logic to `sign-up`" />
+    <MESSAGE value="DT-13 Some fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="DT-13 Some fix" />
   </component>
 </project>
