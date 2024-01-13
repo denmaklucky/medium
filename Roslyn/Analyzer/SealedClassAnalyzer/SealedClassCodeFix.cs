@@ -20,7 +20,7 @@ public sealed class SealedClassCodeFix : CodeFixProvider
     {
         var diagnostic = context.Diagnostics.First();
         var diagnosticSpan = diagnostic.Location.SourceSpan;
-        
+
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken);
 
         var classDeclaration = root?.FindToken(diagnosticSpan.Start).Parent?.AncestorsAndSelf().OfType<ClassDeclarationSyntax>().First();
