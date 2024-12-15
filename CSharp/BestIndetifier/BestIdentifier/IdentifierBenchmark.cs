@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Visus.Cuid;
 
 namespace BestIdentifier;
 
@@ -15,4 +16,7 @@ public class IdentifierBenchmark
 
     [Benchmark]
     public void Suid() => BestIdentifier.Suid.New();
+
+    [Benchmark]
+    public void Cuid() => new Cuid2();
 }
