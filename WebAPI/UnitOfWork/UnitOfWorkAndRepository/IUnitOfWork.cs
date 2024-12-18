@@ -1,4 +1,4 @@
-﻿namespace UnitOfWork;
+﻿namespace UnitOfWorkAndRepository;
 
 public interface IUnitOfWork : IDisposable, IAsyncDisposable
 {

@@ -1,4 +1,4 @@
-﻿namespace UnitOfWork;
+﻿namespace UnitOfWorkAndRepository;
 
 public sealed class Note : IEntity<Guid>
 {
@@ -6,5 +6,5 @@ public sealed class Note : IEntity<Guid>
 
     public string Value { get; set; } = null!;
 
-    public DateTimeOffset? RegisteredAt { get; set; }
+    public DateTimeOffset RegisteredAt { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace UnitOfWork;
+namespace UnitOfWorkAndRepository;
 
 public sealed class UnitOfWork(AppDbContext context) : IUnitOfWork
 {

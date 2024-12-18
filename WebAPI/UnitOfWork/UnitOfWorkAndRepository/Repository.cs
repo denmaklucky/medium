@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace UnitOfWork;
+namespace UnitOfWorkAndRepository;
 
 public sealed class Repository<TEntity, TIdentifier>(AppDbContext context) : IRepository<TEntity, TIdentifier>
     where TEntity : class, IEntity<TIdentifier>
@@ -8,13 +8,19 @@ public sealed class Repository<TEntity, TIdentifier>(AppDbContext context) : IRe
 {
     public IQueryable<TEntity> Query() => context.Set<TEntity>();
 
-    public async Task<TIdentifier> RegisterAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task RegisterAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         try
         {
-            if (entity.Id.Equals(default))
+            var existingEntity = await context.Set<TEntity>().FindAsync([entity.Id], cancellationToken: cancellationToken);
+
+            if (existingEntity == null)
             {
                 await context.Set<TEntity>().AddAsync(entity, cancellationToken);
+            }
+            else
+            {
+                context.Entry(existingEntity).CurrentValues.SetValues(entity);
             }
 
             await context.SaveChangesAsync(cancellationToken);
@@ -38,8 +44,6 @@ public sealed class Repository<TEntity, TIdentifier>(AppDbContext context) : IRe
 
             await context.SaveChangesAsync(cancellationToken);
         }
-
-        return entity.Id!;
     }
 
     public async Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken = default)

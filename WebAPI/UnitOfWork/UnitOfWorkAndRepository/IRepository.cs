@@ -1,12 +1,12 @@
-﻿namespace UnitOfWork;
+﻿namespace UnitOfWorkAndRepository;
 
-public interface IRepository<TEntity, TIdentifier>
+public interface IRepository<TEntity, in TIdentifier>
     where TEntity : class, IEntity<TIdentifier>
     where TIdentifier : notnull
 {
     IQueryable<TEntity> Query();
 
-    Task<TIdentifier> RegisterAsync(TEntity entity, CancellationToken cancellationToken = default);
+    Task RegisterAsync(TEntity entity, CancellationToken cancellationToken = default);
 
     Task DeleteAsync(TIdentifier id, CancellationToken cancellationToken = default);
 }

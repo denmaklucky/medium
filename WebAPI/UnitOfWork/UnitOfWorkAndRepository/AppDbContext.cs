@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace UnitOfWork;
+namespace UnitOfWorkAndRepository;
 
-public sealed class AppDbContext : DbContext
+public sealed class AppDbContext (DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -15,7 +15,7 @@ public sealed class AppDbContext : DbContext
                 .HasMaxLength(250);
 
             entity.Property(note => note.RegisteredAt)
-                .IsRequired(false);
+                .IsRequired();
 
             // shadow property
             entity.Property<byte[]>("Version")

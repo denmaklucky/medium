@@ -1,8 +1,8 @@
-﻿namespace UnitOfWork;
+﻿namespace UnitOfWorkAndRepository;
 
 public interface IEntity<TIdentifier> where TIdentifier : notnull
 {
     TIdentifier Id { get; set; }
 
-    DateTimeOffset? RegisteredAt { get; set; }
+    DateTimeOffset RegisteredAt { get; set; }
 }

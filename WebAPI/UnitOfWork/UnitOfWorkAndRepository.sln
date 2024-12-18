@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWork", "UnitOfWork\UnitOfWork.csproj", "{23A18274-8530-4B24-B7DA-81C6AAC1F345}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWorkAndRepository", "UnitOfWorkAndRepository\UnitOfWorkAndRepository.csproj", "{23A18274-8530-4B24-B7DA-81C6AAC1F345}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
