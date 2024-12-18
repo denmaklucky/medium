@@ -9,6 +9,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
+var scopeService = app.Services.CreateScope();
+scopeService.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
+
 app.MapGet("/", ([FromServices] IUnitOfWork unitOfWork) =>
 {
     var repository = unitOfWork.CreateRepository<Note, Guid>();
