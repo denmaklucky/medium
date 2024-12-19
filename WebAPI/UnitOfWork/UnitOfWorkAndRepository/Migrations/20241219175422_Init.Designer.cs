@@ -11,8 +11,8 @@ using UnitOfWorkAndRepository;
 namespace UnitOfWorkAndRepository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241218080945_Initial")]
-    partial class Initial
+    [Migration("20241219175422_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
