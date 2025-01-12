@@ -3,4 +3,7 @@ Release
 AppPackages
 *.suo
 .vs
+.idea
+bin
 obj
+*.user
