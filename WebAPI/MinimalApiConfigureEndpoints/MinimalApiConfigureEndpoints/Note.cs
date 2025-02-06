@@ -1,3 +1,3 @@
 ﻿namespace MinimalApiConfigureEndpoints;
 
-public record Note(Guid Id, string Value);
+public sealed record Note(Guid Id, string Value);
