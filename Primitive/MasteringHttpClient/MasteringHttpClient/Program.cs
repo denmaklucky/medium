@@ -1,17 +1,66 @@
 ﻿using System.Net.Http.Json;
 using MasteringHttpClient;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http.Resilience;
 
-await AddHttpClient();
+await UseReseline();
+
+async Task UseReseline()
+{
+    var services = new ServiceCollection()
+        .AddScoped<PostService>()
+        .AddTransient<TraceHeaderHandler>();
+
+    services
+        .AddHttpClient<PostService>()
+        .AddHttpMessageHandler<TraceHeaderHandler>()
+        .UseSocketsHttpHandler(handlerBuilder => handlerBuilder.Configure((socketsHandler, _) => socketsHandler.PooledConnectionLifetime = TimeSpan.FromMinutes(2)))
+        .AddStandardResilienceHandler(options =>
+        {
+            options.Retry = new HttpRetryStrategyOptions
+            {
+                MaxRetryAttempts = 5
+            };
+            options.AttemptTimeout = new HttpTimeoutStrategyOptions
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+        });
+    
+    var postService = services.BuildServiceProvider().GetRequiredService<PostService>();
+
+    var post = await postService.GetFirstPostAsync(CancellationToken.None);
+}
+
+async Task UseHttpClientFactory()
+{
+    var services = new ServiceCollection()
+        .AddScoped<PostService>()
+        .AddTransient<TraceHeaderHandler>();
+
+    services
+        .AddHttpClient<PostService>()
+        .AddHttpMessageHandler<TraceHeaderHandler>()
+        .UseSocketsHttpHandler(handlerBuilder => handlerBuilder.Configure((socketsHandler, _) => socketsHandler.PooledConnectionLifetime = TimeSpan.FromMinutes(2)));
+    
+    var postService = services.BuildServiceProvider().GetRequiredService<PostService>();
+
+    var post = await postService.GetFirstPostAsync(CancellationToken.None);
+}
 
 async Task AddHttpClient()
 {
     var serviceProvider = new ServiceCollection()
         .AddSingleton(_ =>
         {
+            var handler = new SocketsHttpHandler
+            {
+                PooledConnectionLifetime = TimeSpan.FromMinutes(2)
+            };
+
             var traceHandler = new TraceHeaderHandler
             {
-                InnerHandler = new HttpClientHandler()
+                InnerHandler = handler
             };
             
             return new HttpClient(traceHandler);
