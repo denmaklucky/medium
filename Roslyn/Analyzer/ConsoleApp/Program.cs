@@ -1,3 +1,3 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿var name = "Denis";
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine($"Hello, {name}!");

@@ -12,7 +12,7 @@ namespace SealedClassAnalyzer;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SealedClassCodeFix))]
 public sealed class SealedClassCodeFix : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SealedClassRule.RuleId);
+    public override ImmutableArray<string> FixableDiagnosticIds => [SealedClassRule.RuleId];
 
     public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
