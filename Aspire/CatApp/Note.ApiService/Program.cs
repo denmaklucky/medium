@@ -1,3 +1,5 @@
+using Amazon.S3;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
@@ -8,6 +10,8 @@ builder.Services.AddProblemDetails();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IAmazonS3, AmazonS3Client>();
 
 var app = builder.Build();
 
@@ -34,6 +38,12 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapPost("/upload", [FromServices]IAmazonS3 s3Client =>
+{
+    
+})
+.WithName("EmptyFileUpload");
 
 app.MapDefaultEndpoints();
 
