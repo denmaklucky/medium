@@ -21,6 +21,11 @@ public class WeatherApiClient(HttpClient httpClient)
 
         return forecasts?.ToArray() ?? [];
     }
+    
+    public Task UploadEmptyFileAsync(CancellationToken cancellationToken = default)
+    {
+        return httpClient.PostAsync("/upload",content: null, cancellationToken);
+    }
 }
 
 public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

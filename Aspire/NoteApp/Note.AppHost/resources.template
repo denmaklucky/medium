@@ -4,7 +4,7 @@
     "S3Bucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "note-v1"
+        "BucketName": "[BUCKET_NAME]"
       }
     }
   }

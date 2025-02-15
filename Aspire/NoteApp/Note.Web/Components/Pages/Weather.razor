@@ -45,5 +45,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await WeatherApi.GetWeatherAsync();
+        
+        await WeatherApi.UploadEmptyFileAsync();
     }
 }

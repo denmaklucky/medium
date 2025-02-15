@@ -1,4 +1,6 @@
 using Amazon.S3;
+using Amazon.S3.Transfer;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +41,11 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.MapPost("/upload", [FromServices]IAmazonS3 s3Client =>
+app.MapPost("/upload", async ([FromServices] IAmazonS3 s3Client) =>
 {
-    
+    using var uploadUtility = new TransferUtility(s3Client);
+
+    await uploadUtility.UploadAsync(new MemoryStream([0, 1, 2 , 3]), "BUCKET_NAME", Guid.NewGuid().ToString());
 })
 .WithName("EmptyFileUpload");
 
