@@ -25,7 +25,8 @@ internal sealed class NoteRepository(IDbConnection dbConnection)
     {
         var result = await dbConnection.QueryAsync<NoteModel>(
             "SELECT Id, Value, CreatedAt, UpdatedAt " +
-            "FROM Notes;");
+            "FROM Notes "+
+            "ORDER BY CreatedAt DESC;");
 
         return result.ToList();
     }
