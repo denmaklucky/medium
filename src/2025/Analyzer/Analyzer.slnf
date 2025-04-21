@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2025\\Analyzer\\ConsoleApp\\ConsoleApp.csproj",
+      "2025\\Analyzer\\SealedClassAnalyzer\\SealedClassAnalyzer.csproj"
+    ]
+  }
+}

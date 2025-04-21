@@ -7,6 +7,22 @@
     <Project Path="2024\UnitOfWork\UnitOfWorkAndRepository\UnitOfWorkAndRepository.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/2025/" />
+  <Folder Name="/2025/Analyzer/">
+    <Project Path="2025\Analyzer\ConsoleApp\ConsoleApp.csproj" Type="Classic C#" />
+    <Project Path="2025\Analyzer\SealedClassAnalyzer\SealedClassAnalyzer.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/2025/AppAI/">
+    <Project Path="2025\AppAI\AppAI\AppAI.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/2025/IdempotentApp/">
+    <Project Path="2025\IdempotentApp\IdempotentApp\IdempotentApp.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/2025/LightweightService/">
+    <Project Path="2025\LightweightService\LightweightService\LightweightService.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/2025/MasteringHttpClient/">
+    <Project Path="2025\MasteringHttpClient\MasteringHttpClient\MasteringHttpClient.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/NoteApp/">
     <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="Classic C#" />
     <Project Path="2025\NoteApp\Note.AppHost\Note.AppHost.csproj" Type="Classic C#" />
