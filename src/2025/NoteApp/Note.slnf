@@ -1,0 +1,11 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2025\\NoteApp\\Note.ApiService\\Note.ApiService.csproj",
+      "2025\\NoteApp\\Note.AppHost\\Note.AppHost.csproj",
+      "2025\\NoteApp\\Note.ServiceDefaults\\Note.ServiceDefaults.csproj",
+      "2025\\NoteApp\\Note.Web\\Note.Web.csproj"
+    ]
+  }
+}

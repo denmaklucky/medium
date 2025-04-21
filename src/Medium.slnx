@@ -7,4 +7,10 @@
     <Project Path="2024\UnitOfWork\UnitOfWorkAndRepository\UnitOfWorkAndRepository.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/2025/" />
+  <Folder Name="/2025/NoteApp/">
+    <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="Classic C#" />
+    <Project Path="2025\NoteApp\Note.AppHost\Note.AppHost.csproj" Type="Classic C#" />
+    <Project Path="2025\NoteApp\Note.ServiceDefaults\Note.ServiceDefaults.csproj" Type="Classic C#" />
+    <Project Path="2025\NoteApp\Note.Web\Note.Web.csproj" Type="Classic C#" />
+  </Folder>
 </Solution>
