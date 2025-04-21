@@ -9,6 +9,7 @@ public sealed class DeleteUserEndpoint(IUsersService service) : EndpointWithoutR
     public override void Configure()
     {
         Delete("api/v1/home");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CancellationToken ct)

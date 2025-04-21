@@ -9,6 +9,7 @@ public sealed class CreateUserEndpoint(IUsersService service) : Endpoint<CreateU
     public override void Configure()
     {
         Post("api/v1/home");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CreateUserRequest req, CancellationToken ct)
