@@ -3,7 +3,7 @@
     "path": "..\\..\\Medium.slnx",
     "projects": [
       "2025\\BestAPI\\DataAccess\\DataAccess.csproj",
-      "2025\\BestAPI\\FastEndpoints\\FastEndpoints.csproj",
+      "2025\\BestAPI\\FEndpoints\\FEndpoints.csproj",
       "2025\\BestAPI\\MinimalAPI\\MinimalAPI.csproj",
       "2025\\BestAPI\\MVC\\MVC.csproj"
     ]

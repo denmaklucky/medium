@@ -16,7 +16,7 @@
   </Folder>
   <Folder Name="/2025/BestAPI/">
     <Project Path="2025\BestAPI\DataAccess\DataAccess.csproj" Type="Classic C#" />
-    <Project Path="2025\BestAPI\FastEndpoints\FastEndpoints.csproj" Type="Classic C#" />
+    <Project Path="2025\BestAPI\FEndpoints\FEndpoints.csproj" Type="Classic C#" />
     <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="Classic C#" />
     <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="Classic C#" />
   </Folder>
