@@ -12,7 +12,8 @@ public sealed class GetUsersEndpoint(IUsersService service) : EndpointWithoutReq
         AllowAnonymous();
     }
 
-    public override async Task<Ok<IReadOnlyCollection<User>>> ExecuteAsync(CancellationToken ct)
+    public override async Task<Ok<IReadOnlyCollection<User>>> ExecuteAsync(
+        CancellationToken ct)
     {
         var users = await service.GetAsync();
 

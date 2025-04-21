@@ -23,7 +23,9 @@ app.MapGet("api/v1/home", async ([FromServices] IUsersService service) =>
     return TypedResults.Ok(users);
 });
 
-app.MapPost("api/v1/home", async ([FromServices] IUsersService service, [FromBody] CreateUserRequest request) =>
+app.MapPost("api/v1/home", async (
+    [FromServices] IUsersService service,
+    [FromBody] CreateUserRequest request) =>
 {
     await service.CreateAsync(request.Email);
 
