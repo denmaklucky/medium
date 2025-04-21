@@ -1,5 +1,8 @@
 ﻿<Solution>
   <Folder Name="/2024/" />
+  <Folder Name="/2024/MinimalApiConfigureEndpoints/">
+    <Project Path="2024\MinimalApiConfigureEndpoints\MinimalApiConfigureEndpoints\MinimalApiConfigureEndpoints.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2024/UnitOfWork/">
     <Project Path="2024\UnitOfWork\UnitOfWorkAndRepository\UnitOfWorkAndRepository.csproj" Type="Classic C#" />
   </Folder>

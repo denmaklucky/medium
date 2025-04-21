@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2024\\MinimalApiConfigureEndpoints\\MinimalApiConfigureEndpoints\\MinimalApiConfigureEndpoints.csproj"
+    ]
+  }
+}
