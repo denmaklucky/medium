@@ -29,6 +29,9 @@
   <Folder Name="/2025/MasteringHttpClient/">
     <Project Path="2025\MasteringHttpClient\MasteringHttpClient\MasteringHttpClient.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/MinimalApiUltimateConfiguration/">
+    <Project Path="2025\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/NoteApp/">
     <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="Classic C#" />
     <Project Path="2025\NoteApp\Note.AppHost\Note.AppHost.csproj" Type="Classic C#" />
