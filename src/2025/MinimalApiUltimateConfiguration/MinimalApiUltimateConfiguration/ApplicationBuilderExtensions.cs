@@ -13,8 +13,10 @@ public static class ApplicationBuilderExtensions
         {
             throw new InvalidOperationException("The applicationBuilder must implement IEndpointRouteBuilder.");
         }
+        
+        using var scope = applicationBuilder.ApplicationServices.CreateScope();
 
-        foreach (var endpoint in applicationBuilder.ApplicationServices.GetServices<IEndpoint>())
+        foreach (var endpoint in scope.ServiceProvider.GetServices<IEndpoint>())
         {
             var groupName = endpoint.GetType().GetCustomAttribute<GroupAttribute>()?.Name;
 

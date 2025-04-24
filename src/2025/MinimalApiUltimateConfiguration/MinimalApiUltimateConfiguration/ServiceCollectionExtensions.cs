@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
 
         foreach (var type in types)
         {
-            services.AddScoped(provider => ActivatorUtilities.CreateInstance<IEndpoint>(provider, type));
+            services.AddScoped(typeof(IEndpoint), provider => ActivatorUtilities.CreateInstance(provider, type));
         }
 
         return services;
