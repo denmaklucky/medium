@@ -1,28 +1,27 @@
-﻿using System.Reflection;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace MinimalApiUltimateConfiguration;
 
 public static class ApplicationBuilderExtensions
 {
-    public static IApplicationBuilder UseEndpoints(this IApplicationBuilder application)
+    private static readonly ConcurrentDictionary<string, IEndpointRouteBuilder> Cache = []; 
+    
+    public static IApplicationBuilder UseEndpoints(this IApplicationBuilder applicationBuilder)
     {
-        var endpoints = application.ApplicationServices
-            .GetServices<IEndpoint>()
-            .Select(endpoint => ActivatorUtilities.CreateInstance<IEndpoint>(application.ApplicationServices, endpoint.GetType()));
-
-        if (application is not IEndpointRouteBuilder routeBuilder)
+        if (applicationBuilder is not IEndpointRouteBuilder routeBuilder)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("The applicationBuilder must implement IEndpointRouteBuilder.");
         }
-        
-        foreach (var endpoint in endpoints)
+
+        foreach (var endpoint in applicationBuilder.ApplicationServices.GetServices<IEndpoint>())
         {
             var groupName = endpoint.GetType().GetCustomAttribute<GroupAttribute>()?.Name;
 
             if (!string.IsNullOrWhiteSpace(groupName))
             {
-                var group = routeBuilder.MapGroup($"/{groupName}");
-                endpoint.Configure(group);
+                var groupRouterBuilder = GetOrCreateGroupRouterBuilder(groupName, name => routeBuilder.MapGroup(name));
+                endpoint.Configure(groupRouterBuilder);
             }
             else
             {
@@ -30,6 +29,20 @@ public static class ApplicationBuilderExtensions
             }
         }
 
-        return application;
+        return applicationBuilder;
+
+        static IEndpointRouteBuilder GetOrCreateGroupRouterBuilder(string groupName, Func<string, IEndpointRouteBuilder> routerBuilderFactory)
+        {
+            if (Cache.TryGetValue(groupName, out var builder))
+            {
+                return builder;
+            }
+
+            builder = routerBuilderFactory(groupName);
+
+            Cache[groupName] = builder;
+
+            return builder;
+        }
     }
 }
