@@ -7,7 +7,8 @@ public static class ApplicationBuilderExtensions
 {
     private static readonly ConcurrentDictionary<string, IEndpointRouteBuilder> Cache = []; 
     
-    public static IApplicationBuilder UseEndpoints(this IApplicationBuilder applicationBuilder)
+    public static IApplicationBuilder UseEndpoints(
+        this IApplicationBuilder applicationBuilder)
     {
         if (applicationBuilder is not IEndpointRouteBuilder routeBuilder)
         {
