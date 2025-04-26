@@ -20,6 +20,9 @@
     <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="Classic C#" />
     <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/EndpointResultApp/">
+    <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/IdempotentApp/">
     <Project Path="2025\IdempotentApp\IdempotentApp\IdempotentApp.csproj" Type="Classic C#" />
   </Folder>
