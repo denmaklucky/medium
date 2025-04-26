@@ -4,7 +4,7 @@ public readonly struct Result<TValue, TError>
 {
     private readonly TValue? _value;
     private readonly TError? _error;
-    
+
     private Result(TValue value)
     {
         _value = value;
@@ -16,14 +16,18 @@ public readonly struct Result<TValue, TError>
         _error = error;
         IsSuccess = false;
     }
-    
+
     public bool IsSuccess { get; }
-    
-    public TValue Value => IsSuccess ? _value! : throw new InvalidOperationException("Result is not successful.");
-    
-    public TError Error => !IsSuccess ? _error! : throw new InvalidOperationException("Result is successful.");
+
+    public TValue Value => _value! ?? throw new InvalidOperationException("Result is not successful.");
+
+    public TError Error => _error! ?? throw new InvalidOperationException("Result is successful.");
 
     public static Result<TValue, TError> Success(TValue value) => new(value);
 
     public static Result<TValue, TError> Failure(TError error) => new(error);
+
+    public static implicit operator Result<TValue, TError>(TValue value) => new(value);
+
+    public static implicit operator Result<TValue, TError>(TError error) => new(error);
 }

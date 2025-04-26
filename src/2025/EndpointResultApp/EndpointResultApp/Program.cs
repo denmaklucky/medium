@@ -10,9 +10,7 @@ app.Run();
 
 async Task<EndpointResult<Success, Error>> InvokeAsync()
 {
-    var result = await InternalInvokeAsync();
-
-    return result;
+    return await InternalInvokeAsync();
 }
 
 async Task<Result<Success, Error>> InternalInvokeAsync()
@@ -22,8 +20,8 @@ async Task<Result<Success, Error>> InternalInvokeAsync()
     var timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     
     return timestamp % 2 == 0
-        ? Result<Success, Error>.Success(new Success())
-        : Result<Success, Error>.Failure(new Error("Some error."));
+        ? new Success()
+        : new Error("Some error.");
 }
 
 sealed record Success;
