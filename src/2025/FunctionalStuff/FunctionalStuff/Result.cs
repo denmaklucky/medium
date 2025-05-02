@@ -2,7 +2,7 @@
 
 public readonly struct Result
 {
-    private Result(bool isSuccess, string error = null)
+    private Result(bool isSuccess, string? error = null)
     {
         IsSuccess = isSuccess;
         Error = error;
