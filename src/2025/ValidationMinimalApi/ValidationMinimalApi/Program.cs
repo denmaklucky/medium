@@ -10,7 +10,7 @@ builder.Services.AddValidation();
 
 var app = builder.Build();
 
-app.MapPost("/v1/note", (CreateNoteRequest request) =>
+app.MapPost("/v1/notes", (CreateNoteRequest request) =>
 {
     if (string.IsNullOrWhiteSpace(request.Value))
     {
@@ -27,7 +27,7 @@ app.MapPost("/v1/note", (CreateNoteRequest request) =>
     return Results.Ok();
 });
 
-app.MapPost("/v2/note", async ([FromServices] IValidator<CreateNoteRequest> validator, CreateNoteRequest request) =>
+app.MapPost("/v2/notes", async ([FromServices] IValidator<CreateNoteRequest> validator, CreateNoteRequest request) =>
 {
     var validationResult = await validator.ValidateAsync(request);
 
@@ -41,7 +41,7 @@ app.MapPost("/v2/note", async ([FromServices] IValidator<CreateNoteRequest> vali
     return Results.Ok();
 });
 
-app.MapPost("/v3/note", (CreateNoteRequest request) =>
+app.MapPost("/v3/notes", (CreateNoteRequest request) =>
 {
     //Store the note into database
 
@@ -49,7 +49,7 @@ app.MapPost("/v3/note", (CreateNoteRequest request) =>
 })
 .AddEndpointFilter<ValidationFilter<CreateNoteRequest>>();
 
-app.MapPost("/v4/note", (CreateNoteRequest request) =>
+app.MapPost("/v4/notes", (CreateNoteRequest request) =>
 {
     //Store the note into database
 
