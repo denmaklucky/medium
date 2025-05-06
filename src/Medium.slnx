@@ -44,4 +44,7 @@
     <Project Path="2025\NoteApp\Note.ServiceDefaults\Note.ServiceDefaults.csproj" Type="Classic C#" />
     <Project Path="2025\NoteApp\Note.Web\Note.Web.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/ValidationMinimalApi/">
+    <Project Path="2025\ValidationMinimalApi\ValidationMinimalApi\ValidationMinimalApi.csproj" Type="Classic C#" />
+  </Folder>
 </Solution>
