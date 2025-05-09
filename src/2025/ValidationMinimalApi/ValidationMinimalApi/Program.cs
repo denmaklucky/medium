@@ -25,7 +25,7 @@ app.MapPost("/v1/notes", (CreateNoteRequest request) =>
     //Store the note into database
 
     return Results.Ok();
-});
+}).Produces<object>(StatusCodes.Status400BadRequest);
 
 app.MapPost("/v2/notes", async ([FromServices] IValidator<CreateNoteRequest> validator, CreateNoteRequest request) =>
 {
