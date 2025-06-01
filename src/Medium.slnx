@@ -23,6 +23,9 @@
   <Folder Name="/2025/EndpointResultApp/">
     <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/ExtensionMembers/">
+    <Project Path="2025\ExtensionMembers\ExtensionMembers\ExtensionMembers.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/FunctionalStuff/">
     <Project Path="2025\FunctionalStuff\FunctionalStuff\FunctionalStuff.csproj" Type="Classic C#" />
   </Folder>
