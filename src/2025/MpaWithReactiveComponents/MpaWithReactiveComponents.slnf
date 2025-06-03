@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2025\\MpaWithReactiveComponents\\AppWithReact\\AppWithReact.csproj",
+      "2025\\MpaWithReactiveComponents\\AppWithVue\\AppWithVue.csproj",
+      "2025\\MpaWithReactiveComponents\\Shared\\Shared.csproj"
+    ]
+  }
+}

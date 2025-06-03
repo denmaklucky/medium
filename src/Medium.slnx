@@ -41,6 +41,11 @@
   <Folder Name="/2025/MinimalApiUltimateConfiguration/">
     <Project Path="2025\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/MpaWithReactiveComponents/">
+    <Project Path="2025\MpaWithReactiveComponents\AppWithReact\AppWithReact.csproj" Type="Classic C#" />
+    <Project Path="2025\MpaWithReactiveComponents\AppWithVue\AppWithVue.csproj" Type="Classic C#" />
+    <Project Path="2025\MpaWithReactiveComponents\Shared\Shared.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/NoteApp/">
     <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="Classic C#" />
     <Project Path="2025\NoteApp\Note.AppHost\Note.AppHost.csproj" Type="Classic C#" />

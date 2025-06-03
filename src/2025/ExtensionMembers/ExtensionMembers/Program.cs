@@ -12,18 +12,18 @@ if (person is Person.Student student)
 }
 
 
-if (person.IsStudent)
-{
-    if (person.IsSoftwareEngineer)
-    {
-
-    }
-}
-
-Enum.Parse<Types>("One");
-
-Types.Parse("One");
-
-var list = new List<int>();
-
-ArgumentException.ThrowIfEmpty(list);
+// if (person.IsStudent)
+// {
+//     if (person.IsSoftwareEngineer)
+//     {
+//
+//     }
+// }
+//
+// Enum.Parse<Types>("One");
+//
+// Types.Parse("One");
+//
+// var list = new List<int>();
+//
+// ArgumentException.ThrowIfEmpty(list);
