@@ -20,6 +20,9 @@
     <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="Classic C#" />
     <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/EndpointAttributeApp/">
+    <Project Path="2025\EndpointAttributeApp\EndpointAttributeApp\EndpointAttributeApp.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/EndpointResultApp/">
     <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="Classic C#" />
   </Folder>
@@ -42,9 +45,10 @@
     <Project Path="2025\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/2025/MpaWithReactiveComponents/">
+    <Project Path="2025\MpaWithReactiveComponents\AppWithAlpine\AppWithAlpine.csproj" Type="Classic C#" />
     <Project Path="2025\MpaWithReactiveComponents\AppWithReact\AppWithReact.csproj" Type="Classic C#" />
     <Project Path="2025\MpaWithReactiveComponents\AppWithVue\AppWithVue.csproj" Type="Classic C#" />
-    <Project Path="2025\MpaWithReactiveComponents\Shared\Shared.csproj" Type="Classic C#" />
+    <Project Path="2025\MpaWithReactiveComponents\Common\Common.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/2025/NoteApp/">
     <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="Classic C#" />

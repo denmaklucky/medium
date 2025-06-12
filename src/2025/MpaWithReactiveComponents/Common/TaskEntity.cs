@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared;
+namespace Common;
 
-public sealed class Note
+public sealed class TaskEntity
 {
     [Key]
     public long Id { get; set; }

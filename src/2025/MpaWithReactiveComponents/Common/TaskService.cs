@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Shared;
+namespace Common;
 
-public interface INoteService
+public interface ITaskService
 {
     Task AddAsync(string? title);
 
@@ -10,14 +10,14 @@ public interface INoteService
 
     Task DeleteAsync(long id);
 
-    Task<IReadOnlyList<Note>> ListAsync();
+    Task<IReadOnlyList<TaskEntity>> ListAsync();
 }
 
-public sealed class NoteService(NoteDbContext context) : INoteService
+public sealed class TaskService(TaskDbContext context) : ITaskService
 {
     public async Task AddAsync(string? title)
     {
-        context.Notes.Add(new Note
+        context.Tasks.Add(new TaskEntity
         {
             Title = title,
             IsCompleted = false,
@@ -29,7 +29,7 @@ public sealed class NoteService(NoteDbContext context) : INoteService
 
     public async Task UpdateAsync(long id, string? title, bool isCompleted)
     {
-        var existingNote = await context.Notes.FindAsync(id);
+        var existingNote = await context.Tasks.FindAsync(id);
 
         if (existingNote == null)
         {
@@ -45,21 +45,21 @@ public sealed class NoteService(NoteDbContext context) : INoteService
 
     public async Task DeleteAsync(long id)
     {
-        var existingNote = await context.Notes.FindAsync(id);
+        var existingNote = await context.Tasks.FindAsync(id);
 
         if (existingNote == null)
         {
             return;
         }
 
-        context.Notes.Remove(existingNote);
+        context.Tasks.Remove(existingNote);
 
         await context.SaveChangesAsync();
     }
 
-    public async Task<IReadOnlyList<Note>> ListAsync()
+    public async Task<IReadOnlyList<TaskEntity>> ListAsync()
     {
-        return await context.Notes
+        return await context.Tasks
             .OrderBy(note => note.IsCompleted)
             .ThenByDescending(note => note.CreatedAt)
             .ToListAsync();

@@ -1,0 +1,27 @@
+﻿@page
+
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="p-6" x-data="{ task: '' }">
+    <h1 class="text-2xl font-bold mb-4">📝 ToDo List</h1>
+
+    <form hx-post="@Url.Page("Index", "Add")" hx-target="#todo-list" hx-swap="outerHTML" @@submit.prevent="task = ''">
+        <input type="text"
+               name="text"
+               x-model="task"
+               required
+               class="border p-2 w-1/2 mr-2" 
+               placeholder="Enter new task..." />
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+    </form>
+
+    <div id="todo-list" class="mt-4">
+        <partial name="_ListPartial" model="@Model.Items"/>
+    </div>
+</div>
+
+

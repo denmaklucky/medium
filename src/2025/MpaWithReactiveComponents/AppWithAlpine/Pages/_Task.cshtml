@@ -1,0 +1,17 @@
+﻿@using Common
+
+@model TaskEntity
+
+<div class="card" x-data="{ 
+                    title: @Model.Title,
+                    isCompleted: @Model.IsCompleted,
+                    createdAt: @Model.CreatedAt,
+                    openActions: false }">
+    <div class="card-body" x-text="title"></div>
+    
+<template x-if="openActions">
+    <div></div>
+</template>
+
+</div>
+
