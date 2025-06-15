@@ -1,7 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
 
 namespace EndpointAttributeApp;
 
@@ -15,20 +14,12 @@ public sealed class EndpointGenerator : IIncrementalGenerator
                 (node, _) => IsEndpointSyntaxNode(node),
                 (syntaxContext, _) => ToClassDeclarationSyntax(syntaxContext)
             )
-            .Where(classSyntax => classSyntax is not null)
+            .Where(classSyntax => classSyntax != null)
             .Select((classSyntax, _) => classSyntax!);
 
-        var classSymbols = classDeclarations
-            .Select((classSyntax, cancellationToken) =>
-            {
-                var model = context.SemanticModel;
-                var classSymbol = model.GetDeclaredSymbol(classSyntax) as INamedTypeSymbol;
+        var compilationAndClasses = context.CompilationProvider.Combine(classDeclarations.Collect());
 
-                return classSymbol;
-            })
-            .Where(static s => s is not null);
-
-        context.RegisterSourceOutput(classSymbols, GenerateEndpointSource);
+        context.RegisterSourceOutput(compilationAndClasses, (productionContext, tuple) => GenerateEndpointSource(productionContext, tuple.Left, tuple.Right));
 
         static bool IsEndpointSyntaxNode(SyntaxNode node) =>
             node is ClassDeclarationSyntax syntax &&
@@ -36,42 +27,70 @@ public sealed class EndpointGenerator : IIncrementalGenerator
 
         static ClassDeclarationSyntax? ToClassDeclarationSyntax(GeneratorSyntaxContext syntaxContext)
         {
+            if (syntaxContext.Node is not ClassDeclarationSyntax classDeclarationSyntax)
+            {
+                return null;
+            }
+
+            const string endpointAttributeName = "Endpoint";
             
+            foreach (var attributeSyntax in classDeclarationSyntax.AttributeLists.SelectMany(attributeList => attributeList.Attributes))
+            {
+                var attributeName = attributeSyntax.Name.ToString();
+
+                if (string.Equals(endpointAttributeName, attributeName, StringComparison.Ordinal) || 
+                    string.Equals($"{endpointAttributeName}Attribute", attributeName, StringComparison.Ordinal))
+                {
+                    return classDeclarationSyntax;
+                }
+            }
+
+            return null;
         }
     }
 
-    private void GenerateEndpointSource(SourceProductionContext context, INamedTypeSymbol classSymbol)
+    private static void GenerateEndpointSource(SourceProductionContext context, Compilation compilation, ImmutableArray<ClassDeclarationSyntax> classSyntaxes)
     {
-        var endpointAttrSymbol = context.Compilation.GetTypeByMetadataName("EndpointAttribute");
-        var handlerInterfaceSymbol = context.Compilation.GetTypeByMetadataName("IHandler`2");
-
-        if (endpointAttrSymbol is null || handlerInterfaceSymbol is null)
+        if (classSyntaxes.IsDefaultOrEmpty)
+        {
             return;
+        }
 
-        var endpointAttr = classSymbol.GetAttributes().FirstOrDefault(attr =>
-            SymbolEqualityComparer.Default.Equals(attr.AttributeClass, endpointAttrSymbol));
+        foreach (var classSyntax in classSyntaxes)
+        {
+            var model = compilation.GetSemanticModel(classSyntax.SyntaxTree);
+        }
 
-        if (endpointAttr is null)
-            return;
-
-        var handlerInterface = classSymbol.AllInterfaces.FirstOrDefault(i =>
-            i.OriginalDefinition.Equals(handlerInterfaceSymbol, SymbolEqualityComparer.Default));
-
-        if (handlerInterface is null)
-            return;
-
-        var verb = endpointAttr.ConstructorArguments[0].Value?.ToString();
-        var route = endpointAttr.ConstructorArguments[1].Value?.ToString();
-
-        var tCommand = handlerInterface.TypeArguments[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-        var tResult = handlerInterface.TypeArguments[1].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-
-        var source = GenerateClass(classSymbol.Name, verb, route, tCommand, tResult);
-
-        context.AddSource($"{classSymbol.Name}.g.cs", SourceText.From(source, Encoding.UTF8));
+        // var endpointAttrSymbol = context.Compilation.GetTypeByMetadataName("EndpointAttribute");
+        // var handlerInterfaceSymbol = context.Compilation.GetTypeByMetadataName("IHandler`2");
+        //
+        // if (endpointAttrSymbol is null || handlerInterfaceSymbol is null)
+        //     return;
+        //
+        // var endpointAttr = classSymbol.GetAttributes().FirstOrDefault(attr =>
+        //     SymbolEqualityComparer.Default.Equals(attr.AttributeClass, endpointAttrSymbol));
+        //
+        // if (endpointAttr is null)
+        //     return;
+        //
+        // var handlerInterface = classSymbol.AllInterfaces.FirstOrDefault(i =>
+        //     i.OriginalDefinition.Equals(handlerInterfaceSymbol, SymbolEqualityComparer.Default));
+        //
+        // if (handlerInterface is null)
+        //     return;
+        //
+        // var verb = endpointAttr.ConstructorArguments[0].Value?.ToString();
+        // var route = endpointAttr.ConstructorArguments[1].Value?.ToString();
+        //
+        // var tCommand = handlerInterface.TypeArguments[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        // var tResult = handlerInterface.TypeArguments[1].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        //
+        // var source = GenerateClass(classSymbol.Name, verb, route, tCommand, tResult);
+        //
+        // context.AddSource($"{classSymbol.Name}.g.cs", SourceText.From(source, Encoding.UTF8));
     }
     
-    private string GenerateClass(string className, string? verb, string? route, string tCommand, string tResult)
+    private static string GenerateClass(string className, string? verb, string? route, string tCommand, string tResult)
     {
         var mapMethod = verb?.ToLowerInvariant() switch
         {
@@ -98,6 +117,7 @@ public partial class {className} : IEndpoint
     private static async Task<IResult> InvokeAsync({className} handler, {tCommand} command)
     {{
         var result = await handler.InvokeAsync(command);
+
         return TypedResults.Ok(result);
     }}
 }}
