@@ -2,7 +2,8 @@
   "solution": {
     "path": "..\\..\\Medium.slnx",
     "projects": [
-      "2025\\EndpointAttributeApp\\EndpointAttributeApp\\EndpointAttributeApp.csproj"
+      "2025\\EndpointAttributeApp\\EndpointAttributeApp\\EndpointAttributeApp.csproj",
+      "2025\\EndpointAttributeApp\\EndpointGenerator\\EndpointGenerator.csproj"
     ]
   }
 }

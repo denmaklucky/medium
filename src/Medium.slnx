@@ -22,6 +22,7 @@
   </Folder>
   <Folder Name="/2025/EndpointAttributeApp/">
     <Project Path="2025\EndpointAttributeApp\EndpointAttributeApp\EndpointAttributeApp.csproj" Type="Classic C#" />
+    <Project Path="2025\EndpointAttributeApp\EndpointGenerator\EndpointGenerator.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/2025/EndpointResultApp/">
     <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="Classic C#" />

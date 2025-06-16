@@ -1,6 +1,8 @@
-﻿namespace EndpointAttributeApp;
+﻿using EndpointGenerator;
 
-[Endpoint(HttpVerb.GET, "api/v1/notes/")]
+namespace EndpointAttributeApp;
+
+[Endpoint("Get", "api/v1/notes")]
 public sealed class GetNoteHandler : IHandler<object, object>
 {
     public Task<object> InvokeAsync(object command)

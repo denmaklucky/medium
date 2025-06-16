@@ -1,4 +1,6 @@
-﻿namespace EndpointAttributeApp;
+﻿using EndpointGenerator;
+
+namespace EndpointAttributeApp;
 
 internal static class ApplicationBuilderExtensions
 {
