@@ -48,8 +48,8 @@ public interface IEndpoint
 
             var classDeclarations = context.SyntaxProvider
                 .CreateSyntaxProvider(
-                    (node, _) => IsSyntaxTargetForGeneration(node),
-                    (syntaxContext, _) => (ClassDeclarationSyntax) syntaxContext.Node
+                    predicate: (node, _) => IsSyntaxTargetForGeneration(node),
+                    transform: (syntaxContext, _) => (ClassDeclarationSyntax) syntaxContext.Node
                 );
 
             var compilationAndClasses = context.CompilationProvider.Combine(classDeclarations.Collect());
