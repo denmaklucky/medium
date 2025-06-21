@@ -20,6 +20,9 @@
     <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="Classic C#" />
     <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/CustomMiddleware/">
+    <Project Path="2025\CustomMiddleware\CustomMiddleware\CustomMiddleware.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/EndpointAttributeApp/">
     <Project Path="2025\EndpointAttributeApp\EndpointAttributeApp\EndpointAttributeApp.csproj" Type="Classic C#" />
     <Project Path="2025\EndpointAttributeApp\EndpointGenerator\EndpointGenerator.csproj" Type="Classic C#" />
