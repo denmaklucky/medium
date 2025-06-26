@@ -108,3 +108,69 @@ public sealed class UpdateNoteHandler2(INoteRepository noteRepository)
         return new Result();
     }
 }
+
+public sealed class UpdateNoteHandler3(INoteRepository noteRepository)
+{
+    public async Task<Reply> InvokeAsync(
+        Guid noteId,
+        string? title,
+        Guid userId)
+    {
+        var note = await noteRepository.GetNoteOrNullAsync(noteId);
+
+        if (note == null)
+        {
+            return new NotFoundReply(noteId);
+        }
+
+        if (note.UserId != userId)
+        {
+            return new ForbiddenReply();
+        }
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return new EmptyTitleReply();
+        }
+
+        note.Title = title;
+        note.UpdatedAt = DateTimeOffset.UtcNow;
+
+        await noteRepository.UpdateNoteAsync(note);
+
+        return new SuccessReply();
+    }
+}
+
+public sealed class UpdateNoteHandler4(INoteRepository noteRepository)
+{
+    public async Task<UpdateNoteReply> InvokeAsync(
+        Guid noteId,
+        string? title,
+        Guid userId)
+    {
+        var note = await noteRepository.GetNoteOrNullAsync(noteId);
+
+        if (note == null)
+        {
+            return new UpdateNoteReply.NotFound(noteId);
+        }
+
+        if (note.UserId != userId)
+        {
+            return new  UpdateNoteReply.Forbidden();
+        }
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return new UpdateNoteReply.EmptyTitle();
+        }
+
+        note.Title = title;
+        note.UpdatedAt = DateTimeOffset.UtcNow;
+
+        await noteRepository.UpdateNoteAsync(note);
+
+        return new UpdateNoteReply.Success();
+    }
+}
