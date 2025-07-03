@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Notifications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff4757;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.connected {
+            background: #2ed573;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-connect {
+            background: linear-gradient(135deg, #2ed573, #17a2b8);
+            color: white;
+        }
+
+        .btn-disconnect {
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #ffa502, #ff6348);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .notifications-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .notification {
+            background: white;
+            border-left: 4px solid #4facfe;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(-100%);
+            animation: slideIn 0.5s ease-out forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notification::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4facfe, transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes slideIn {
+            to { transform: translateX(0); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .notification-time {
+            font-size: 0.8em;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .notification-content {
+            font-size: 1.1em;
+            line-height: 1.4;
+            color: #2c3e50;
+        }
+
+        .notification-data {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #495057;
+            border: 1px solid #e9ecef;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            padding: 15px 20px;
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Scrollbar styling */
+        .notifications-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .notifications-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .notifications-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border-radius: 4px;
+        }
+
+        .notifications-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #3a8bfe, #00d4fe);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stats {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🔔 Real-time Notifications</h1>
+        <div class="status">
+            <div class="status-indicator" id="statusIndicator"></div>
+            <span id="statusText">Disconnected</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="stats">
+            <span>Total: <strong id="totalCount">0</strong></span>
+            <span>Connected: <strong id="connectionTime">--</strong></span>
+        </div>
+        <div>
+            <button class="btn btn-connect" id="connectBtn">Connect</button>
+            <button class="btn btn-disconnect" id="disconnectBtn" disabled>Disconnect</button>
+            <button class="btn btn-clear" id="clearBtn">Clear All</button>
+        </div>
+    </div>
+
+    <div class="notifications-container" id="notificationsContainer">
+        <div class="empty-state" id="emptyState">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <h3>No notifications yet</h3>
+            <p>Connect to start receiving real-time notifications</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    class NotificationClient {
+        constructor() {
+            this.eventSource = null;
+            this.isConnected = false;
+            this.notifications = [];
+            this.connectionStartTime = null;
+            this.reconnectAttempts = 0;
+            this.maxReconnectAttempts = 5;
+
+            this.initializeElements();
+            this.bindEvents();
+            this.autoConnect();
+        }
+
+        initializeElements() {
+            this.statusIndicator = document.getElementById('statusIndicator');
+            this.statusText = document.getElementById('statusText');
+            this.connectBtn = document.getElementById('connectBtn');
+            this.disconnectBtn = document.getElementById('disconnectBtn');
+            this.clearBtn = document.getElementById('clearBtn');
+            this.container = document.getElementById('notificationsContainer');
+            this.emptyState = document.getElementById('emptyState');
+            this.totalCount = document.getElementById('totalCount');
+            this.connectionTime = document.getElementById('connectionTime');
+        }
+
+        bindEvents() {
+            this.connectBtn.addEventListener('click', () => this.connect());
+            this.disconnectBtn.addEventListener('click', () => this.disconnect());
+            this.clearBtn.addEventListener('click', () => this.clearNotifications());
+        }
+
+        autoConnect() {
+            // Auto-connect on page load
+            setTimeout(() => this.connect(), 500);
+        }
+
+        connect() {
+            if (this.isConnected) return;
+
+            try {
+                this.eventSource = new EventSource('https://localhost:7197/notifications');
+
+                this.eventSource.onopen = (event) => {
+                    console.log('SSE Connection opened:', event);
+                    this.handleConnectionOpen();
+                };
+
+                this.eventSource.onmessage = (event) => {
+                    console.log('SSE Message received:', event);
+                    this.handleMessage(event);
+                };
+
+                this.eventSource.onerror = (event) => {
+                    console.error('SSE Connection error:', event);
+                    this.handleConnectionError(event);
+                };
+
+                // Handle custom event types (if your .NET server sends them)
+                this.eventSource.addEventListener('notification', (event) => {
+                    console.log('Custom notification event:', event);
+                    this.handleMessage(event);
+                });
+
+            } catch (error) {
+                console.error('Failed to create EventSource:', error);
+                this.showError('Failed to connect to notification server');
+            }
+        }
+
+        disconnect() {
+            if (this.eventSource) {
+                this.eventSource.close();
+                this.eventSource = null;
+            }
+            this.handleConnectionClose();
+        }
+
+        handleConnectionOpen() {
+            this.isConnected = true;
+            this.connectionStartTime = new Date();
+            this.reconnectAttempts = 0;
+
+            this.statusIndicator.classList.add('connected');
+            this.statusText.textContent = 'Connected';
+
+            this.connectBtn.disabled = true;
+            this.disconnectBtn.disabled = false;
+
+            this.updateConnectionTime();
+            this.hideError();
+
+            console.log('Connected to notification server');
+        }
+
+        handleConnectionClose() {
+            this.isConnected = false;
+            this.connectionStartTime = null;
+
+            this.statusIndicator.classList.remove('connected');
+            this.statusText.textContent = 'Disconnected';
+
+            this.connectBtn.disabled = false;
+            this.disconnectBtn.disabled = true;
+
+            this.connectionTime.textContent = '--';
+
+            console.log('Disconnected from notification server');
+        }
+
+        handleConnectionError(event) {
+            console.error('Connection error:', event);
+
+            if (this.eventSource && this.eventSource.readyState === EventSource.CLOSED) {
+                this.handleConnectionClose();
+
+                // Attempt to reconnect with exponential backoff
+                if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                    const delay = Math.pow(2, this.reconnectAttempts) * 1000;
+                    this.reconnectAttempts++;
+
+                    this.showError(`Connection lost. Reconnecting in ${delay/1000}s... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+
+                    setTimeout(() => {
+                        if (!this.isConnected) {
+                            this.connect();
+                        }
+                    }, delay);
+                } else {
+                    this.showError('Connection failed after multiple attempts. Please reconnect manually.');
+                }
+            }
+        }
+
+        handleMessage(event) {
+            try {
+                let data;
+
+                // Try to parse as JSON, fallback to plain text
+                try {
+                    data = JSON.parse(event.data);
+                } catch (e) {
+                    data = { message: event.data, type: 'text' };
+                }
+
+                const notification = {
+                    id: Date.now() + Math.random(),
+                    timestamp: new Date(),
+                    data: data,
+                    raw: event.data
+                };
+
+                this.addNotification(notification);
+
+            } catch (error) {
+                console.error('Error processing message:', error);
+                this.showError('Error processing notification');
+            }
+        }
+
+        addNotification(notification) {
+            this.notifications.unshift(notification);
+            this.renderNotification(notification);
+            this.updateStats();
+            this.hideEmptyState();
+        }
+
+        renderNotification(notification) {
+            const notificationEl = document.createElement('div');
+            notificationEl.className = 'notification';
+            notificationEl.setAttribute('data-id', notification.id);
+
+            const timeStr = notification.timestamp.toLocaleTimeString();
+            const dateStr = notification.timestamp.toLocaleDateString();
+
+            let contentHtml;
+            if (typeof notification.data === 'object' && notification.data !== null) {
+                const mainMessage = notification.data.message || notification.data.text || notification.data.content || 'New notification';
+                contentHtml = `
+                        <div class="notification-content">${this.escapeHtml(mainMessage)}</div>
+                        <div class="notification-data">${this.escapeHtml(JSON.stringify(notification.data, null, 2))}</div>
+                    `;
+            } else {
+                contentHtml = `<div class="notification-content">${this.escapeHtml(notification.raw)}</div>`;
+            }
+
+            notificationEl.innerHTML = `
+                    <div class="notification-header">
+                        <div class="notification-time">${timeStr} - ${dateStr}</div>
+                    </div>
+                    ${contentHtml}
+                `;
+
+            this.container.insertBefore(notificationEl, this.container.firstChild);
+
+            // Auto-scroll to top to show new notification
+            this.container.scrollTop = 0;
+        }
+
+        clearNotifications() {
+            this.notifications = [];
+
+            // Remove all notification elements
+            const notificationElements = this.container.querySelectorAll('.notification');
+            notificationElements.forEach(el => el.remove());
+
+            this.updateStats();
+            this.showEmptyState();
+        }
+
+        updateStats() {
+            this.totalCount.textContent = this.notifications.length;
+        }
+
+        updateConnectionTime() {
+            if (!this.connectionStartTime) return;
+
+            const now = new Date();
+            const diff = now - this.connectionStartTime;
+            const seconds = Math.floor(diff / 1000);
+
+            if (seconds < 60) {
+                this.connectionTime.textContent = `${seconds}s`;
+            } else if (seconds < 3600) {
+                this.connectionTime.textContent = `${Math.floor(seconds / 60)}m ${seconds % 60}s`;
+            } else {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                this.connectionTime.textContent = `${hours}h ${minutes}m`;
+            }
+
+            if (this.isConnected) {
+                setTimeout(() => this.updateConnectionTime(), 1000);
+            }
+        }
+
+        showEmptyState() {
+            this.emptyState.style.display = 'block';
+        }
+
+        hideEmptyState() {
+            this.emptyState.style.display = 'none';
+        }
+
+        showError(message) {
+            this.hideError();
+
+            const errorEl = document.createElement('div');
+            errorEl.className = 'error-message';
+            errorEl.textContent = message;
+            errorEl.id = 'errorMessage';
+
+            this.container.insertBefore(errorEl, this.container.firstChild);
+        }
+
+        hideError() {
+            const existingError = document.getElementById('errorMessage');
+            if (existingError) {
+                existingError.remove();
+            }
+        }
+
+        escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    }
+
+    // Initialize the notification client when the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        new NotificationClient();
+    });
+</script>
+</body>
+</html>

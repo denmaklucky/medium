@@ -8,7 +8,26 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IRandomizerString>(_ => RandomizerFactory.GetRandomizer(new FieldOptionsTextWords()));
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors();
 
 app.MapGet("/notifications", ([FromServices] IRandomizerString randomizer, CancellationToken token) =>
 {
@@ -18,7 +37,7 @@ app.MapGet("/notifications", ([FromServices] IRandomizerString randomizer, Cance
     {
         while (!cancellationToken.IsCancellationRequested)
         {
-            await Task.Delay(2000, cancellationToken);
+            await Task.Delay(4000, cancellationToken);
 
             yield return new NotificationEvent(Guid.CreateVersion7(), randomizerString.Generate()!);
         }
