@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RandomDataGenerator.Net" Version="1.0.19.1" />
+  </ItemGroup>
+
 </Project>
