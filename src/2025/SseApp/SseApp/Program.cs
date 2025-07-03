@@ -31,9 +31,9 @@ app.UseCors();
 
 app.MapGet("/notifications", ([FromServices] IRandomizerString randomizer, CancellationToken token) =>
 {
-    return TypedResults.ServerSentEvents(GetNotificationAsync(randomizer, token), "notification");
+    return TypedResults.ServerSentEvents(GetNotificationsAsync(randomizer, token), "notification");
 
-    async IAsyncEnumerable<NotificationEvent> GetNotificationAsync(IRandomizerString randomizerString, [EnumeratorCancellation] CancellationToken cancellationToken)
+    async IAsyncEnumerable<NotificationEvent> GetNotificationsAsync(IRandomizerString randomizerString, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         while (!cancellationToken.IsCancellationRequested)
         {
