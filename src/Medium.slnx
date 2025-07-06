@@ -27,6 +27,7 @@
     <Project Path="2025\DirectoryBuildApp\Domain\Domain.csproj" Type="Classic C#" />
     <Project Path="2025\DirectoryBuildApp\Host\Host.csproj" Type="Classic C#" />
     <Project Path="2025\DirectoryBuildApp\Model\Model.csproj" Type="Classic C#" />
+    <File Path="2025\DirectoryBuildApp\Directory.Build.props" />
   </Folder>
   <Folder Name="/2025/DisciminatedUnion/">
     <Project Path="2025\DisciminatedUnion\DisciminatedUnion\DisciminatedUnion.csproj" Type="Classic C#" />
