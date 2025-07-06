@@ -5,5 +5,22 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    
+
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="10.0.0-preview.5.25277.114"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="$(MSBuildProjectName.EndsWith('Model'))">
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0-preview.5.25277.114"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="$(MSBuildProjectName.EndsWith('Domain'))">
+        <PackageReference Include="Polly" Version="8.6.1"/>
+        <ProjectReference Include="..\Model\Model.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup Condition="$(MSBuildProjectName.EndsWith('Host'))">
+        <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
 </Project>
