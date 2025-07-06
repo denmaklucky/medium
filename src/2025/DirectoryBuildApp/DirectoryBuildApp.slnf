@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2025\\DirectoryBuildApp\\Domain\\Domain.csproj",
+      "2025\\DirectoryBuildApp\\Host\\Host.csproj",
+      "2025\\DirectoryBuildApp\\Model\\Model.csproj"
+    ]
+  }
+}
