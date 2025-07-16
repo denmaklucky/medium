@@ -45,6 +45,9 @@
   <Folder Name="/2025/FunctionalStuff/">
     <Project Path="2025\FunctionalStuff\FunctionalStuff\FunctionalStuff.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/GraphQlApp/">
+    <Project Path="2025\GraphQlApp\GraphQlApp\GraphQlApp.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/IdempotentApp/">
     <Project Path="2025\IdempotentApp\IdempotentApp\IdempotentApp.csproj" Type="Classic C#" />
   </Folder>
