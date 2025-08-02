@@ -51,6 +51,9 @@
   <Folder Name="/2025/IdempotentApp/">
     <Project Path="2025\IdempotentApp\IdempotentApp\IdempotentApp.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/JobApp/">
+    <Project Path="2025\JobApp\JobApp\JobApp.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/LevelUpLogs/">
     <Project Path="2025\LevelUpLogs\LevelUpLogs\LevelUpLogs.csproj" Type="Classic C#" />
   </Folder>
