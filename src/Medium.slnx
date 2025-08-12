@@ -78,6 +78,9 @@
     <Project Path="2025\NoteApp\Note.ServiceDefaults\Note.ServiceDefaults.csproj" Type="Classic C#" />
     <Project Path="2025\NoteApp\Note.Web\Note.Web.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/ProblemDetailsApp/">
+    <Project Path="2025\ProblemDetailsApp\ProblemDetailsApp\ProblemDetailsApp.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/SseApp/">
     <Project Path="2025\SseApp\SseApp\SseApp.csproj" Type="Classic C#" />
   </Folder>
