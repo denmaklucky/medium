@@ -11,7 +11,8 @@ public sealed class EndpointResult : IResult
         _result = result;
     }
     
-    public Task ExecuteAsync(HttpContext httpContext) => _result.ExecuteAsync(httpContext);
+    public Task ExecuteAsync(HttpContext httpContext) =>
+        _result.ExecuteAsync(httpContext);
     
     public static implicit operator EndpointResult(Result result)
     {

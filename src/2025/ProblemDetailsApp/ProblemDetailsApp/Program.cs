@@ -10,7 +10,8 @@ app.UseExceptionHandler(configure =>
 {
     configure.Run(async context =>
     {
-        var problemDetailsService = context.RequestServices.GetRequiredService<IProblemDetailsService>();
+        var problemDetailsService = context.RequestServices
+            .GetRequiredService<IProblemDetailsService>();
 
         await problemDetailsService.TryWriteAsync(new ProblemDetailsContext { HttpContext = context });
     });
