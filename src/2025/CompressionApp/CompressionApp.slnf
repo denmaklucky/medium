@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+        "2025\\CompressionApp\\CompressionApp\\CompressionApp.csproj"
+    ]
+  }
+}
