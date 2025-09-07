@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2025\\AotUtilities\\AotJsonUtility\\AotJsonUtility.csproj",
+      "2025\\AotUtilities\\JsonUtility\\JsonUtility.csproj"
+    ]
+  }
+}

@@ -11,6 +11,10 @@
     <Project Path="2025\Analyzer\ConsoleApp\ConsoleApp.csproj" Type="Classic C#" />
     <Project Path="2025\Analyzer\SealedClassAnalyzer\SealedClassAnalyzer.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/AotUtilities/">
+    <Project Path="2025\AotUtilities\AotJsonUtility\AotJsonUtility.csproj" Type="Classic C#" />
+    <Project Path="2025\AotUtilities\JsonUtility\JsonUtility.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/AppAI/">
     <Project Path="2025\AppAI\AppAI\AppAI.csproj" Type="Classic C#" />
   </Folder>
