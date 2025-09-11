@@ -24,6 +24,9 @@
     <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="Classic C#" />
     <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/CachedApp/">
+    <Project Path="2025\CachedApp\CachedApp\CachedApp.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/CompressionApp/">
     <Project Path="2025\CompressionApp\CompressionApp\CompressionApp.csproj" Type="Classic C#" />
   </Folder>
