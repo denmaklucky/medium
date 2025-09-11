@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Scrutor" Version="6.1.0" />
+  </ItemGroup>
+
 </Project>
