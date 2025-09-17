@@ -1,0 +1,16 @@
+﻿@page "/todo"
+
+@model AppWithReact.Pages.ToDo
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+@foreach (var task in Model.Tasks)
+{
+    <div>
+        @task.Title
+    </div>
+}
+
+<div id="root"></div>

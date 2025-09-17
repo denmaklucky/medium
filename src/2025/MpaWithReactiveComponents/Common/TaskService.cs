@@ -10,7 +10,9 @@ public interface ITaskService
 
     Task DeleteAsync(long id);
 
-    Task<IReadOnlyList<TaskEntity>> ListAsync();
+    Task<List<TaskEntity>> ListIncompletedAsync();
+
+    Task<List<TaskEntity>> ListCompletedAsync();
 }
 
 public sealed class TaskService(TaskDbContext context) : ITaskService
@@ -39,27 +41,35 @@ public sealed class TaskService(TaskDbContext context) : ITaskService
         existingNote.Title = title;
         existingNote.IsCompleted = isCompleted;
         existingNote.UpdatedAt = DateTime.UtcNow;
-
+        
         await context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(long id)
     {
         var existingNote = await context.Tasks.FindAsync(id);
-
+        
         if (existingNote == null)
         {
             return;
         }
-
+        
         context.Tasks.Remove(existingNote);
-
+        
         await context.SaveChangesAsync();
     }
 
-    public async Task<IReadOnlyList<TaskEntity>> ListAsync()
+    public Task<List<TaskEntity>> ListIncompletedAsync()
     {
-        return await context.Tasks
+        return context.Tasks
+            .OrderBy(note => !note.IsCompleted)
+            .ThenByDescending(note => note.CreatedAt)
+            .ToListAsync();
+    }
+
+    public Task<List<TaskEntity>> ListCompletedAsync()
+    {
+        return context.Tasks
             .OrderBy(note => note.IsCompleted)
             .ThenByDescending(note => note.CreatedAt)
             .ToListAsync();
