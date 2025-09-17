@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { TasksApi, type TaskEntity } from './api'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [items, setItems] = useState<TaskEntity[]>([])
+  const [title, setTitle] = useState('')
+
+  async function load() {
+    const list = await TasksApi.list()
+    setItems(list)
+  }
+
+  useEffect(() => { load() }, [])
+
+  async function add() {
+    if (!title.trim()) return
+    await TasksApi.add(title.trim())
+    setTitle('')
+    await load()
+  }
+
+  async function toggle(id: number, isCompleted: boolean) {
+    const t = items.find(x => x.id === id)
+    if (!t) return
+    await TasksApi.update({ id, title: t.title, isCompleted })
+    await load()
+  }
+
+  async function remove(id: number) {
+    await TasksApi.remove(id)
+    await load()
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="p-4">
+      <div style={{ display:'flex', gap:8 }}>
+        <input className="form-control"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          placeholder="New task title..."/>
+        <button type="button" className="btn btn-primary" onClick={add}>Add</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <ul>
+        {items.map(t => (
+          <li key={t.id} style={{ display:'flex', gap:8, alignItems:'center' }}>
+            <input
+              type="checkbox"
+              checked={t.isCompleted}
+              onChange={e => toggle(t.id, e.target.checked)}
+            />
+            <span style={{ textDecoration: t.isCompleted ? 'line-through' : 'none' }}>
+              {t.title ?? '(no title)'}
+            </span>
+            <button onClick={() => remove(t.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
-
-export default App

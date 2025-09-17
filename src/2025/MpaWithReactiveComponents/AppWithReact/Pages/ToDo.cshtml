@@ -1,16 +1,17 @@
 ﻿@page "/todo"
 
+@using Microsoft.AspNetCore.Antiforgery
+
+@inject IAntiforgery Xsrf
+
 @model AppWithReact.Pages.ToDo
 
 @{
     Layout = "Shared/_Layout";
+    ViewData["Title"] = "ToDo";
+    var tokens = Xsrf.GetAndStoreTokens(HttpContext);
 }
 
-@foreach (var task in Model.Tasks)
-{
-    <div>
-        @task.Title
-    </div>
-}
+<meta name="request-verification-token" content="@tokens.RequestToken" />
 
 <div id="root"></div>

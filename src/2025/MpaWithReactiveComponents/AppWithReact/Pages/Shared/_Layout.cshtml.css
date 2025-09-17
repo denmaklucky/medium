@@ -46,3 +46,9 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
