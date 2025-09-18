@@ -1,0 +1,13 @@
+﻿@page "/todo"
+
+@using Microsoft.AspNetCore.Antiforgery
+
+@inject IAntiforgery Xsrf
+
+@model AppWithVue.Pages.ToDo
+
+@{
+  Layout = "Shared/_Layout";
+  ViewData["Title"] = "ToDo";
+  ViewData["Token"] = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+}
