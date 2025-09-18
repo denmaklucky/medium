@@ -9,9 +9,7 @@
 @{
     Layout = "Shared/_Layout";
     ViewData["Title"] = "ToDo";
-    var tokens = Xsrf.GetAndStoreTokens(HttpContext);
+    ViewData["Token"] = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
 }
 
-<meta name="request-verification-token" content="@tokens.RequestToken" />
-
-<div id="root"></div>
+<div id="root" class="container-sm"></div>

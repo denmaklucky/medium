@@ -6,16 +6,26 @@ namespace AppWithReact.Pages;
 
 public class ToDo(ITaskService taskService) : PageModel
 {
-    public async Task<IActionResult> OnGetListAsync()
+    public async Task<IActionResult> OnGetListIncompletedAsync()
     {
         var items = await taskService.ListIncompletedAsync();
 
         return new JsonResult(items);
-    }
-    
-    public async Task OnPostAddAsync([FromBody] TaskDto dto)
+    } 
+
+    public async Task<IActionResult> OnGetListCompletedAsync()
     {
-        await taskService.AddAsync(dto.Title);
+        var items = await taskService.ListCompletedAsync();
+
+        return new JsonResult(items);
+    }
+
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> OnPostAddAsync([FromBody] TaskDto dto)
+    {
+        var createdTask = await taskService.AddAsync(dto.Title);
+
+        return new JsonResult(createdTask);
     }
     
     [ValidateAntiForgeryToken]

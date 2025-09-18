@@ -24,7 +24,9 @@ export type TaskEntity = {
 };
 
 export const TasksApi = {
-  list: () => json<TaskEntity[]>('/todo?handler=List'),
+  listIncompleted: () => json<TaskEntity[]>('/todo?handler=ListIncompleted'),
+
+  listCompleted: () => json<TaskEntity[]>('/todo?handler=ListCompleted'),
 
   add: (title: string | null) =>
     json<TaskEntity>('/todo?handler=Add', {
@@ -32,7 +34,7 @@ export const TasksApi = {
       body: JSON.stringify({ title }),
       headers: {
           'Content-Type': 'application/json',
-          'RequestVerificationToken': xsrf() 
+          'RequestVerificationToken': xsrf()
       }
     }),
 
@@ -40,13 +42,19 @@ export const TasksApi = {
     json<{ ok: boolean }>('/todo?handler=Update', {
       method: 'POST',
       body: JSON.stringify(t),
-      headers: { 'RequestVerificationToken': xsrf() }
+      headers: {
+           'Content-Type': 'application/json',
+          'RequestVerificationToken': xsrf() 
+      }
     }),
 
   remove: (id: number) =>
     json<{ ok: boolean }>('/todo?handler=Delete', {
       method: 'POST',
       body: JSON.stringify({ id }),
-      headers: { 'RequestVerificationToken': xsrf() }
+      headers: {
+          'Content-Type': 'application/json',
+          'RequestVerificationToken': xsrf() 
+      }
     }),
 };

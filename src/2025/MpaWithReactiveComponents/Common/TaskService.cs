@@ -4,7 +4,7 @@ namespace Common;
 
 public interface ITaskService
 {
-    Task AddAsync(string? title);
+    Task<TaskEntity> AddAsync(string? title);
 
     Task UpdateAsync(long id, string? title, bool isCompleted);
 
@@ -17,9 +17,9 @@ public interface ITaskService
 
 public sealed class TaskService(TaskDbContext context) : ITaskService
 {
-    public async Task AddAsync(string? title)
+    public async Task<TaskEntity> AddAsync(string? title)
     {
-        context.Tasks.Add(new TaskEntity
+        var task = context.Tasks.Add(new TaskEntity
         {
             Title = title,
             IsCompleted = false,
@@ -27,6 +27,8 @@ public sealed class TaskService(TaskDbContext context) : ITaskService
         });
 
         await context.SaveChangesAsync();
+
+        return task.Entity;
     }
 
     public async Task UpdateAsync(long id, string? title, bool isCompleted)
@@ -62,16 +64,16 @@ public sealed class TaskService(TaskDbContext context) : ITaskService
     public Task<List<TaskEntity>> ListIncompletedAsync()
     {
         return context.Tasks
-            .OrderBy(note => !note.IsCompleted)
-            .ThenByDescending(note => note.CreatedAt)
+            .Where(note => !note.IsCompleted)
+            .OrderBy(note => note.CreatedAt)
             .ToListAsync();
     }
 
     public Task<List<TaskEntity>> ListCompletedAsync()
     {
         return context.Tasks
-            .OrderBy(note => note.IsCompleted)
-            .ThenByDescending(note => note.CreatedAt)
+            .Where(note => note.IsCompleted)
+            .OrderBy(note => note.CreatedAt)
             .ToListAsync();
     }
 }
