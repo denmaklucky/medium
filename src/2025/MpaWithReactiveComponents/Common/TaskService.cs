@@ -65,7 +65,7 @@ public sealed class TaskService(TaskDbContext context) : ITaskService
     {
         return context.Tasks
             .Where(note => !note.IsCompleted)
-            .OrderBy(note => note.CreatedAt)
+            .OrderByDescending(note => note.CreatedAt)
             .ToListAsync();
     }
 
@@ -73,7 +73,7 @@ public sealed class TaskService(TaskDbContext context) : ITaskService
     {
         return context.Tasks
             .Where(note => note.IsCompleted)
-            .OrderBy(note => note.CreatedAt)
+            .OrderByDescending(note => note.CreatedAt)
             .ToListAsync();
     }
 }

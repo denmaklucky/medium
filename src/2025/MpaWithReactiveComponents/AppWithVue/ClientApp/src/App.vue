@@ -1,30 +1,80 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import {onMounted, ref} from 'vue'
+import {TasksApi, type TaskEntity} from './api'
+
+const incompletedItems = ref<TaskEntity[]>([])
+const completedItems = ref<TaskEntity[]>([])
+const title = ref('')
+
+async function load() {
+  incompletedItems.value = await TasksApi.listIncompleted()
+  completedItems.value = await TasksApi.listCompleted();
+}
+
+async function add() {
+  const t = title.value.trim()
+  if (!t) return
+  await TasksApi.add(t)
+  title.value = ''
+  await load()
+}
+
+async function toggle(item: TaskEntity) {
+  await TasksApi.update({id: item.id, title: item.title, isCompleted: !item.isCompleted})
+  await load()
+}
+
+async function removeItem(id: number) {
+  await TasksApi.remove(id)
+  await load()
+}
+
+onMounted(load)
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="p-4">
+
+    <div style="display:flex; gap:8px; margin-bottom:12px;">
+      <input class="form-control" v-model="title" placeholder="New task title..."/>
+      <button type="button" class="btn btn-primary" @click="add">Add</button>
+    </div>
+
+    <h5 class="m-3">Incompleted task</h5>
+
+    <ul class="container">
+      <li v-for="t in incompletedItems" :key="t.id">
+        <div class="card">
+          <div class="card-body task">
+            <input type="checkbox" class="form-check-input" :checked="t.isCompleted" @change="() => toggle(t)"/>
+            <span>
+              {{ t.title ?? '(no title)' }}
+            </span>
+            <button type="button" class="btn btn-danger" @click="removeItem(t.id)">Delete</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <h5 class="m-3">Completed task</h5>
+
+    <ul class="container">
+      <li v-for="t in completedItems" :key="t.id">
+        <div class="card">
+          <div class="card-body task">
+            <input type="checkbox" class="form-check-input" :checked="t.isCompleted" @change="() => toggle(t)"/>
+            <span :style="{ textDecoration: 'line-through'}">
+              {{ t.title ?? '(no title)' }}
+            </span>
+            <button type="button" class="btn btn-danger" @click="removeItem(t.id)">Delete</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+/* minimal */
 </style>
