@@ -1,0 +1,54 @@
+﻿@page
+
+@using Microsoft.AspNetCore.Antiforgery
+
+@inject IAntiforgery Xsrf
+
+@model AppWithAlpine.Pages.ToDo
+
+@{
+  Layout = "Shared/_Layout";
+  ViewData["Title"] = "ToDo";
+  ViewData["Token"] = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+}
+
+<div class="p-4" x-data="tasks()" x-init="load()">
+
+  <div style="display:flex; gap:8px; margin-bottom:12px;">
+    <input class="form-control" x-model="title" placeholder="New task title..."/>
+    <button type="button" class="btn btn-primary" x-on:click="add">Add</button>
+  </div>
+
+  <h5 class="m-3">Incompleted task</h5>
+
+  <ul class="container">
+    <template x-for="t in incompletedItems" :key="t.id">
+      <li>
+        <div class="card">
+          <div class="card-body task">
+            <input type="checkbox" class="form-check-input" :checked="t.isCompleted" x-on:change="toggle(t)"/>
+            <span x-text="t.title ?? '(no title)'"></span>
+            <button type="button" class="btn btn-danger" x-on:click="remove(t.id)">Delete</button>
+          </div>
+        </div>
+      </li>
+    </template>
+  </ul>
+
+  <h5 class="m-3">Completed task</h5>
+
+  <ul class="container">
+    <template x-for="t in completedItems" :key="t.id">
+      <li>
+        <div class="card">
+          <div class="card-body task">
+            <input type="checkbox" class="form-check-input" :checked="t.isCompleted" x-on:change="toggle(t)"/>
+            <span :style="'text-decoration: line-through'" x-text="t.title ?? '(no title)'"></span>
+            <button type="button" class="btn btn-danger" x-on:click="remove(t.id)">Delete</button>
+          </div>
+        </div>
+      </li>
+    </template>
+  </ul>
+
+</div>
