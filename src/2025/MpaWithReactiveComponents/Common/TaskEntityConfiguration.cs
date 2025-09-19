@@ -23,9 +23,6 @@ public sealed class TaskEntityConfiguration : IEntityTypeConfiguration<TaskEntit
                .HasColumnType("datetime2")
                .HasDefaultValueSql("SYSUTCDATETIME()");
 
-        builder.Property(t => t.UpdatedAt)
-               .HasColumnType("datetime2");
-
         builder.HasIndex(t => t.IsCompleted);
         builder.HasIndex(t => new { t.IsCompleted, t.CreatedAt });
     }

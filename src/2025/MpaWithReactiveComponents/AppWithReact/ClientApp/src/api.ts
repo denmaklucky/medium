@@ -8,7 +8,7 @@
 async function json<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
     headers: { 'Content-Type': 'application/json', ...(options?.headers || {}) },
-    credentials: 'same-origin',  // Razor cookie + XSRF cookie
+    credentials: 'same-origin',
     ...options
   });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);

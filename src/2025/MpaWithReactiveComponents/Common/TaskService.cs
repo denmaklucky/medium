@@ -33,31 +33,30 @@ public sealed class TaskService(TaskDbContext context) : ITaskService
 
     public async Task UpdateAsync(long id, string? title, bool isCompleted)
     {
-        var existingNote = await context.Tasks.FindAsync(id);
+        var existingTask = await context.Tasks.FindAsync(id);
 
-        if (existingNote == null)
+        if (existingTask == null)
         {
             return;
         }
 
-        existingNote.Title = title;
-        existingNote.IsCompleted = isCompleted;
-        existingNote.UpdatedAt = DateTime.UtcNow;
+        existingTask.Title = title;
+        existingTask.IsCompleted = isCompleted;
         
         await context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(long id)
     {
-        var existingNote = await context.Tasks.FindAsync(id);
+        var existingTask = await context.Tasks.FindAsync(id);
         
-        if (existingNote == null)
+        if (existingTask == null)
         {
             return;
         }
         
-        context.Tasks.Remove(existingNote);
-        
+        context.Tasks.Remove(existingTask);
+
         await context.SaveChangesAsync();
     }
 
