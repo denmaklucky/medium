@@ -52,6 +52,9 @@
   <Folder Name="/2025/EndpointResultApp/">
     <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/2025/ExceptionFlow/">
+    <Project Path="2025\ExceptionFlow\ExceptionFlow\ExceptionFlow.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/2025/ExtensionMembers/">
     <Project Path="2025\ExtensionMembers\ExtensionMembers\ExtensionMembers.csproj" Type="Classic C#" />
   </Folder>
