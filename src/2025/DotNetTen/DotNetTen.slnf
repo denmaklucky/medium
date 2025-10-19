@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2025\\DotNetTen\\CSharpEfAndAspNet\\CSharpEfAndAspNet.csproj",
+      "2025\\DotNetTen\\NotFoundPage\\NotFoundPage.csproj"
+    ]
+  }
+}
