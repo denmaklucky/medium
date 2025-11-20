@@ -1,122 +1,131 @@
 ﻿<Solution>
   <Folder Name="/2024/" />
   <Folder Name="/2024/MinimalApiConfigureEndpoints/">
-    <Project Path="2024\MinimalApiConfigureEndpoints\MinimalApiConfigureEndpoints\MinimalApiConfigureEndpoints.csproj" Type="Classic C#" />
+    <Project Path="2024\MinimalApiConfigureEndpoints\MinimalApiConfigureEndpoints\MinimalApiConfigureEndpoints.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2024/UnitOfWork/">
-    <Project Path="2024\UnitOfWork\UnitOfWorkAndRepository\UnitOfWorkAndRepository.csproj" Type="Classic C#" />
+    <Project Path="2024\UnitOfWork\UnitOfWorkAndRepository\UnitOfWorkAndRepository.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/" />
   <Folder Name="/2025/Analyzer/">
-    <Project Path="2025\Analyzer\ConsoleApp\ConsoleApp.csproj" Type="Classic C#" />
-    <Project Path="2025\Analyzer\SealedClassAnalyzer\SealedClassAnalyzer.csproj" Type="Classic C#" />
+    <Project Path="2025\Analyzer\ConsoleApp\ConsoleApp.csproj" Type="C#" />
+    <Project Path="2025\Analyzer\SealedClassAnalyzer\SealedClassAnalyzer.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/AotUtilities/">
-    <Project Path="2025\AotUtilities\AotJsonUtility\AotJsonUtility.csproj" Type="Classic C#" />
-    <Project Path="2025\AotUtilities\JsonUtility\JsonUtility.csproj" Type="Classic C#" />
+    <Project Path="2025\AotUtilities\AotJsonUtility\AotJsonUtility.csproj" Type="C#" />
+    <Project Path="2025\AotUtilities\JsonUtility\JsonUtility.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/AppAI/">
-    <Project Path="2025\AppAI\AppAI\AppAI.csproj" Type="Classic C#" />
+    <Project Path="2025\AppAI\AppAI\AppAI.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/AppWithResources/">
-    <Project Path="2025\AppWithResources\AppWithResources\AppWithResources.csproj" Type="Classic C#" />
+    <Project Path="2025\AppWithResources\AppWithResources\AppWithResources.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/BestAPI/">
-    <Project Path="2025\BestAPI\DataAccess\DataAccess.csproj" Type="Classic C#" />
-    <Project Path="2025\BestAPI\FEndpoints\FEndpoints.csproj" Type="Classic C#" />
-    <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="Classic C#" />
-    <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="Classic C#" />
+    <Project Path="2025\BestAPI\DataAccess\DataAccess.csproj" Type="C#" />
+    <Project Path="2025\BestAPI\FEndpoints\FEndpoints.csproj" Type="C#" />
+    <Project Path="2025\BestAPI\MinimalAPI\MinimalAPI.csproj" Type="C#" />
+    <Project Path="2025\BestAPI\MVC\MVC.csproj" Type="C#" />
+  </Folder>
+  <Folder Name="/2025/BestStructure/" />
+  <Folder Name="/2025/BestStructure/NLayerStructure/">
+    <Project Path="2025/BestStructure/NLayerStructure/Domain/Domain.csproj" />
+    <Project Path="2025/BestStructure/NLayerStructure/Model/Model.csproj" />
+    <Project Path="2025/BestStructure/NLayerStructure/WebApi/WebApi.csproj" />
+  </Folder>
+  <Folder Name="/2025/BestStructure/VSAStructure/">
+    <Project Path="2025/BestStructure/VSAStructure/WebApi/WebApi.csproj" />
   </Folder>
   <Folder Name="/2025/CachedApp/">
-    <Project Path="2025\CachedApp\CachedApp\CachedApp.csproj" Type="Classic C#" />
+    <Project Path="2025\CachedApp\CachedApp\CachedApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/CompressionApp/">
-    <Project Path="2025\CompressionApp\CompressionApp\CompressionApp.csproj" Type="Classic C#" />
+    <Project Path="2025\CompressionApp\CompressionApp\CompressionApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/CustomMiddleware/">
-    <Project Path="2025\CustomMiddleware\CustomMiddleware\CustomMiddleware.csproj" Type="Classic C#" />
+    <Project Path="2025\CustomMiddleware\CustomMiddleware\CustomMiddleware.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/DirectoryBuildApp/">
-    <Project Path="2025\DirectoryBuildApp\Domain\Domain.csproj" Type="Classic C#" />
-    <Project Path="2025\DirectoryBuildApp\Host\Host.csproj" Type="Classic C#" />
-    <Project Path="2025\DirectoryBuildApp\Model\Model.csproj" Type="Classic C#" />
+    <Project Path="2025\DirectoryBuildApp\Domain\Domain.csproj" Type="C#" />
+    <Project Path="2025\DirectoryBuildApp\Host\Host.csproj" Type="C#" />
+    <Project Path="2025\DirectoryBuildApp\Model\Model.csproj" Type="C#" />
     <File Path="2025\DirectoryBuildApp\Directory.Build.props" />
   </Folder>
   <Folder Name="/2025/DisciminatedUnion/">
-    <Project Path="2025\DisciminatedUnion\DisciminatedUnion\DisciminatedUnion.csproj" Type="Classic C#" />
+    <Project Path="2025\DisciminatedUnion\DisciminatedUnion\DisciminatedUnion.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/DotNetTen/">
-    <Project Path="2025\DotNetTen\CSharpEfAndAspNet\CSharpEfAndAspNet.csproj" Type="Classic C#" />
-    <Project Path="2025\DotNetTen\NotFoundPage\NotFoundPage.csproj" Type="Classic C#" />
+    <Project Path="2025\DotNetTen\CSharpEfAndAspNet\CSharpEfAndAspNet.csproj" Type="C#" />
+    <Project Path="2025\DotNetTen\NotFoundPage\NotFoundPage.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/EndpointAttributeApp/">
-    <Project Path="2025\EndpointAttributeApp\EndpointAttributeApp\EndpointAttributeApp.csproj" Type="Classic C#" />
-    <Project Path="2025\EndpointAttributeApp\EndpointGenerator\EndpointGenerator.csproj" Type="Classic C#" />
+    <Project Path="2025\EndpointAttributeApp\EndpointAttributeApp\EndpointAttributeApp.csproj" Type="C#" />
+    <Project Path="2025\EndpointAttributeApp\EndpointGenerator\EndpointGenerator.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/EndpointResultApp/">
-    <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="Classic C#" />
+    <Project Path="2025\EndpointResultApp\EndpointResultApp\EndpointResultApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/ExceptionFlow/">
-    <Project Path="2025\ExceptionFlow\ExceptionFlow\ExceptionFlow.csproj" Type="Classic C#" />
+    <Project Path="2025\ExceptionFlow\ExceptionFlow\ExceptionFlow.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/ExtensionMembers/">
-    <Project Path="2025\ExtensionMembers\ExtensionMembers\ExtensionMembers.csproj" Type="Classic C#" />
+    <Project Path="2025\ExtensionMembers\ExtensionMembers\ExtensionMembers.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/FakeDataApp/">
-    <Project Path="2025\FakeDataApp\FakeDataApp\FakeDataApp.csproj" Type="Classic C#" />
+    <Project Path="2025\FakeDataApp\FakeDataApp\FakeDataApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/FunctionalStuff/">
-    <Project Path="2025\FunctionalStuff\FunctionalStuff\FunctionalStuff.csproj" Type="Classic C#" />
+    <Project Path="2025\FunctionalStuff\FunctionalStuff\FunctionalStuff.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/GraphQlApp/">
-    <Project Path="2025\GraphQlApp\GraphQlApp\GraphQlApp.csproj" Type="Classic C#" />
+    <Project Path="2025\GraphQlApp\GraphQlApp\GraphQlApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/IdempotentApp/">
-    <Project Path="2025\IdempotentApp\IdempotentApp\IdempotentApp.csproj" Type="Classic C#" />
+    <Project Path="2025\IdempotentApp\IdempotentApp\IdempotentApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/JobApp/">
-    <Project Path="2025\JobApp\JobApp\JobApp.csproj" Type="Classic C#" />
+    <Project Path="2025\JobApp\JobApp\JobApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/LevelUpLogs/">
-    <Project Path="2025\LevelUpLogs\LevelUpLogs\LevelUpLogs.csproj" Type="Classic C#" />
+    <Project Path="2025\LevelUpLogs\LevelUpLogs\LevelUpLogs.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/LightweightService/">
-    <Project Path="2025\LightweightService\LightweightService\LightweightService.csproj" Type="Classic C#" />
+    <Project Path="2025\LightweightService\LightweightService\LightweightService.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/MasteringHttpClient/">
-    <Project Path="2025\MasteringHttpClient\MasteringHttpClient\MasteringHttpClient.csproj" Type="Classic C#" />
+    <Project Path="2025\MasteringHttpClient\MasteringHttpClient\MasteringHttpClient.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/MinimalApiUltimateConfiguration/">
-    <Project Path="2025\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration.csproj" Type="Classic C#" />
+    <Project Path="2025\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration\MinimalApiUltimateConfiguration.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/MpaWithReactiveComponents/">
-    <Project Path="2025\MpaWithReactiveComponents\AppWithAlpine\AppWithAlpine.csproj" Type="Classic C#" />
-    <Project Path="2025\MpaWithReactiveComponents\AppWithReact\AppWithReact.csproj" Type="Classic C#" />
-    <Project Path="2025\MpaWithReactiveComponents\AppWithVue\AppWithVue.csproj" Type="Classic C#" />
-    <Project Path="2025\MpaWithReactiveComponents\Common\Common.csproj" Type="Classic C#" />
+    <Project Path="2025\MpaWithReactiveComponents\AppWithAlpine\AppWithAlpine.csproj" Type="C#" />
+    <Project Path="2025\MpaWithReactiveComponents\AppWithReact\AppWithReact.csproj" Type="C#" />
+    <Project Path="2025\MpaWithReactiveComponents\AppWithVue\AppWithVue.csproj" Type="C#" />
+    <Project Path="2025\MpaWithReactiveComponents\Common\Common.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/NoteApp/">
-    <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="Classic C#" />
-    <Project Path="2025\NoteApp\Note.AppHost\Note.AppHost.csproj" Type="Classic C#" />
-    <Project Path="2025\NoteApp\Note.ServiceDefaults\Note.ServiceDefaults.csproj" Type="Classic C#" />
-    <Project Path="2025\NoteApp\Note.Web\Note.Web.csproj" Type="Classic C#" />
+    <Project Path="2025\NoteApp\Note.ApiService\Note.ApiService.csproj" Type="C#" />
+    <Project Path="2025\NoteApp\Note.AppHost\Note.AppHost.csproj" Type="C#" />
+    <Project Path="2025\NoteApp\Note.ServiceDefaults\Note.ServiceDefaults.csproj" Type="C#" />
+    <Project Path="2025\NoteApp\Note.Web\Note.Web.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/OrmApp/">
-    <Project Path="2025\OrmApp\OrmApp\OrmApp.csproj" Type="Classic C#" />
+    <Project Path="2025\OrmApp\OrmApp\OrmApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/ProblemDetailsApp/">
-    <Project Path="2025\ProblemDetailsApp\ProblemDetailsApp\ProblemDetailsApp.csproj" Type="Classic C#" />
+    <Project Path="2025\ProblemDetailsApp\ProblemDetailsApp\ProblemDetailsApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/SpecificationDrivenApp/">
-    <Project Path="2025\SpecificationDrivenApp\SpecificationDrivenApp\SpecificationDrivenApp.csproj" Type="Classic C#" />
+    <Project Path="2025\SpecificationDrivenApp\SpecificationDrivenApp\SpecificationDrivenApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/SseApp/">
-    <Project Path="2025\SseApp\SseApp\SseApp.csproj" Type="Classic C#" />
+    <Project Path="2025\SseApp\SseApp\SseApp.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/StandaloneNoteWebApi/">
-    <Project Path="2025\StandaloneNoteWebApi\StandaloneNoteWebApi\StandaloneNoteWebApi.csproj" Type="Classic C#" />
+    <Project Path="2025\StandaloneNoteWebApi\StandaloneNoteWebApi\StandaloneNoteWebApi.csproj" Type="C#" />
   </Folder>
   <Folder Name="/2025/ValidationMinimalApi/">
-    <Project Path="2025\ValidationMinimalApi\ValidationMinimalApi\ValidationMinimalApi.csproj" Type="Classic C#" />
+    <Project Path="2025\ValidationMinimalApi\ValidationMinimalApi\ValidationMinimalApi.csproj" Type="C#" />
   </Folder>
 </Solution>
