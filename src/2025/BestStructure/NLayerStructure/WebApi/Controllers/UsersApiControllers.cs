@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Controllers;
 
-public class UserApiControllers
+public class UsersApiControllers
 {
     
 }
