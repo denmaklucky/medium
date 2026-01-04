@@ -1,6 +1,22 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using WebHostApp;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration;
+var key = configuration["MediumKey"];
+
+var mediumOptions = new MediumOptions();
+configuration.GetSection(MediumOptions.SectionName).Bind(mediumOptions);
+
+var mediumOptions1 = configuration.GetSection(MediumOptions.SectionName).Get<MediumOptions>();
+
+builder.Services.Configure<MediumOptions>(
+    builder.Configuration.GetSection(MediumOptions.SectionName));
+
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", ([FromServices] IOptions<MediumOptions> options) => options.Value.Key);
 
 app.Run();
