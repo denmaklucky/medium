@@ -2,8 +2,7 @@
   "solution": {
     "path": "..\\..\\Medium.slnx",
     "projects": [
-      "2026\\ConfigureApps\\GenericHostApp\\GenericHostApp.csproj",
-      "2026\\ConfigureApps\\WebHostApp\\WebHostApp.csproj"
+      "2026\\EfApp\\EfApp\\EfApp.csproj"
     ]
   }
 }
