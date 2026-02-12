@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2026\\StripeIntegrationApi\\StripeIntegrationApi\\StripeIntegrationApi.csproj"
+    ]
+  }
+}

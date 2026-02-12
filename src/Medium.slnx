@@ -136,4 +136,7 @@
   <Folder Name="/2026/EfApp/">
     <Project Path="2026/EfApp/EfApp/EfApp.csproj" />
   </Folder>
+  <Folder Name="/2026/StripeIntegrationApi/">
+    <Project Path="2026/StripeIntegrationApi/StripeIntegrationApi/StripeIntegrationApi.csproj" />
+  </Folder>
 </Solution>
