@@ -1,0 +1,52 @@
+﻿@page
+
+@model RazorApp.Pages.ToDoList
+
+@{
+    ViewData["Title"] = "ToDo List";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>My ToDo List</h2>
+        <a asp-page="/ToDoItem" asp-route-id="0" class="btn btn-primary">
+            + Add New ToDo
+        </a>
+    </div>
+
+    @if (Model.ToDos != null && Model.ToDos.Any())
+    {
+        <div class="list-group shadow-sm">
+            @foreach (var todo in Model.ToDos)
+            {
+                <a asp-page="/ToDoItem" asp-route-id="@todo.Id" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        @if (todo.IsDone)
+                        {
+                            <del class="text-muted">@todo.Title</del>
+                        }
+                        else
+                        {
+                            <span class="fw-bold">@todo.Title</span>
+                        }
+                    </div>
+                    @if (todo.IsDone)
+                    {
+                        <span class="badge bg-success rounded-pill">Done</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark rounded-pill">Pending</span>
+                    }
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center mt-4" role="alert">
+            You don't have any ToDos yet. Click <strong>Add New ToDo</strong> to get started!
+        </div>
+    }
+</div>
+

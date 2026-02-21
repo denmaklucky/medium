@@ -1,0 +1,49 @@
+﻿@page "/ToDoList/{id:long}"
+
+@model RazorApp.Pages.ToDoItem
+
+@{
+    ViewData["Title"] = "Edit ToDoItem";
+}
+
+<div class="container">
+        <div class="card shadow-sm mx-auto" style="max-width: 500px;">
+            <div class="card-body">
+                <form method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="IsDone" />
+
+                    <div class="mb-4">
+                        <label asp-for="Title" class="form-label fw-bold">Title</label>
+                        <input asp-for="@Model.Title" class="form-control" placeholder="What needs to be done?" />
+                        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-2">
+                        <button type="submit" name="action" value="back" class="btn btn-outline-secondary form-action-btn">
+                            &larr; Back
+                        </button>
+                        
+                        <div class="d-flex gap-2" role="group">
+                            <button type="submit" name="action" value="done" class="btn btn-success form-action-btn">
+                                @if (Model.IsDone)
+                                {
+                                    <text>Undone</text>
+                                }
+                                else
+                                {
+                                    <text>Done</text>
+                                }
+                            </button>
+                            <button type="submit" name="action" value="save" class="btn btn-primary form-action-btn">
+                                Save
+                            </button>
+                            <button type="submit" name="action" value="remove" class="btn btn-danger form-action-btn" onclick="return confirm('Are you sure you want to remove this item?');">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
