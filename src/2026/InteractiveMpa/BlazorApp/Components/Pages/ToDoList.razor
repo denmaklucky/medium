@@ -1,0 +1,125 @@
+﻿@page "/ToDoList"
+@rendermode InteractiveServer
+
+@using Shared
+@inject IToDoService ToDoService
+
+<div class="container mt-4" style="max-width: 600px;">
+    <h2 class="mb-4 text-center">My Tasks</h2>
+    
+    <div class="input-group mb-4 shadow-sm">
+        <input type="text" 
+               class="form-control" 
+               placeholder="What needs to be done?" 
+               @bind="newTaskTitle"
+               @bind:event="oninput" 
+               @onkeyup="HandleKeyUp" />
+        <button class="btn btn-primary" type="button" @onclick="AddTask" disabled="@string.IsNullOrWhiteSpace(newTaskTitle)">
+            Add Task
+        </button>
+    </div>
+
+    @if (ToDos == null)
+    {
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if (!ToDos.Any())
+    {
+        <div class="alert alert-info text-center shadow-sm" role="alert">
+            You don't have any tasks yet. Add one above to get started!
+        </div>
+    }
+    else
+    {
+        <div class="list-group shadow-sm">
+            @foreach (var todo in ToDos)
+            {
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center flex-grow-1 me-3">
+                        <input class="form-check-input me-3 fs-5" 
+                               type="checkbox" 
+                               checked="@todo.IsDone" 
+                               @onchange="@(e => ToggleDone(todo, e))" />
+
+                        <input type="text" 
+                               class="form-control border-0 bg-transparent @(todo.IsDone ? "text-decoration-line-through text-muted" : "fw-bold")" 
+                               value="@todo.Title"
+                               @onchange="@(e => UpdateTitle(todo, e))" />
+                    </div>
+
+                    <button class="btn btn-sm btn-outline-danger" @onclick="@(() => RemoveTask(todo.Id))" title="Remove Task">
+                        <i class="bi bi-trash"></i> Remove
+                    </button>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<ToDo>? ToDos;
+    private string newTaskTitle = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTasks();
+    }
+
+    private async Task LoadTasks()
+    {
+        ToDos = await ToDoService.GetToDosAsync();
+    }
+
+    private async Task AddTask()
+    {
+        if (!string.IsNullOrWhiteSpace(newTaskTitle))
+        {
+            await ToDoService.CreateAsync(newTaskTitle);
+            newTaskTitle = string.Empty;
+            await LoadTasks();
+        }
+    }
+
+    private async Task HandleKeyUp(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await AddTask();
+        }
+    }
+
+    private async Task ToggleDone(ToDo todo, ChangeEventArgs e)
+    {
+        if (e.Value is bool isDone)
+        {
+            todo.IsDone = isDone;
+            await ToDoService.UpdateAsync(todo);
+            await LoadTasks();
+        }
+    }
+
+    private async Task UpdateTitle(ToDo todo, ChangeEventArgs e)
+    {
+        var newTitle = e.Value?.ToString();
+
+        if (!string.IsNullOrWhiteSpace(newTitle) && newTitle != todo.Title)
+        {
+            todo.Title = newTitle;
+            await ToDoService.UpdateAsync(todo);
+        }
+        else if (string.IsNullOrWhiteSpace(newTitle))
+        {
+            await LoadTasks(); 
+        }
+    }
+
+    private async Task RemoveTask(long id)
+    {
+        await ToDoService.RemoveAsync(id);
+        await LoadTasks();
+    }
+}
