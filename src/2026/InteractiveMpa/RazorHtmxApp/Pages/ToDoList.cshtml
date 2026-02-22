@@ -1,0 +1,55 @@
+﻿@page
+@model RazorHtmxApp.Pages.ToDoList
+
+@{
+    ViewData["Title"] = "ToDo List";
+}
+
+<div class="container mt-4">
+    <h2>My ToDo List</h2>
+
+    <form hx-post hx-page="ToDoList" hx-page-handler="Add">
+        <input type="text" asp-for="NewToDoTitle" class="form-control" placeholder="What needs to be done?" required />
+        <button type="submit"  class="btn btn-primary text-nowrap">Add</button>
+    </form>
+
+    <!-- ToDo List Container -->
+    <div id="todo-list-container">
+        @if (Model.ToDos != null && Model.ToDos.Any())
+        {
+            <div class="list-group shadow-sm">
+                @foreach (var todo in Model.ToDos)
+                {
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-3">
+                            <!-- Toggle Checkbox Form -->
+                            <form hx-page="ToDoList" hx-page-handler="Toggle" hx-route-id="@todo.Id" hx-target="#todo-list-container" hx-select="#todo-list-container" hx-swap="OuterHTML" class="m-0 p-0">
+                                <input type="checkbox" class="form-check-input mt-0 fs-5" onchange="this.form.dispatchEvent(new Event('submit'))" checked="@todo.IsDone" style="cursor: pointer;" />
+                            </form>
+                            
+                            @if (todo.IsDone)
+                            {
+                                <del class="text-muted fs-5">@todo.Title</del>
+                            }
+                            else
+                            {
+                                <span class="fw-bold fs-5">@todo.Title</span>
+                            }
+                        </div>
+
+                        <!-- Delete Form -->
+                        <form hx-page="ToDoList" hx-page-handler="Delete" hx-route-id="@todo.Id" hx-target="#todo-list-container" hx-select="#todo-list-container" hx-swap="OuterHTML" class="m-0 p-0">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center mt-4" role="alert">
+                You don't have any ToDos yet. Type a task above to get started!
+            </div>
+        }
+    </div>
+</div>

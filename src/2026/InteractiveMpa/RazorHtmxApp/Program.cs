@@ -1,7 +1,14 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Shared;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options => options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
+
+builder.Services.AddDbContext<ToDoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OwlDb")));
+builder.Services.AddScoped<IToDoService, ToDoService>();
 
 var app = builder.Build();
 
@@ -18,7 +25,6 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
-
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
