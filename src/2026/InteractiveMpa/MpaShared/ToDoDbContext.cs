@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Shared;
+namespace MpaShared;
 
 public sealed class ToDoDbContext(DbContextOptions options) : DbContext(options)
 {

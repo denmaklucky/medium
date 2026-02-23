@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Shared;
+using MpaShared;
 
 namespace RazorHtmxApp.Pages;
 
@@ -15,17 +15,17 @@ public class ToDoList(IToDoService toDoService) : PageModel
     {
         ToDos = await toDoService.GetToDosAsync();
     }
-
-     public async Task<IActionResult> OnPostAddAsync()
+    
+    public async Task<IActionResult> OnPostAddAsync()
     {
         if (!string.IsNullOrWhiteSpace(NewToDoTitle))
         {
-            _ = await toDoService.CreateAsync(NewToDoTitle); 
+            _ = await toDoService.CreateAsync(NewToDoTitle);
         }
 
         ToDos = await toDoService.GetToDosAsync();
 
-        return Page();
+        return Partial("_List", ToDos);
     }
 
     public async Task<IActionResult> OnPostToggleAsync(int id)
@@ -40,15 +40,15 @@ public class ToDoList(IToDoService toDoService) : PageModel
 
         ToDos = await toDoService.GetToDosAsync();
 
-        return Page();
+        return Partial("_List", ToDos);
     }
 
-    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    public async Task<IActionResult> OnDeleteAsync(int id)
     {
         await toDoService.RemoveAsync(id);
 
         ToDos = await toDoService.GetToDosAsync();
 
-        return Page();
+        return Partial("_List", ToDos);
     }
 }

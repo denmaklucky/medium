@@ -139,9 +139,9 @@
   <Folder Name="/2026/InteractiveMpa/">
     <Project Path="2026/InteractiveMpa/BlazorApp/BlazorApp.csproj" />
     <Project Path="2026/InteractiveMpa/HydroApp/HydroApp.csproj" />
+    <Project Path="2026/InteractiveMpa/MpaShared/MpaShared.csproj" />
     <Project Path="2026/InteractiveMpa/RazorApp/RazorApp.csproj" />
     <Project Path="2026/InteractiveMpa/RazorHtmxApp/RazorHtmxApp.csproj" />
-    <Project Path="2026/InteractiveMpa/Shared/Shared.csproj" />
   </Folder>
   <Folder Name="/2026/StripeIntegrationApi/">
     <Project Path="2026/StripeIntegrationApi/StripeIntegrationApi/StripeIntegrationApi.csproj" />

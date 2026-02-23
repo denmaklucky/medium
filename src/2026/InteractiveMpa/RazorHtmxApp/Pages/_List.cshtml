@@ -1,0 +1,71 @@
+﻿@model List<MpaShared.ToDo>
+
+@{
+    Layout = null;
+}
+
+<div id="main" class="container mt-4">
+    <h2>My ToDo List</h2>
+
+    <form hx-post
+          hx-page="ToDoList"
+          hx-page-handler="Add"
+          hx-target="#main"
+          hx-swap="outerHTML"
+          class="d-flex gap-3">
+        <input type="text" name="NewToDoTitle" id="NewToDoTitle" class="form-control" placeholder="What needs to be done?" required />
+        <button type="submit" class="btn btn-primary text-nowrap">Add</button>
+    </form>
+
+    <div id="todo-list-container" class="mt-4">
+        @if (Model.Any())
+        {
+            <div class="list-group shadow-sm">
+                @foreach (var todo in Model)
+                {
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-3">
+
+                            <input type="checkbox"
+                                   class="form-check-input mt-0 fs-5 fs-5"
+                                   hx-post
+                                   hx-page="ToDoList"
+                                   hx-page-handler="Toggle"
+                                   hx-route-id="@todo.Id"
+                                   hx-target="#main"
+                                   hx-swap="outerHTML"
+                                   checked="@todo.IsDone"
+                                   style="cursor: pointer;" />
+
+                            @if (todo.IsDone)
+                            {
+                                <del class="text-muted fs-5">@todo.Title</del>
+                            }
+                            else
+                            {
+                                <span class="fw-bold fs-5">@todo.Title</span>
+                            }
+                        </div>
+
+                        <button hx-delete
+                                hx-page="ToDoList"
+                                hx-page-handler=""
+                                hx-route-id="@todo.Id"
+                                hx-target="#main"
+                                hx-swap="outerHTML"
+                                class="btn btn-sm btn-outline-danger">
+                            Remove
+                        </button>
+
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info text-center mt-4" role="alert">
+                You don't have any ToDos yet. Type a task above to get started!
+            </div>
+        }
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿namespace Shared;
+﻿namespace MpaShared;
 
 public sealed class ToDo
 {

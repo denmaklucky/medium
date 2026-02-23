@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Shared;
+namespace MpaShared;
 
 public sealed class InMemoryToDoService: IToDoService
 {
@@ -15,7 +15,7 @@ public sealed class InMemoryToDoService: IToDoService
     
     public Task<ToDo?> GetByIdAsync(long id)
     {
-        return !_todos.TryGetValue(id, out var todo) ? Task.FromResult((ToDo?)null) : Task.FromResult(todo);
+        return !_todos.TryGetValue(id, out var todo) ? Task.FromResult<ToDo?>(null)! : Task.FromResult(todo);
         
     }
 

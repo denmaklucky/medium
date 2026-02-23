@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Shared;
+using MpaShared;
 
 var builder = WebApplication.CreateBuilder(args);
 

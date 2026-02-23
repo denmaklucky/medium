@@ -1,4 +1,4 @@
-﻿namespace Shared;
+﻿namespace MpaShared;
 
 public interface IToDoService
 {

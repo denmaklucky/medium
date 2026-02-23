@@ -1,12 +1,12 @@
-{
+﻿{
   "solution": {
     "path": "..\\..\\Medium.slnx",
     "projects": [
       "2026\\InteractiveMpa\\BlazorApp\\BlazorApp.csproj",
       "2026\\InteractiveMpa\\HydroApp\\HydroApp.csproj",
+      "2026\\InteractiveMpa\\MpaShared\\MpaShared.csproj",
       "2026\\InteractiveMpa\\RazorApp\\RazorApp.csproj",
-      "2026\\InteractiveMpa\\RazorHtmxApp\\RazorHtmxApp.csproj",
-      "2026\\InteractiveMpa\\Shared\\Shared.csproj"
+      "2026\\InteractiveMpa\\RazorHtmxApp\\RazorHtmxApp.csproj"
     ]
   }
 }
