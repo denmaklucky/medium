@@ -143,6 +143,9 @@
     <Project Path="2026/InteractiveMpa/RazorApp/RazorApp.csproj" />
     <Project Path="2026/InteractiveMpa/RazorHtmxApp/RazorHtmxApp.csproj" />
   </Folder>
+  <Folder Name="/2026/Mcp/">
+    <Project Path="2026/Mcp/McpApp/McpApp.csproj" />
+  </Folder>
   <Folder Name="/2026/StripeIntegrationApi/">
     <Project Path="2026/StripeIntegrationApi/StripeIntegrationApi/StripeIntegrationApi.csproj" />
   </Folder>
