@@ -1,0 +1,16 @@
+root = true
+
+[*]
+
+indent_style = space
+tab_width = 4
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+
+[*.cs]
+indent_size = 4
+
+csharp_prefer_braces = true : error
+dotnet_diagnostic.IDE0011.severity = error
