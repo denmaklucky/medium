@@ -149,4 +149,7 @@
   <Folder Name="/2026/StripeIntegrationApi/">
     <Project Path="2026/StripeIntegrationApi/StripeIntegrationApi/StripeIntegrationApi.csproj" />
   </Folder>
+  <Folder Name="/SolutionItems/">
+    <File Path="../.editorconfig" />
+  </Folder>
 </Solution>
