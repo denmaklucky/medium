@@ -1,7 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
+using McpApp;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var app = builder.Build();
+var builder = Host.CreateApplicationBuilder(args);
 
-app.MapGet("/", () => "Hello World!");
+builder.Services
+    .AddSingleton(_ => new NoteRepository(builder.Configuration.GetConnectionString("Notes")!))
+    .AddMcpServer()
+    .WithStdioServerTransport()
+    .WithToolsFromAssembly();
 
-app.Run();
+await builder.Build().RunAsync();

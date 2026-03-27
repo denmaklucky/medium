@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "NoteSavers": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "[THE_FULL_PATH_TO_PROJECT]"
+      ]
+    }
+  }
+}
