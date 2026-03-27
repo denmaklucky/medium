@@ -7,3 +7,6 @@ AppPackages
 bin
 obj
 *.user
+.claude
+.copilot
+
