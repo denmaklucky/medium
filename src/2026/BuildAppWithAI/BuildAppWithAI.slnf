@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2026\\BuildAppWithAI\\GraduallyAIApp\\GraduallyAIApp.csproj",
+      "2026\\BuildAppWithAI\\HumanMadeApp\\HumanMadeApp.csproj",
+      "2026\\BuildAppWithAI\\OnePromptAIApp\\OnePromptAIApp.csproj"
+    ]
+  }
+}

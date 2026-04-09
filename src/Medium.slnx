@@ -129,6 +129,11 @@
     <Project Path="2025\ValidationMinimalApi\ValidationMinimalApi\ValidationMinimalApi.csproj" />
   </Folder>
   <Folder Name="/2026/" />
+  <Folder Name="/2026/BuildAppWithAI/">
+    <Project Path="2026/BuildAppWithAI/GraduallyAIApp/GraduallyAIApp.csproj" />
+    <Project Path="2026/BuildAppWithAI/HumanMadeApp/HumanMadeApp.csproj" />
+    <Project Path="2026/BuildAppWithAI/OnePromptAIApp/OnePromptAIApp.csproj" />
+  </Folder>
   <Folder Name="/2026/ConfigureApps/">
     <Project Path="2026/ConfigureApps/GenericHostApp/GenericHostApp.csproj" />
     <Project Path="2026/ConfigureApps/WebHostApp/WebHostApp.csproj" />
