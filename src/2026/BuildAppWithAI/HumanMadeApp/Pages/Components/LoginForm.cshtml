@@ -1,0 +1,35 @@
+﻿@model HumanMadeApp.Pages.Components.LoginForm
+
+<div class="card login-form">
+    <div class="card-body p-4">
+        <h2 class="mb-1 fs-4 login-form--title">Create an account</h2>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger login-form--error" role="alert">
+                <strong>Error:</strong> <span id="error-message">@Model.ErrorMessage</span>
+            </div>
+        }
+
+        <div class="mb-3">
+            <label class="form-label login-form--label">Username</label>
+            <input bind asp-for="Username" type="text" class="form-control form-control-sm" placeholder="Denis Makarenko">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label login-form--label">Password</label>
+            <input bind asp-for="Password" value="@Model.Password" type="@(Model.ShowPassword ? "text" : "password")" class="form-control form-control-sm" placeholder="Password">
+        </div>
+
+        <div class="form-check mb-4">
+            <input bind asp-for="ShowPassword" class="form-check-input" type="checkbox"/>
+            <label class="form-check-label login-form--label">Show password</label>
+        </div>
+
+        <p class="text-muted mb-4 login-form--text">
+            Don't have one? <a class="text-decoration-none" href="#" on:click="@(() => Model.NavigateToSignUp())">Sign Up</a>
+        </p>
+
+        <button class="btn btn-primary w-100 btn-sm login-form--register-button" on:click="@(() => Model.LoginAsync())">Sign In</button>
+    </div>
+</div>

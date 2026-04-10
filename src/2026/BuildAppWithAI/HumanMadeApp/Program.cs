@@ -5,9 +5,10 @@ using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddHydro();
+
+builder.Services
+    .AddHydro()
+    .AddRazorPages();
 
 builder.Services.AddScoped(_ => new SqliteConnection(builder.Configuration.GetConnectionString("OwlDb")!));
 builder.Services.AddScoped<UserRepository>();

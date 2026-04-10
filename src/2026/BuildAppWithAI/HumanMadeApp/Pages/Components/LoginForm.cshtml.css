@@ -1,29 +1,29 @@
-﻿.register-form {
+﻿.login-form {
     width: 100%;
     max-width: 400px;
     border: 0.5px solid rgba(0, 0, 0, 0.15);
     border-radius: 12px;
 }
 
-.register-form--title {
+.login-form--title {
     font-weight: 500;
 }
 
-.register-form--error {
+.login-form--error {
     font-size: 13px;
     padding: 10px 14px;
     border-radius: 8px;
 }
 
-.register-form--label {
+.login-form--label {
     font-size: 13px;
     color: #6c757d;
 }
 
-.register-form--text {
+.login-form--text {
     font-size: 14px;
 }
 
-.register-form--register-button {
+.login-form--register-button {
     padding: 8px;
 }

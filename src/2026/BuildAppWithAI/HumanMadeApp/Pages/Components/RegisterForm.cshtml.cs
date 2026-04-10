@@ -12,17 +12,17 @@ public class RegisterForm(UserRepository repository, PasswordHasher<string> pass
     public bool ShowPassword { get; set; }
 
     [Required]
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     [Required]
-    public string Password { get; set; }
+    public string Password { get; set; } = null!;
 
     [Required]
-    public string ConfirmPassword { get; set; }
+    public string ConfirmPassword { get; set; } = null!;
 
     public async Task RegisterUserAsync()
     {
-        if (!ModelState.IsValid)
+        if (!Validate())
         {
             ErrorMessage = "Please input a valid username and password";
 

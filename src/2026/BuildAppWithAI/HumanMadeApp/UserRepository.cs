@@ -44,5 +44,5 @@ public sealed class UserRepository(SqliteConnection connection)
         return new GetUserResult.Success(user.Id, user.Hash);
     }
 
-    private sealed record UserEntity(Guid Id, string Hash);
+    private sealed record UserEntity(string Id, string Hash);
 }
