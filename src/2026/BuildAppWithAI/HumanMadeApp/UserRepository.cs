@@ -3,13 +3,13 @@ using Microsoft.Data.Sqlite;
 
 namespace HumanMadeApp;
 
-internal sealed class UserRepository(SqliteConnection connection)
+public sealed class UserRepository(SqliteConnection connection)
 {
     public async Task<RegisterUserResult> RegisterAsync(string username, string hashedPassword)
     {
-        const string getUserSql = "SELECT COUNT(1) FROM Users WHERE Username = @username;";
+        const string getUsersCountSql = "SELECT COUNT(1) FROM Users WHERE Username = @username;";
 
-        var count = await connection.ExecuteScalarAsync<int>(getUserSql, new { username });
+        var count = await connection.ExecuteScalarAsync<int>(getUsersCountSql, new { username });
 
         if (count > 0)
         {
@@ -17,20 +17,32 @@ internal sealed class UserRepository(SqliteConnection connection)
         }
 
         const string registerUserSql = """
-        INSERT INTO Users (Username, Hash)
-        VALUES (@Name, @Hash)
+        INSERT INTO Users (Id, Username, Hash)
+        VALUES (@Id, @Username, @Hash)
         ON CONFLICT(Username) DO UPDATE SET
-            Username = excluded.Username,
             Hash = @Hash;
         """;
 
-        await connection.ExecuteAsync(registerUserSql, new { Username = username, Hash = hashedPassword });
+        var userId = Guid.CreateVersion7();
 
-        return new  RegisterUserResult.UserAlreadyRegistered();
+        await connection.ExecuteAsync(registerUserSql, new { Id = userId, Username = username, Hash = hashedPassword });
+
+        return new  RegisterUserResult.Success(userId);
     }
 
-    public Task<GetUserResult> GetAsync(string username)
+    public async Task<GetUserResult> GetAsync(string username)
     {
-        throw new NotImplementedException();
+        const string getUserSql = "SELECT Id, Hash FROM Users WHERE Username = @username;";
+
+        var user = await connection.QueryFirstOrDefaultAsync<UserEntity>(getUserSql, new { username });
+
+        if (user is null)
+        {
+            return new GetUserResult.NotFound();
+        }
+
+        return new GetUserResult.Success(user.Id, user.Hash);
     }
+
+    private sealed record UserEntity(Guid Id, string Hash);
 }

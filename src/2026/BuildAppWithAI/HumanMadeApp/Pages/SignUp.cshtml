@@ -1,0 +1,24 @@
+﻿@page
+@model HumanMadeApp.Pages.SignUp
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="hydro-config"/>
+    <title>Sign Up for Human Made App</title>
+    <script defer src="~/hydro/hydro.js" asp-append-version="true"></script>
+    <script defer src="~/hydro/alpine.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="HumanMadeApp.styles.css">
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <hydro name="RegisterForm"/>
+</div>
+</body>
+</html>

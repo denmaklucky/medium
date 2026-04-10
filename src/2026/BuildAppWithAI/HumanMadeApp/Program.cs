@@ -1,10 +1,17 @@
+using HumanMadeApp;
 using Hydro.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddHydro();
+
+builder.Services.AddScoped(_ => new SqliteConnection(builder.Configuration.GetConnectionString("OwlDb")!));
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped(_ => new PasswordHasher<string>());
 
 var app = builder.Build();
 
@@ -16,7 +23,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//TODO db seader
+DbSeeder.Seed(builder.Configuration.GetConnectionString("OwlDb")!);
 
 app.UseHttpsRedirection();
 
