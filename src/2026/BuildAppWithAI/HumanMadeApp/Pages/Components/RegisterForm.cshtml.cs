@@ -54,7 +54,7 @@ public class RegisterForm(UserRepository repository, PasswordHasher<string> pass
             return;
         }
 
-        CookieHelper.Set(HttpContext, "Id", success.Id.ToString());
+        await AuthHelper.SignInAsync(HttpContext, Username, success.Id.ToString());
         Location(Url.Page("/Index"));
     }
 

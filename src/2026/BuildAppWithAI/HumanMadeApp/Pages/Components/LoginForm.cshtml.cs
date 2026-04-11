@@ -53,7 +53,8 @@ public class LoginForm(UserRepository repository, PasswordHasher<string> passwor
             return;
         }
 
-        CookieHelper.Set(HttpContext, "Id", success.UserId);
+        await AuthHelper.SignInAsync(HttpContext, Username, success.UserId);
+
         Location(Url.Page("/Index"));
     }
 
