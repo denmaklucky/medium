@@ -6,13 +6,13 @@ using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services
     .AddHydro()
     .AddRazorPages();
 
 builder.Services.AddScoped(_ => new SqliteConnection(builder.Configuration.GetConnectionString("OwlDb")!));
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ToDoRepository>();
 builder.Services.AddScoped(_ => new PasswordHasher<string>());
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

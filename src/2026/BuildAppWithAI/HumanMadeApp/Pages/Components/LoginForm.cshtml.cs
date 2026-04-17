@@ -42,9 +42,7 @@ public class LoginForm(UserRepository repository, PasswordHasher<string> passwor
             return;
         }
 
-        var providedHash = passwordHasher.HashPassword(Username, Password);
-
-        var verifyResult = passwordHasher.VerifyHashedPassword(Username, success.Hash, providedHash);
+        var verifyResult = passwordHasher.VerifyHashedPassword(Username, success.Hash, Password);
 
         if (verifyResult == PasswordVerificationResult.Failed)
         {
