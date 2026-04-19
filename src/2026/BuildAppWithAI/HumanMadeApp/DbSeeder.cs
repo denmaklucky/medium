@@ -12,6 +12,7 @@ internal static class DbSeeder
         db.Open();
 
         CreateUsersTable(db);
+        CreateTodosTable(db);
     }
 
     private static void CreateUsersTable(IDbConnection db)
@@ -24,6 +25,21 @@ internal static class DbSeeder
                            );
                            """;
 
+        db.Execute(sql);
+    }
+
+    private static void CreateTodosTable(IDbConnection db)
+    {
+        const string sql = """
+                           CREATE TABLE IF NOT EXISTS Todos (
+                               Id          UUID      PRIMARY KEY,
+                               Title       TEXT      NOT NULL,
+                               IsCompleted INTEGER   NOT NULL DEFAULT 0,
+                               CreatedBy   UUID      NOT NULL,
+                               CreatedAt   TEXT      NOT NULL,
+                               FOREIGN KEY (CreatedBy) REFERENCES Users(Id)
+                           );
+                           """;
         db.Execute(sql);
     }
 }

@@ -6,7 +6,7 @@
         <div class="card-body p-3">
             <p class="mb-2 todo-list--new-input">New item</p>
             <div class="d-flex gap-2">
-                <input bind asp-for="NewItem" type="text" class="form-control form-control-sm" placeholder="What needs to be done?">
+                <input bind asp-for="NewToDo" type="text" class="form-control form-control-sm" placeholder="What needs to be done?">
                 <button class="btn btn-primary btn-sm px-3" on:click="@(() => Model.CreateAsync())">Add</button>
             </div>
         </div>
@@ -19,10 +19,29 @@
                     Active <span class="badge bg-primary rounded-pill ms-1">@(Model.ActiveToDos?.Count ?? 0)</span>
                 </p>
             </div>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush todo-list--active-list">
                 @if (Model.ActiveToDos == null || Model.ActiveToDos.Count == 0)
                 {
                     <li class="list-group-item text-muted todo-list--active-empty">No active items</li>
+                }
+                else
+                {
+                    foreach (var activeToDo in Model.ActiveToDos)
+                    {
+                        <div class="card">
+                            <div class="card-body d-flex align-items-center gap-3">
+
+                                <input type="checkbox"
+                                       class="form-check-input mt-0"
+                                       checked="@activeToDo.IsCompleted"
+                                       on:click="@(() => Model.ToggleAsync(activeToDo.Id))"/>
+
+                                <span class="flex-grow-1">@activeToDo.Title</span>
+
+                                <button class="btn btn-danger btn-sm" on:click="@(() => Model.DeleteAsync(activeToDo.Id))">Remove</button>
+                            </div>
+                        </div>
+                    }
                 }
             </ul>
         </div>
@@ -32,11 +51,31 @@
         <div class="card-body p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <p class="mb-0 todo-list--complete-text">
-                    Completed <span class="badge bg-secondary rounded-pill ms-1" id="done-count">@(Model.CompletedToDosCount ?? 0)</span>
+                    Completed <span class="badge bg-secondary rounded-pill ms-1" id="done-count">@(Model.CompletedToDosCount)</span>
                 </p>
-                <button class="btn btn-sm btn-outline-secondary" on:click="@(() => Model.ToggleShowCompletedTodos())">Show</button>
+                <button class="btn btn-sm btn-outline-secondary" on:click="@(() => Model.ToggleCompletedFilter())">Show</button>
             </div>
-            <ul class="list-group list-group-flush mt-2" style="display: none;"></ul>
+            @if (Model.CompeletedFilter)
+            {
+                <ul class="list-group list-group-flush mt-2 todo-list--complete-list">
+                    @foreach (var completedToDo in Model.CompletedToDos)
+                    {
+                        <div class="card todo-list--item-is-completed">
+                            <div class="card-body d-flex align-items-center gap-3">
+
+                                <input type="checkbox"
+                                       class="form-check-input mt-0"
+                                       checked="@completedToDo.IsCompleted"
+                                       on:click="@(() => Model.ToggleAsync(completedToDo.Id))"/>
+
+                                <span class="flex-grow-1 text-decoration-line-through text-muted">@completedToDo.Title</span>
+
+                                <button class="btn btn-danger btn-sm" on:click="@(() => Model.DeleteAsync(completedToDo.Id))">Remove</button>
+                            </div>
+                        </div>
+                    }
+                </ul>
+            }
         </div>
     </div>
 

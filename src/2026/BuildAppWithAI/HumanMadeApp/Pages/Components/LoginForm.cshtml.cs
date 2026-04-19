@@ -51,7 +51,7 @@ public class LoginForm(UserRepository repository, PasswordHasher<string> passwor
             return;
         }
 
-        await AuthHelper.SignInAsync(HttpContext, Username, success.UserId);
+        await AuthHelper.SignInAsync(HttpContext, success.UserId, Username);
 
         Location(Url.Page("/Index"));
     }
