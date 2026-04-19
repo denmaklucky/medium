@@ -1,7 +1,6 @@
 ﻿@model HumanMadeApp.Pages.Components.ToDoList
 
 <div>
-
     <div class="card mb-3 todo-list--new">
         <div class="card-body p-3">
             <p class="mb-2 todo-list--new-input">New item</p>
@@ -16,11 +15,11 @@
         <div class="card-body p-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <p class="mb-0 todo-list--active-text">
-                    Active <span class="badge bg-primary rounded-pill ms-1">@(Model.ActiveToDos?.Count ?? 0)</span>
+                    Active <span class="badge bg-primary rounded-pill ms-1">@(Model.ActiveToDos.Count)</span>
                 </p>
             </div>
             <ul class="list-group list-group-flush todo-list--active-list">
-                @if (Model.ActiveToDos == null || Model.ActiveToDos.Count == 0)
+                @if (Model.ActiveToDos.Count == 0)
                 {
                     <li class="list-group-item text-muted todo-list--active-empty">No active items</li>
                 }
@@ -55,7 +54,7 @@
                 </p>
                 <button class="btn btn-sm btn-outline-secondary" on:click="@(() => Model.ToggleCompletedFilter())">Show</button>
             </div>
-            @if (Model.CompeletedFilter)
+            @if (Model.CompletedFilter)
             {
                 <ul class="list-group list-group-flush mt-2 todo-list--complete-list">
                     @foreach (var completedToDo in Model.CompletedToDos)
@@ -78,5 +77,4 @@
             }
         </div>
     </div>
-
 </div>

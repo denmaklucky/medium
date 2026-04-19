@@ -13,27 +13,25 @@ public class ToDoList(ToDoRepository repository) : HydroComponent
 
     public int CompletedToDosCount { get; set; }
 
-    public bool CompeletedFilter { get; set; }
+    public bool CompletedFilter { get; set; }
 
     public override async Task RenderAsync()
     {
         if (!TryGetUserId(out var userId))
         {
-            Location(Url.Page("/SignIn"));
-
             return;
         }
 
         bool? completedFilter = false;
 
-        if (CompeletedFilter)
+        if (CompletedFilter)
         {
             completedFilter = null;
         }
 
         var toDos = await repository.ListAsync(userId, completedFilter);
 
-        if (CompeletedFilter)
+        if (CompletedFilter)
         {
             ActiveToDos = toDos.Where(t => !t.IsCompleted).ToList();
             CompletedToDos = toDos.Where(t => t.IsCompleted).ToList();
@@ -55,7 +53,8 @@ public class ToDoList(ToDoRepository repository) : HydroComponent
 
         if (!TryGetUserId(out var userId))
         {
-            Location(Url.Page("/SignIn"));
+            await AuthHelper.SignOutAsync(HttpContext);
+            Redirect(Url.Page("/SignIn"));
 
             return;
         }
@@ -64,33 +63,35 @@ public class ToDoList(ToDoRepository repository) : HydroComponent
         NewToDo = null;
     }
 
-    public Task ToggleAsync(Guid toDoId)
+    public async Task ToggleAsync(Guid toDoId)
     {
         if (!TryGetUserId(out var userId))
         {
-            Location(Url.Page("/SignIn"));
+            await AuthHelper.SignOutAsync(HttpContext);
+            Redirect(Url.Page("/SignIn"));
 
-            return Task.CompletedTask;
+            return;
         }
 
-        return repository.ToggleAsync(userId, toDoId);
+        await repository.ToggleAsync(userId, toDoId);
     }
 
-    public Task DeleteAsync(Guid toDoId)
+    public async Task DeleteAsync(Guid toDoId)
     {
         if (!TryGetUserId(out var userId))
         {
-            Location(Url.Page("/SignIn"));
+            await AuthHelper.SignOutAsync(HttpContext);
+            Redirect(Url.Page("/SignIn"));
 
-            return Task.CompletedTask;
+            return;
         }
 
-        return repository.DeleteAsync(userId, toDoId);
+        await repository.DeleteAsync(userId, toDoId);
     }
 
     public void ToggleCompletedFilter()
     {
-        CompeletedFilter = !CompeletedFilter;
+        CompletedFilter = !CompletedFilter;
     }
 
     private bool TryGetUserId(out Guid userId)
