@@ -1,0 +1,105 @@
+@model OnePromptAIApp.Pages.Components.TodoList
+
+<div class="container py-4" style="max-width: 700px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0">
+            <span class="text-primary">My</span> Todos
+        </h2>
+        <div class="d-flex align-items-center gap-2">
+            <span class="text-muted small">@Context.User.Identity!.Name</span>
+            <button class="btn btn-outline-secondary btn-sm" on:click="@(() => Model.Logout())">
+                Sign out
+            </button>
+        </div>
+    </div>
+
+    <div class="input-group mb-4 shadow-sm">
+        <input bind asp-for="NewTitle" type="text" class="form-control form-control-lg border-end-0" placeholder="What needs to be done?" />
+        <button class="btn btn-primary px-4" on:click="@(() => Model.AddTodo())">
+            Add
+        </button>
+    </div>
+
+    <div class="mb-4">
+        <h6 class="text-uppercase text-muted fw-semibold mb-2 small">
+            Active <span class="badge bg-primary rounded-pill">@Model.ActiveTodos.Count</span>
+        </h6>
+
+        @if (!Model.ActiveTodos.Any())
+        {
+            <p class="text-muted text-center py-3 border rounded bg-light mb-0">
+                No active todos — great job!
+            </p>
+        }
+        else
+        {
+            <div class="list-group shadow-sm">
+                @foreach (var todo in Model.ActiveTodos)
+                {
+                    <div class="list-group-item list-group-item-action d-flex align-items-center gap-2 py-3">
+                        <input type="checkbox" class="form-check-input flex-shrink-0" style="width:1.2em;height:1.2em;"
+                               on:change="@(() => Model.Toggle(todo.Id))" />
+
+                        @if (Model.EditingId == todo.Id)
+                        {
+                            <input bind asp-for="EditingTitle" type="text" class="form-control form-control-sm me-1" />
+                            <button class="btn btn-success btn-sm" on:click="@(() => Model.SaveEdit())">Save</button>
+                            <button class="btn btn-outline-secondary btn-sm" on:click="@(() => Model.CancelEdit())">Cancel</button>
+                        }
+                        else
+                        {
+                            <span class="flex-grow-1">@todo.Title</span>
+                            <button class="btn btn-outline-primary btn-sm"
+                                    on:click="@(() => Model.StartEdit(todo.Id))">
+                                Edit
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm"
+                                    on:click="@(() => Model.Delete(todo.Id))">
+                                Delete
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    @if (Model.CompletedTodos.Any())
+    {
+        <div>
+            <h6 class="text-uppercase text-muted fw-semibold mb-2 small">
+                Completed <span class="badge bg-secondary rounded-pill">@Model.CompletedTodos.Count</span>
+            </h6>
+            <div class="list-group shadow-sm">
+                @foreach (var todo in Model.CompletedTodos)
+                {
+                    <div class="list-group-item d-flex align-items-center gap-2 py-3">
+                        <input type="checkbox" class="form-check-input flex-shrink-0 mt-0"
+                               style="width:1.2em;height:1.2em;"
+                               checked
+                               on:change="@(() => Model.Toggle(todo.Id))" />
+
+                        @if (Model.EditingId == todo.Id)
+                        {
+                            <input bind asp-for="EditingTitle" type="text" class="form-control form-control-sm me-1"/>
+                            <button class="btn btn-success btn-sm" on:click="@(() => Model.SaveEdit())">Save</button>
+                            <button class="btn btn-outline-secondary btn-sm" on:click="@(() => Model.CancelEdit())">Cancel</button>
+                        }
+                        else
+                        {
+                            <span class="flex-grow-1 text-decoration-line-through text-muted">@todo.Title</span>
+                            <button class="btn btn-outline-primary btn-sm"
+                                    on:click="@(() => Model.StartEdit(todo.Id))">
+                                Edit
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm"
+                                    on:click="@(() => Model.Delete(todo.Id))">
+                                Delete
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,77 @@
+@model OnePromptAIApp.Pages.Components.AuthComponent
+
+@{
+    var loginActive = Model.ActiveTab == "login" ? "active" : "";
+    var signupActive = Model.ActiveTab == "signup" ? "active" : "";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h3 class="text-center mb-4 fw-bold">
+                    <span class="text-primary">Todo</span>App
+                </h3>
+
+                <ul class="nav nav-pills nav-fill mb-4">
+                    <li class="nav-item">
+                        <button class="nav-link @loginActive" on:click="@(() => Model.SwitchToLogin())">
+                            Sign In
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link @signupActive" on:click="@(() => Model.SwitchToSignup())">
+                            Sign Up
+                        </button>
+                    </li>
+                </ul>
+
+                @if (Model.ActiveTab == "login")
+                {
+                    <div>
+                        @if (!string.IsNullOrEmpty(Model.LoginError))
+                        {
+                            <div class="alert alert-danger py-2">@Model.LoginError</div>
+                        }
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input bind asp-for="LoginUsername" type="text" class="form-control" placeholder="Enter username" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input bind asp-for="LoginPassword" type="password" class="form-control" placeholder="Enter password" />
+                        </div>
+                        <button class="btn btn-primary w-100" on:click="@(() => Model.Login())">
+                            Sign In
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        @if (!string.IsNullOrEmpty(Model.SignupError))
+                        {
+                            <div class="alert alert-danger py-2">@Model.SignupError</div>
+                        }
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input bind asp-for="SignupUsername" type="text" class="form-control" placeholder="Choose a username" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input bind asp-for="SignupPassword" type="password" class="form-control" placeholder="Choose a password" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input bind asp-for="SignupConfirmPassword" type="password" class="form-control"
+                                   placeholder="Repeat your password" />
+                        </div>
+                        <button class="btn btn-success w-100" on:click="@(() => Model.SignUp())">
+                            Create Account
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
