@@ -40,6 +40,7 @@ internal static class DbSeeder
                                FOREIGN KEY (CreatedBy) REFERENCES Users(Id)
                            );
                            """;
+
         db.Execute(sql);
     }
 }

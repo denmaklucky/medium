@@ -54,7 +54,7 @@ public class RegisterForm(UserRepository repository, PasswordHasher<string> pass
             return;
         }
 
-        await AuthHelper.SignInAsync(HttpContext, Username, success.Id.ToString());
+        await AuthHelper.SignInAsync(HttpContext, success.Id.ToString(), Username);
         Location(Url.Page("/Index"));
     }
 

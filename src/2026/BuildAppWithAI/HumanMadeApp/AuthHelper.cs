@@ -6,7 +6,7 @@ namespace HumanMadeApp;
 
 public static class AuthHelper
 {
-    public static async Task SignInAsync(HttpContext context, string userId, string username)
+    public static Task SignInAsync(HttpContext context, string userId, string username)
     {
         var claims = new List<Claim>
         {
@@ -17,12 +17,12 @@ public static class AuthHelper
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
-        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+        return context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
 
-    public static async Task SignOutAsync(HttpContext context)
+    public static Task SignOutAsync(HttpContext context)
     {
-        await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 
     public static string? GetUserId(HttpContext context)
