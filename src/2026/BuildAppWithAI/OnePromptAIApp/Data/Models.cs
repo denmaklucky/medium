@@ -2,7 +2,7 @@ namespace OnePromptAIApp.Data;
 
 public class User
 {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     public string Username { get; set; } = "";
     public string Hash { get; set; } = "";
 }

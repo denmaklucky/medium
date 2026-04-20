@@ -21,15 +21,15 @@ public class Database
         conn.Open();
         conn.Execute("""
             CREATE TABLE IF NOT EXISTS Users (
-                Id        TEXT    PRIMARY KEY,
+                Id        UUID    PRIMARY KEY,
                 Username  TEXT    NOT NULL UNIQUE,
                 Hash      TEXT    NOT NULL
             );
             CREATE TABLE IF NOT EXISTS Todos (
-                Id          TEXT      PRIMARY KEY,
+                Id          UUID      PRIMARY KEY,
                 Title       TEXT      NOT NULL,
                 IsCompleted INTEGER   NOT NULL DEFAULT 0,
-                CreatedBy   TEXT      NOT NULL,
+                CreatedBy   UUID      NOT NULL,
                 CreatedAt   TEXT      NOT NULL,
                 FOREIGN KEY (CreatedBy) REFERENCES Users(Id)
             );
