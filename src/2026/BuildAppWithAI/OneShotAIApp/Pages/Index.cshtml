@@ -1,0 +1,38 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-primary">TodoApp</h1>
+            <p class="lead text-muted">Organize your tasks, get things done.</p>
+        </div>
+
+        <ul class="nav nav-tabs mb-3" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="tab"
+                        data-bs-target="#login-pane" type="button" role="tab">
+                    Login
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="signup-tab" data-bs-toggle="tab"
+                        data-bs-target="#signup-pane" type="button" role="tab">
+                    Sign Up
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="login-pane" role="tabpanel">
+                <login-form />
+            </div>
+            <div class="tab-pane fade" id="signup-pane" role="tabpanel">
+                <sign-up-form />
+            </div>
+        </div>
+    </div>
+</div>

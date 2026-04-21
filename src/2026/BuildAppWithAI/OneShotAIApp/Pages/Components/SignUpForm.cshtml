@@ -1,0 +1,28 @@
+@model OneShotAIApp.Pages.Components.SignUpForm
+
+<div class="card shadow-sm">
+    <div class="card-body p-4">
+        <h4 class="card-title mb-4 text-center">Sign Up</h4>
+
+        @if (Model.Error != null)
+        {
+            <div class="alert alert-danger py-2">@Model.Error</div>
+        }
+
+        <form on:submit="@(() => Model.SignUp())">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" asp-for="Username" bind />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" asp-for="Password" bind />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" bind />
+            </div>
+            <button type="submit" class="btn btn-success w-100">Sign Up</button>
+        </form>
+    </div>
+</div>

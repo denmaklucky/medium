@@ -1,0 +1,109 @@
+@model OneShotAIApp.Pages.Components.TodoList
+
+<div>
+    <!-- Add new todo -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form on:submit="@(() => Model.AddTodo())" class="d-flex gap-2">
+                <input type="text"
+                       class="form-control"
+                       placeholder="What needs to be done?"
+                       asp-for="NewTitle"
+                       bind />
+                <button type="submit" class="btn btn-primary text-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-1" viewBox="0 0 16 16">
+                        <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                    </svg>
+                    Add
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Active Todos -->
+    <div class="mb-4">
+        <h5 class="text-muted mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-list-task me-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z"/>
+                <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1z"/>
+                <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5zM2 7h1v1H2zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm1 .5H2v1h1z"/>
+            </svg>
+            Active
+            <span class="badge bg-primary rounded-pill ms-1">@Model.ActiveTodos.Count</span>
+        </h5>
+
+        @if (Model.ActiveTodos.Count == 0)
+        {
+            <div class="text-center text-muted py-4">
+                <p class="mb-0">No active todos. Add one above!</p>
+            </div>
+        }
+        else
+        {
+            <div class="list-group">
+                @foreach (var todo in Model.ActiveTodos)
+                {
+                    <div class="list-group-item d-flex align-items-center gap-2">
+                        <button class="btn btn-outline-secondary btn-sm rounded-circle flex-shrink-0"
+                                on:click="@(() => Model.ToggleTodo(todo.Id.ToString()))"
+                                title="Mark as completed"
+                                style="width:32px;height:32px;padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            </svg>
+                        </button>
+                        <span class="flex-grow-1">@todo.Title</span>
+                        <button class="btn btn-outline-danger btn-sm"
+                                on:click="@(() => Model.DeleteTodo(todo.Id.ToString()))"
+                                title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Completed Todos -->
+    @if (Model.CompletedTodos.Count > 0)
+    {
+        <div>
+            <h5 class="text-muted mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check-circle me-1" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                </svg>
+                Completed
+                <span class="badge bg-success rounded-pill ms-1">@Model.CompletedTodos.Count</span>
+            </h5>
+
+            <div class="list-group">
+                @foreach (var todo in Model.CompletedTodos)
+                {
+                    <div class="list-group-item d-flex align-items-center gap-2 bg-light">
+                        <button class="btn btn-success btn-sm rounded-circle flex-shrink-0"
+                                on:click="@(() => Model.ToggleTodo(todo.Id.ToString()))"
+                                title="Mark as active"
+                                style="width:32px;height:32px;padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+                            </svg>
+                        </button>
+                        <span class="flex-grow-1 text-decoration-line-through text-muted">@todo.Title</span>
+                        <button class="btn btn-outline-danger btn-sm"
+                                on:click="@(() => Model.DeleteTodo(todo.Id.ToString()))"
+                                title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

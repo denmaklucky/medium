@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OnePromptAIApp.Pages;
+namespace OneShotAIApp.Pages;
 
 [Authorize]
 public class DashboardModel : PageModel
 {
-    public void OnGet() { }
+    public void OnGet()
+    {
+    }
 }

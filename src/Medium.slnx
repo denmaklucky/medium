@@ -132,7 +132,7 @@
   <Folder Name="/2026/BuildAppWithAI/">
     <Project Path="2026/BuildAppWithAI/GraduallyAIApp/GraduallyAIApp.csproj" />
     <Project Path="2026/BuildAppWithAI/HumanMadeApp/HumanMadeApp.csproj" />
-    <Project Path="2026/BuildAppWithAI/OnePromptAIApp/OnePromptAIApp.csproj" />
+    <Project Path="2026/BuildAppWithAI/OneShotAIApp/OneShotAIApp.csproj" />
   </Folder>
   <Folder Name="/2026/ConfigureApps/">
     <Project Path="2026/ConfigureApps/GenericHostApp/GenericHostApp.csproj" />

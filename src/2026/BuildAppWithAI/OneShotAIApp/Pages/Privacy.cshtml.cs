@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OnePromptAIApp.Pages;
+namespace OneShotAIApp.Pages;
 
 public class PrivacyModel : PageModel
 {
