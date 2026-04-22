@@ -1,0 +1,102 @@
+@model GraduallyAIApp.Pages.Components.TodoList
+
+<div>
+    <!-- Filter tabs -->
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <button class="nav-link @(!Model.ShowCompleted ? "active" : "")"
+                    on:click="@(() => Model.SetFilter(false))">
+                Active
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link @(Model.ShowCompleted ? "active" : "")"
+                    on:click="@(() => Model.SetFilter(true))">
+                Completed
+            </button>
+        </li>
+    </ul>
+
+    <!-- Add new todo (only shown on active tab) -->
+    @if (!Model.ShowCompleted)
+    {
+        <form on:submit="@(() => Model.Add())" class="mb-3">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       placeholder="What needs to be done?"
+                       name="NewTitle"
+                       value="@Model.NewTitle"
+                       bind
+                       autofocus />
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+    }
+
+    <!-- Todo items -->
+    @if (Model.Items.Count == 0)
+    {
+        <p class="text-muted text-center py-4">
+            @(Model.ShowCompleted ? "No completed todos yet." : "No active todos. Add one above!")
+        </p>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var item in Model.Items)
+            {
+                <li class="list-group-item d-flex align-items-center gap-2">
+                    <!-- Checkbox -->
+                    @if (item.IsCompleted)
+                    {
+                        <input type="checkbox"
+                               class="form-check-input mt-0"
+                               checked
+                               on:click="@(() => Model.Toggle(item.Id))" />
+                    }
+                    else
+                    {
+                        <input type="checkbox"
+                               class="form-check-input mt-0"
+                               on:click="@(() => Model.Toggle(item.Id))" />
+                    }
+
+                    @if (Model.EditingId == item.Id)
+                    {
+                        <!-- Editing mode -->
+                        <input type="text"
+                               class="form-control form-control-sm flex-grow-1"
+                               name="EditTitle"
+                               value="@Model.EditTitle"
+                               bind
+                               on:keyup.enter="@(() => Model.SaveEdit(item.Id))"
+                               on:keyup.escape="@(() => Model.CancelEdit())"
+                               autofocus />
+                        <button class="btn btn-sm btn-success"
+                                on:click="@(() => Model.SaveEdit(item.Id))">
+                            Save
+                        </button>
+                        <button class="btn btn-sm btn-secondary"
+                                on:click="@(() => Model.CancelEdit())">
+                            Cancel
+                        </button>
+                    }
+                    else
+                    {
+                        <!-- Display mode -->
+                        <span class="flex-grow-1 @(item.IsCompleted ? "text-decoration-line-through text-muted" : "")"
+                              style="cursor: pointer;"
+                              on:click="@(() => Model.StartEdit(item.Id, item.Title))">
+                            @item.Title
+                        </span>
+                        <button class="btn btn-sm btn-outline-danger"
+                                x-on:click="if(confirm('Delete this todo?')) { $el.closest('[hydro]').__hydro.invoke('Delete', { id: @item.Id }) }">
+                            &times;
+                        </button>
+                    }
+                </li>
+            }
+        </ul>
+    }
+</div>
