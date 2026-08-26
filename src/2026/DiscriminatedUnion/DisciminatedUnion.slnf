@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "..\\..\\Medium.slnx",
+    "projects": [
+      "2026\\DiscriminatedUnion\\App\\App.csproj",
+      "2026\\DiscriminatedUnion\\SourceGenerator\\SourceGenerator.csproj"
+    ]
+  }
+}

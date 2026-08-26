@@ -138,6 +138,10 @@
     <Project Path="2026/ConfigureApps/GenericHostApp/GenericHostApp.csproj" />
     <Project Path="2026/ConfigureApps/WebHostApp/WebHostApp.csproj" />
   </Folder>
+  <Folder Name="/2026/DiscriminatedUnion/">
+    <Project Path="2026/DiscriminatedUnion/App/App.csproj" />
+    <Project Path="2026/DiscriminatedUnion/SourceGenerator/SourceGenerator.csproj" />
+  </Folder>
   <Folder Name="/2026/EfApp/">
     <Project Path="2026/EfApp/EfApp/EfApp.csproj" />
   </Folder>
