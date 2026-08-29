@@ -35,7 +35,7 @@ public sealed class DiscriminatedUnionAttribute(params Type[] caseTypes) : Attri
 
             var compilationAndClasses = context.CompilationProvider.Combine(classDeclarations.Collect());
 
-            context.RegisterSourceOutput(compilationAndClasses, (productionContext, tuple) => GenerateUnionSource(productionContext, tuple.Left, tuple.Right));
+            context.RegisterSourceOutput(compilationAndClasses, (productionContext, tuple) => GenerateDisciminatedUnionSource(productionContext, tuple.Left, tuple.Right));
 
             static bool IsSyntaxTargetForGeneration(SyntaxNode node)
             {
@@ -61,24 +61,24 @@ public sealed class DiscriminatedUnionAttribute(params Type[] caseTypes) : Attri
             }
         }
 
-        private static void GenerateUnionSource(SourceProductionContext context, Compilation compilation, ImmutableArray<ClassDeclarationSyntax> classSyntaxes)
+        private static void GenerateDisciminatedUnionSource(SourceProductionContext context, Compilation compilation, ImmutableArray<ClassDeclarationSyntax> classSyntaxes)
         {
             if (classSyntaxes.IsDefaultOrEmpty)
             {
                 return;
             }
 
-            var unionAttributeSymbol = compilation.GetTypeByMetadataName("DiscriminatedUnions.DiscriminatedUnionAttribute");
+            var discriminatedUnionAttributeSymbol = compilation.GetTypeByMetadataName("DiscriminatedUnions.DiscriminatedUnionAttribute");
             var unionInterfaceSymbol = compilation.GetTypeByMetadataName("System.Runtime.CompilerServices.IUnion");
 
-            if (unionAttributeSymbol is null || unionInterfaceSymbol is null)
+            if (discriminatedUnionAttributeSymbol is null || unionInterfaceSymbol is null)
             {
                 return;
             }
 
             foreach (var classSyntax in classSyntaxes)
             {
-                // The generated half is another part of the same class, so a non-partial declaration is skipped silently.
+                // Skip not partial classes
                 if (!classSyntax.Modifiers.Any(SyntaxKind.PartialKeyword))
                 {
                     continue;
@@ -86,20 +86,21 @@ public sealed class DiscriminatedUnionAttribute(params Type[] caseTypes) : Attri
 
                 var model = compilation.GetSemanticModel(classSyntax.SyntaxTree);
 
-                if (model.GetDeclaredSymbol(classSyntax, context.CancellationToken) is not INamedTypeSymbol classSymbol)
+                if (model.GetDeclaredSymbol(classSyntax, context.CancellationToken) is not  { } classSymbol)
                 {
                     continue;
                 }
 
-                var unionAttribute = classSymbol.GetAttributes()
-                    .FirstOrDefault(attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, unionAttributeSymbol));
+                var discriminatedUnionAttribute = classSymbol
+                    .GetAttributes()
+                    .FirstOrDefault(attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, discriminatedUnionAttributeSymbol));
 
-                if (unionAttribute is null || unionAttribute.ConstructorArguments.Length != 1)
+                if (discriminatedUnionAttribute is null || discriminatedUnionAttribute.ConstructorArguments.Length != 1)
                 {
                     continue;
                 }
 
-                var caseTypes = unionAttribute.ConstructorArguments[0].Values
+                var caseTypes = discriminatedUnionAttribute.ConstructorArguments[0].Values
                     .Select(argument => argument.Value as ITypeSymbol)
                     .Where(caseType => caseType is not null && caseType.TypeKind != TypeKind.Error)
                     .ToList();
@@ -114,7 +115,6 @@ public sealed class DiscriminatedUnionAttribute(params Type[] caseTypes) : Attri
                 var className = classSymbol.Name;
                 var accessibility = classSymbol.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
 
-                // A union declared in the global namespace gets no namespace declaration at all.
                 var namespaceDeclaration = classSymbol.ContainingNamespace.IsGlobalNamespace
                     ? string.Empty
                     : $"namespace {classSymbol.ContainingNamespace.ToDisplayString()};\n\n";
@@ -125,7 +125,6 @@ public sealed class DiscriminatedUnionAttribute(params Type[] caseTypes) : Attri
             }
         }
 
-        /// <summary>Pairs every case type with the discriminator name it gets in the generated enum.</summary>
         private static List<(string Type, string Name)> BuildCases(List<ITypeSymbol> caseTypes)
         {
             var cases = new List<(string Type, string Name)>(caseTypes.Count);
