@@ -1,7 +1,7 @@
 ﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+.navbar-brand a.navbar-item {
   white-space: normal;
   text-align: center;
   word-break: break-all;
@@ -40,6 +40,9 @@ button.accept-policy {
 }
 
 .footer {
+  /* neutralise Bulma's .footer component so this stays a slim fixed bar */
+  background-color: transparent;
+  padding: 0;
   position: absolute;
   bottom: 0;
   width: 100%;
