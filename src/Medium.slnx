@@ -145,6 +145,9 @@
   <Folder Name="/2026/EfApp/">
     <Project Path="2026/EfApp/EfApp/EfApp.csproj" />
   </Folder>
+  <Folder Name="/2026/FeelSpaApp/">
+    <Project Path="2026/FeelSpaApp/FeelSpaApp/FeelSpaApp.csproj" />
+  </Folder>
   <Folder Name="/2026/InteractiveMpa/">
     <Project Path="2026/InteractiveMpa/BlazorApp/BlazorApp.csproj" />
     <Project Path="2026/InteractiveMpa/HydroApp/HydroApp.csproj" />
