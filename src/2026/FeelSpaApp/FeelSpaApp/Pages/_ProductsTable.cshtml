@@ -1,0 +1,69 @@
+﻿@using State = FeelSpaApp.Pages.BulkActions.State
+@model List<FeelSpaApp.Pages.BulkActions.Product>
+
+@{
+    var items = string.Join(", ", Model.Select(p => $"{{ id: {p.Id}, selected: false }}"));
+}
+
+<div id="products"
+     x-data="{
+         items: [@Html.Raw(items)],
+         item(id) { return this.items.find(i => i.id === id) },
+         get selectedCount() { return this.items.filter(i => i.selected).length }
+     }">
+
+    <div class="buttons mb-4"
+         x-bind:class="{ 'is-invisible': selectedCount === 0 }">
+        <button type="button"
+                class="button is-danger"
+                hx-delete="@Url.Page("BulkActions", "Delete")"
+                hx-include="#products [name='ids']"
+                hx-target="#products"
+                hx-swap="outerHTML">
+            Delete (<span x-text="selectedCount"></span>)
+        </button>
+        <button type="button"
+                class="button is-warning"
+                hx-post="@Url.Page("BulkActions", "Archive")"
+                hx-include="#products [name='ids']"
+                hx-target="#products"
+                hx-swap="outerHTML">
+            Archive (<span x-text="selectedCount"></span>)
+        </button>
+    </div>
+
+    <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox"
+                           x-bind:checked="selectedCount === items.length"
+                           x-on:change="items.forEach(i => i.selected = $event.target.checked)" />
+                </th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr x-bind:class="{ 'is-selected': item(@product.Id).selected }">
+                    <td>
+                        <input type="checkbox" name="ids" value="@product.Id" x-model="item(@product.Id).selected" />
+                    </td>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>
+                        <span class="tag @(product.State switch
+                                         {
+                                             State.Deleted => "is-danger",
+                                             State.Archived => "is-warning",
+                                             _ => "is-light"
+                                         })">@product.State</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

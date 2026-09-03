@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FeelSpaApp</title>
     <script type="importmap"></script>
+    <script src="~/scripts/htmx.min.js" asp-append-version="true"></script>
+    <script src="~/scripts/alpine.min.js" asp-append-version="true" defer></script>
     <link rel="stylesheet" href="css/bulma.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FeelSpaApp.styles.css" asp-append-version="true" />
@@ -25,6 +27,7 @@
                 <div id="navbarMain" class="navbar-menu">
                     <div class="navbar-start">
                         <a class="navbar-item has-text-dark" asp-area="" asp-page="/Index">Home</a>
+                        <a class="navbar-item has-text-dark" asp-area="" asp-page="/BulkActions">Bulk Actions</a>
                     </div>
                 </div>
             </div>
@@ -38,11 +41,8 @@
 
     <footer class="border-top footer has-text-grey">
         <div class="container">
-            &copy; 2026 - FeelSpaApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2026 - FeelSpaApp
         </div>
     </footer>
-
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

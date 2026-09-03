@@ -1,10 +1,11 @@
 ﻿@page
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="has-text-centered">
     <h1 class="title is-1">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <a href="@Url.Page("BulkActions")">A table with bulk actions</a>
 </div>
