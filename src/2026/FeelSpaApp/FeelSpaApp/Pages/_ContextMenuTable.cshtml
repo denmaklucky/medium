@@ -1,0 +1,64 @@
+﻿@using State = FeelSpaApp.Pages.ContextMenu.State
+@model List<FeelSpaApp.Pages.ContextMenu.Product>
+
+<div id="products">
+    <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>
+                        <span class="tag @(product.State switch
+                                         {
+                                             State.Deleted => "is-danger",
+                                             State.Archived => "is-warning",
+                                             _ => "is-light"
+                                         })">@product.State</span>
+                    </td>
+                    <td class="has-text-right">
+                        <div class="dropdown is-right"
+                             x-data="{ open: false }"
+                             x-bind:class="{ 'is-active': open }"
+                             x-on:click.outside="open = false">
+                            <div class="dropdown-trigger">
+                                <button type="button"
+                                        class="button is-white"
+                                        aria-haspopup="true"
+                                        aria-label="Actions"
+                                        x-on:click="open = !open">
+                                    &#8942;
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a class="dropdown-item has-text-danger"
+                                       hx-delete="@Url.Page("ContextMenu", new { id = product.Id })"
+                                       hx-target="#products"
+                                       hx-swap="outerHTML">
+                                        Delete
+                                    </a>
+                                    <a class="dropdown-item"
+                                       hx-post="@Url.Page("ContextMenu", "Archive", new { id = product.Id })"
+                                       hx-target="#products"
+                                       hx-swap="outerHTML">
+                                        Archive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
