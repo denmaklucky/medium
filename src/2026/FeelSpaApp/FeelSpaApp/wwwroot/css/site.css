@@ -33,3 +33,19 @@ body {
 [x-cloak] {
   display: none !important;
 }
+
+dialog {
+  transition: width 0.2s ease, height 0.2s ease;
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+dialog::backdrop {
+  background-color: rgba(10, 10, 10, 0.6);
+}
+
+dialog > .box {
+  height: 100%;
+  overflow-y: auto;
+}
