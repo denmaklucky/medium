@@ -1,0 +1,44 @@
+﻿@page
+@using State = FeelSpaApp.Pages.SelectFilter.State
+@model FeelSpaApp.Pages.SelectFilter
+
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<h1 class="title is-3">Products</h1>
+
+<div class="field is-grouped mb-4" x-data="{ selected: '', applied: '' }">
+    <div class="control">
+        <div class="select">
+            <select name="state" x-model="selected">
+                <option value="">All</option>
+                @foreach (var state in Enum.GetValues<State>())
+                {
+                    <option value="@state">@state</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="control">
+        <button type="button"
+                class="button is-primary"
+                x-bind:disabled="selected === applied"
+                x-on:htmx:after-request="applied = selected"
+                hx-get="@Url.Page("SelectFilter", "Filter")"
+                hx-include="[name='state']"
+                hx-target="#products"
+                hx-swap="outerHTML">
+            Search
+        </button>
+    </div>
+    <div class="control">
+        <span class="tag is-warning is-light"
+              x-show="selected !== applied"
+              x-cloak>
+            Not applied
+        </span>
+    </div>
+</div>
+
+<partial name="_SelectFilterTable" model="Model.Products" />
