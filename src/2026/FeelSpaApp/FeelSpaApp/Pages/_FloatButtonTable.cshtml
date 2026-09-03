@@ -1,0 +1,31 @@
+﻿@using State = FeelSpaApp.Pages.FloatButton.State
+@model List<FeelSpaApp.Pages.FloatButton.Product>
+
+<div id="products">
+    <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>
+                        <span class="tag @(product.State switch
+                                         {
+                                             State.Deleted => "is-danger",
+                                             State.Archived => "is-warning",
+                                             _ => "is-light"
+                                         })">@product.State</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

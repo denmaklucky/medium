@@ -1,0 +1,24 @@
+﻿@page
+@model FeelSpaApp.Pages.FloatButton
+
+@{
+    ViewData["Title"] = "Float button";
+}
+
+<h1 class="title is-3">Products</h1>
+
+<div x-data="{ shown: false }"
+     x-on:scroll.window="shown = window.scrollY > 200">
+    <button type="button"
+            class="button is-primary is-rounded float-button"
+            x-show="shown"
+            x-cloak
+            x-transition
+            hx-post="@Url.Page("FloatButton", "Add")"
+            hx-target="#products"
+            hx-swap="outerHTML">
+        Add product
+    </button>
+</div>
+
+<partial name="_FloatButtonTable" model="Model.Products" />

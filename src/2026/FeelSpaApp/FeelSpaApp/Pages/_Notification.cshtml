@@ -1,0 +1,12 @@
+﻿@model FeelSpaApp.Pages.Notification.Message
+
+<div class="notification is-info" x-data>
+    <button type="button"
+            class="delete"
+            aria-label="close"
+            x-on:click="$root.remove()"></button>
+
+    <strong>@Model.Text</strong>
+    <br />
+    Generated on the server at @Model.CreatedAt.ToString("HH:mm:ss").
+</div>
