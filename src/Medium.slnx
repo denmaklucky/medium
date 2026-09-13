@@ -161,6 +161,9 @@
   <Folder Name="/2026/StripeIntegrationApi/">
     <Project Path="2026/StripeIntegrationApi/StripeIntegrationApi/StripeIntegrationApi.csproj" />
   </Folder>
+  <Folder Name="/2026/ValidationImprovements/">
+    <Project Path="2026/ValidationImprovements/AsyncValidation/AsyncValidation.csproj" />
+  </Folder>
   <Folder Name="/SolutionItems/">
     <File Path="../.editorconfig" />
     <File Path="../.gitignore" />
